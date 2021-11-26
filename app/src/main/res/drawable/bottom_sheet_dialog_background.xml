@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:bottomLeftRadius="@dimen/bottom_sheet_dialog_left_right_bottom_radius"
+        android:bottomRightRadius="@dimen/bottom_sheet_dialog_left_right_bottom_radius"
+        android:topLeftRadius="@dimen/bottom_sheet_dialog_corner_radius"
+        android:topRightRadius="@dimen/bottom_sheet_dialog_corner_radius" />
+    <padding
+        android:bottom="@dimen/padding_bottom_sheet"
+        android:left="@dimen/padding_bottom_sheet"
+        android:right="@dimen/padding_bottom_sheet"
+        android:top="@dimen/padding_bottom_sheet" />
+    <solid android:color="#ffffff" />
+</shape>
