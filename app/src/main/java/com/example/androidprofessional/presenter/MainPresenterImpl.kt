@@ -4,7 +4,7 @@ import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.usecase.MainInteractor
 import com.example.androidprofessional.model.repository.DataSourceLocal
 import com.example.androidprofessional.model.repository.DataSourceRemote
-import com.example.androidprofessional.model.repository.RepositoryImplementation
+import com.example.androidprofessional.model.repository.RepositoryImpl
 import com.example.androidprofessional.rx.SchedulerProvider
 import com.example.androidprofessional.view.Contract
 import io.reactivex.disposables.CompositeDisposable
@@ -13,8 +13,8 @@ import io.reactivex.observers.DisposableObserver
 
 class MainPresenterImpl<T : AppState, V : Contract.View>(
         private val interactor: MainInteractor = MainInteractor(
-                RepositoryImplementation(DataSourceRemote()),
-                RepositoryImplementation(DataSourceLocal())),
+                RepositoryImpl(DataSourceRemote()),
+                RepositoryImpl(DataSourceLocal())),
         protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
         protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
         ) : Contract.Presenter<T, V> {
