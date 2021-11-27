@@ -38,6 +38,7 @@ class MainFragment : BaseFragment<AppState>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.startTextViewBeforeSearch.visibility = View.VISIBLE
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(object :
@@ -97,18 +98,21 @@ class MainFragment : BaseFragment<AppState>() {
         successLinearLayout.visibility = View.VISIBLE
         loadingFrameLayout.visibility = View.GONE
         errorLinearLayout.visibility = View.GONE
+        startTextViewBeforeSearch.visibility = View.GONE
     }
 
     private fun showViewLoading() = with(binding) {
         successLinearLayout.visibility = View.GONE
         loadingFrameLayout.visibility = View.VISIBLE
         errorLinearLayout.visibility = View.GONE
+        startTextViewBeforeSearch.visibility = View.GONE
     }
 
     private fun showViewError() = with(binding) {
         successLinearLayout.visibility = View.GONE
         loadingFrameLayout.visibility = View.GONE
         errorLinearLayout.visibility = View.VISIBLE
+        startTextViewBeforeSearch.visibility = View.GONE
     }
 
     companion object {

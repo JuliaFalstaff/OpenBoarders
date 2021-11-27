@@ -1,5 +1,6 @@
 package com.example.androidprofessional.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,10 +28,12 @@ class MainAdapter(
     override fun getItemCount(): Int = data.size
 
     inner class ViewHolder(val binding: ItemTranslationLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.headerTextViewRecyclerItem.text = data.text
                 binding.descriptionTextViewRecyclerItem.text = data.meanings?.first()?.translation?.translation
+                binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener { openInNewWindow(data) }
             }
         }
