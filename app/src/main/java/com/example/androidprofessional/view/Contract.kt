@@ -1,6 +1,6 @@
 package com.example.androidprofessional.view
 
-import com.example.androidprofessional.AppState
+import com.example.androidprofessional.model.AppState
 import io.reactivex.Observable
 
 class Contract {

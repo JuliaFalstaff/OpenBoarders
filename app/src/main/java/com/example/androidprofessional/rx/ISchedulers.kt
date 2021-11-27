@@ -1,8 +1,8 @@
-package com.example.androidprofessional.utils
+package com.example.androidprofessional.rx
 
 import io.reactivex.Scheduler
 
-interface Schedulers {
+interface ISchedulers {
     fun io(): Scheduler
     fun main() : Scheduler
 }

@@ -29,8 +29,8 @@ class MainAdapter(
     inner class ViewHolder(val binding: ItemTranslationLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                binding.headerTextviewRecyclerItem.text = data.text
-                binding.descriptionTextviewRecyclerItem.text = data.meanings?.first()?.translation?.translation
+                binding.headerTextViewRecyclerItem.text = data.text
+                binding.descriptionTextViewRecyclerItem.text = data.meanings?.first()?.translation?.translation
                 itemView.setOnClickListener { openInNewWindow(data) }
             }
         }

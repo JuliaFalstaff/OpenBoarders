@@ -3,21 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.MainActivity">
 
     <FrameLayout
-        android:id="@+id/success_linear_layout"
+        android:id="@+id/successLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_activity_recyclerview"
+            android:id="@+id/mainActivityRecyclerview"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_translation_layout"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/search_fab"
+            android:id="@+id/searchFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -27,27 +30,27 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/loading_frame_layout"
+        android:id="@+id/loadingFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
 
         <ProgressBar
-            android:id="@+id/progress_bar_horizontal"
+            android:id="@+id/progressBarHorizontal"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <ProgressBar
-            android:id="@+id/progress_bar_round"
+            android:id="@+id/progressBarRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/error_linear_layout"
+        android:id="@+id/errorLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -55,13 +58,13 @@
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/error_textview"
+            android:id="@+id/errorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/error_textview_stub" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/reload_button"
+            android:id="@+id/reloadButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reload_button" />

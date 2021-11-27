@@ -1,11 +1,11 @@
 package com.example.androidprofessional.presenter
 
-import com.example.androidprofessional.AppState
-import com.example.androidprofessional.MainInteractor
+import com.example.androidprofessional.model.AppState
+import com.example.androidprofessional.usecase.MainInteractor
 import com.example.androidprofessional.model.repository.DataSourceLocal
 import com.example.androidprofessional.model.repository.DataSourceRemote
 import com.example.androidprofessional.model.repository.RepositoryImplementation
-import com.example.androidprofessional.utils.SchedulerProvider
+import com.example.androidprofessional.rx.SchedulerProvider
 import com.example.androidprofessional.view.Contract
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
@@ -16,9 +16,7 @@ class MainPresenterImpl<T : AppState, V : Contract.View>(
                 RepositoryImplementation(DataSourceRemote()),
                 RepositoryImplementation(DataSourceLocal())),
         protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
-        protected val schedulerProvider: SchedulerProvider = SchedulerProvider(),
-
-
+        protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
         ) : Contract.Presenter<T, V> {
     private var currentView: V? = null
 

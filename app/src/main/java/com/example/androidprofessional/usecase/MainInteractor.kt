@@ -1,5 +1,6 @@
-package com.example.androidprofessional
+package com.example.androidprofessional.usecase
 
+import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.view.Contract
 import io.reactivex.Observable

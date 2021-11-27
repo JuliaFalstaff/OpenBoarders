@@ -1,4 +1,4 @@
-package com.example.androidprofessional
+package com.example.androidprofessional.model
 
 import com.example.androidprofessional.model.data.DataModel
 
