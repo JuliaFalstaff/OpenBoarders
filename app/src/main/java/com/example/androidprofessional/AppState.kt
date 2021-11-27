@@ -1,6 +1,6 @@
 package com.example.androidprofessional
 
-import com.example.androidprofessional.model.DataModel
+import com.example.androidprofessional.model.data.DataModel
 
 sealed class AppState {
     data class Success(val data: List<DataModel>?) : AppState()
