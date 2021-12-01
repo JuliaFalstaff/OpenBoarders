@@ -1,5 +1,6 @@
 package com.example.androidprofessional.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +15,16 @@ import com.example.androidprofessional.databinding.FragmentMainBinding
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.viewmodel.MainViewModel
+import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 class MainFragment : BaseFragment<AppState>() {
 
-    override val model: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override lateinit var model: MainViewModel
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +37,11 @@ class MainFragment : BaseFragment<AppState>() {
                 }
             }
 
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -37,13 +49,14 @@ class MainFragment : BaseFragment<AppState>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model = viewModelFactory.create(MainViewModel::class.java)
         binding.startTextViewBeforeSearch.visibility = View.VISIBLE
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(object :
                     SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    model.getData(searchWord, true).observe(viewLifecycleOwner, Observer { renderData(it) })
+                    model.subscribe().observe(viewLifecycleOwner, Observer { renderData(it) })
                 }
             })
             searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)

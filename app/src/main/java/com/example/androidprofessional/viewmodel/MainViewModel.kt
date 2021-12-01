@@ -6,10 +6,9 @@ import com.example.androidprofessional.model.repository.DataSourceLocal
 import com.example.androidprofessional.model.repository.DataSourceRemote
 import com.example.androidprofessional.model.repository.RepositoryImpl
 import com.example.androidprofessional.usecase.MainInteractor
+import javax.inject.Inject
 
-class MainViewModel(
-        private val interactor: MainInteractor = MainInteractor(RepositoryImpl(DataSourceRemote()), RepositoryImpl(DataSourceLocal())),
-) : BaseViewModel<AppState>() {
+class MainViewModel @Inject constructor (private val interactor: MainInteractor): BaseViewModel<AppState>() {
 
     private var appState: AppState? = null
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
@@ -27,6 +26,10 @@ class MainViewModel(
                                 {})
         )
         return super.getData(word, isOnline)
+    }
+
+    fun subscribe(): LiveData<AppState> {
+        return liveDataForViewToObserve
     }
 
     override fun onCleared() {
