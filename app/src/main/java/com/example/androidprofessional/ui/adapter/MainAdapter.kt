@@ -1,4 +1,4 @@
-package com.example.androidprofessional.adapter
+package com.example.androidprofessional.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
