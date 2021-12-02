@@ -6,7 +6,7 @@ import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

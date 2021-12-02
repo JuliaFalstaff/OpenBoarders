@@ -10,5 +10,5 @@
         android:left="@dimen/padding_bottom_sheet"
         android:right="@dimen/padding_bottom_sheet"
         android:top="@dimen/padding_bottom_sheet" />
-    <solid android:color="#ffffff" />
+    <solid android:color="@color/white" />
 </shape>

@@ -10,39 +10,39 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
-import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.androidprofessional.databinding.FragmentMainBinding
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
+import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.androidprofessional.viewmodel.MainViewModel
-import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 class MainFragment : BaseFragment<AppState>() {
-
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
-
     override lateinit var model: MainViewModel
-
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
     private var adapter: MainAdapter? = null
+
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
-            object : MainAdapter.OnListItemClickListener {
-                override fun onItemClick(data: DataModel) {
-                    Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
-                }
+        object : MainAdapter.OnListItemClickListener {
+            override fun onItemClick(data: DataModel) {
+                Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
             }
+        }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,9 +54,10 @@ class MainFragment : BaseFragment<AppState>() {
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(object :
-                    SearchDialogFragment.OnSearchClickListener {
+                SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    model.getData(searchWord, true).observe(viewLifecycleOwner, Observer { renderData(it) })
+                    model.getData(searchWord, true)
+                        .observe(viewLifecycleOwner, Observer { renderData(it) })
                 }
             })
             searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
@@ -73,9 +74,9 @@ class MainFragment : BaseFragment<AppState>() {
                     showViewSuccess()
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
-                                LinearLayoutManager(context)
+                            LinearLayoutManager(context)
                         binding.mainActivityRecyclerview.adapter =
-                                MainAdapter(onListItemClickListener, dataModel)
+                            MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
@@ -102,7 +103,8 @@ class MainFragment : BaseFragment<AppState>() {
         showViewError()
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
-            model.getData(getString(R.string.empty), true).observe(viewLifecycleOwner, Observer { renderData(it) })
+            model.getData(getString(R.string.empty), true)
+                .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }
 

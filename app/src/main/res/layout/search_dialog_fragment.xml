@@ -5,7 +5,7 @@
     android:id="@+id/bottom_sheet_dialog_layout"
     style="@style/AppBottomSheetDialogTheme"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="@dimen/dialog_fragment_height"
     android:layout_marginBottom="@dimen/margin_medium"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
