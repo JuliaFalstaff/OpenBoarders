@@ -1,6 +1,7 @@
 package com.example.androidprofessional
 
 import android.app.Application
+import com.example.androidprofessional.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector

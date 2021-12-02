@@ -56,7 +56,7 @@ class MainFragment : BaseFragment<AppState>() {
             searchDialogFragment.setOnSearchClickListener(object :
                     SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    model.subscribe().observe(viewLifecycleOwner, Observer { renderData(it) })
+                    model.getData(searchWord, true).observe(viewLifecycleOwner, Observer { renderData(it) })
                 }
             })
             searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)

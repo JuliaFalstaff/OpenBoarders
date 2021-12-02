@@ -28,10 +28,6 @@ class MainViewModel @Inject constructor (private val interactor: MainInteractor)
         return super.getData(word, isOnline)
     }
 
-    fun subscribe(): LiveData<AppState> {
-        return liveDataForViewToObserve
-    }
-
     override fun onCleared() {
         compositeDisposable.clear()
         super.onCleared()
