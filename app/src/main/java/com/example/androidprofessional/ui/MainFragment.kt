@@ -1,47 +1,41 @@
 package com.example.androidprofessional.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMainBinding
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.ui.adapter.MainAdapter
+import com.example.androidprofessional.viewmodel.BaseViewModel
 import com.example.androidprofessional.viewmodel.MainViewModel
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<AppState>() {
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-    override lateinit var model: MainViewModel
+
+    val viewModel: MainViewModel by viewModel()
+    override val model: BaseViewModel<AppState>
+        get() = viewModel
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
-        object : MainAdapter.OnListItemClickListener {
-            override fun onItemClick(data: DataModel) {
-                Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
+            object : MainAdapter.OnListItemClickListener {
+                override fun onItemClick(data: DataModel) {
+                    Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
+                }
             }
-        }
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -49,19 +43,20 @@ class MainFragment : BaseFragment<AppState>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model = viewModelFactory.create(MainViewModel::class.java)
         binding.startTextViewBeforeSearch.visibility = View.VISIBLE
-        binding.searchFab.setOnClickListener {
-            val searchDialogFragment = SearchDialogFragment.newInstance()
-            searchDialogFragment.setOnSearchClickListener(object :
+        binding.searchFab.setOnClickListener { initViews() }
+    }
+
+    private fun initViews() {
+        val searchDialogFragment = SearchDialogFragment.newInstance()
+        searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
-                override fun onClick(searchWord: String) {
-                    model.getData(searchWord, true)
+            override fun onClick(searchWord: String) {
+                model.getData(searchWord, true)
                         .observe(viewLifecycleOwner, Observer { renderData(it) })
-                }
-            })
-            searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
-        }
+            }
+        })
+        searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
     }
 
     override fun renderData(appState: AppState) {
@@ -74,9 +69,9 @@ class MainFragment : BaseFragment<AppState>() {
                     showViewSuccess()
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
-                            LinearLayoutManager(context)
+                                LinearLayoutManager(context)
                         binding.mainActivityRecyclerview.adapter =
-                            MainAdapter(onListItemClickListener, dataModel)
+                                MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
@@ -104,7 +99,7 @@ class MainFragment : BaseFragment<AppState>() {
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
             model.getData(getString(R.string.empty), true)
-                .observe(viewLifecycleOwner, Observer { renderData(it) })
+                    .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }
 

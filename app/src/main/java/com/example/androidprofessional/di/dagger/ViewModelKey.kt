@@ -1,4 +1,4 @@
-package com.example.androidprofessional.di
+package com.example.androidprofessional.di.dagger
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

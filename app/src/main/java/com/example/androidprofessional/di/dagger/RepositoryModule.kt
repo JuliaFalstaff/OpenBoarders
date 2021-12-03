@@ -1,5 +1,7 @@
-package com.example.androidprofessional.di
+package com.example.androidprofessional.di.dagger
 
+import com.example.androidprofessional.di.NAME_LOCAL
+import com.example.androidprofessional.di.NAME_REMOTE
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.model.repository.IDataSource
 import com.example.androidprofessional.model.repository.IRepository
