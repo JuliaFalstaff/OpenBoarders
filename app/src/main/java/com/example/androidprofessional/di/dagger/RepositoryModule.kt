@@ -7,7 +7,7 @@ import com.example.androidprofessional.model.repository.IDataSource
 import com.example.androidprofessional.model.repository.IRepository
 import com.example.androidprofessional.model.repository.RepositoryImpl
 import com.example.androidprofessional.model.retrofit.RetrofitImpl
-import com.example.androidprofessional.model.room.RoomDataBaseImplementation
+import com.example.androidprofessional.model.room.RoomDataBaseImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -38,5 +38,5 @@ class RepositoryModule {
     @Singleton
     @Named(NAME_LOCAL)
     internal fun provideDataSourceLocal(): IDataSource<List<DataModel>> =
-        RoomDataBaseImplementation()
+        RoomDataBaseImpl()
 }

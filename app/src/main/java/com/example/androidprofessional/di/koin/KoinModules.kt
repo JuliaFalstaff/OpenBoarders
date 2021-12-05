@@ -6,7 +6,7 @@ import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.model.repository.IRepository
 import com.example.androidprofessional.model.repository.RepositoryImpl
 import com.example.androidprofessional.model.retrofit.RetrofitImpl
-import com.example.androidprofessional.model.room.RoomDataBaseImplementation
+import com.example.androidprofessional.model.room.RoomDataBaseImpl
 import com.example.androidprofessional.usecase.MainInteractor
 import com.example.androidprofessional.viewmodel.MainViewModel
 import org.koin.core.qualifier.named
@@ -17,7 +17,7 @@ val application = module {
         RepositoryImpl(RetrofitImpl())
     }
     single<IRepository<List<DataModel>>>(named(NAME_LOCAL)) {
-        RepositoryImpl(RoomDataBaseImplementation())
+        RepositoryImpl(RoomDataBaseImpl())
     }
 }
 

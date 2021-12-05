@@ -4,8 +4,8 @@ import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.model.repository.IDataSource
 import io.reactivex.Observable
 
-class RoomDataBaseImplementation: IDataSource<List<DataModel>> {
-    override fun getData(word: String): Observable<List<DataModel>> {
+class RoomDataBaseImpl: IDataSource<List<DataModel>> {
+    override suspend fun getData(word: String): List<DataModel> {
         TODO("Not yet implemented")
     }
 }
