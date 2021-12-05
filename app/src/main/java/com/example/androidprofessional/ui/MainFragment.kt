@@ -12,6 +12,7 @@ import com.example.androidprofessional.databinding.FragmentMainBinding
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.ui.adapter.MainAdapter
+import com.example.androidprofessional.utils.isOnline
 import com.example.androidprofessional.viewmodel.BaseViewModel
 import com.example.androidprofessional.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,16 +27,16 @@ class MainFragment : BaseFragment<AppState>() {
     private var adapter: MainAdapter? = null
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
-        object : MainAdapter.OnListItemClickListener {
-            override fun onItemClick(data: DataModel) {
-                Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
+            object : MainAdapter.OnListItemClickListener {
+                override fun onItemClick(data: DataModel) {
+                    Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
+                }
             }
-        }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,17 +44,26 @@ class MainFragment : BaseFragment<AppState>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.startTextViewBeforeSearch.visibility = View.VISIBLE
-        binding.searchFab.setOnClickListener { initViews() }
+        initView()
     }
 
-    private fun initViews() {
+    private fun initView() {
+        binding.startTextViewBeforeSearch.visibility = View.VISIBLE
+        binding.searchFab.setOnClickListener { openDialogFragmentsAndSearch() }
+    }
+
+    private fun openDialogFragmentsAndSearch() {
         val searchDialogFragment = SearchDialogFragment.newInstance()
         searchDialogFragment.setOnSearchClickListener(object :
-            SearchDialogFragment.OnSearchClickListener {
+                SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
-                model.getData(searchWord, true)
-                    .observe(viewLifecycleOwner, Observer { renderData(it) })
+                isNetworkAvailable = isOnline(context)
+                if (isNetworkAvailable) {
+                    model.getData(searchWord, isNetworkAvailable)
+                            .observe(viewLifecycleOwner, Observer { renderData(it) })
+                } else {
+                    Toast.makeText(context, getString(R.string.error_no_internet), Toast.LENGTH_SHORT).show()
+                }
             }
         })
         searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
@@ -63,15 +73,15 @@ class MainFragment : BaseFragment<AppState>() {
         when (appState) {
             is AppState.Success -> {
                 val dataModel = appState.data
-                if (dataModel == null || dataModel.isEmpty()) {
+                if (dataModel.isNullOrEmpty()) {
                     showErrorScreen(getString(R.string.empty_server_response_on_success))
                 } else {
                     showViewSuccess()
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
-                            LinearLayoutManager(context)
+                                LinearLayoutManager(context)
                         binding.mainActivityRecyclerview.adapter =
-                            MainAdapter(onListItemClickListener, dataModel)
+                                MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
@@ -98,8 +108,8 @@ class MainFragment : BaseFragment<AppState>() {
         showViewError()
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
-            model.getData(getString(R.string.empty), true)
-                .observe(viewLifecycleOwner, Observer { renderData(it) })
+            model.getData(getString(R.string.empty), isNetworkAvailable)
+                    .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }
 
