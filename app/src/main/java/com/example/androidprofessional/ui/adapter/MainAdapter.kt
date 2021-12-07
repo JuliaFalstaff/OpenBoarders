@@ -1,20 +1,25 @@
-package com.example.androidprofessional.adapter
+package com.example.androidprofessional.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.databinding.ItemTranslationLayoutBinding
 import com.example.androidprofessional.model.data.DataModel
+import com.example.androidprofessional.utils.DiffUtils
 
 class MainAdapter(
         private var onListItemClickListener: OnListItemClickListener,
-        private var data: List<DataModel>,
+        private var data: MutableList<DataModel>,
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
-    fun setData(data: List<DataModel>) {
-        this.data = data
-        notifyDataSetChanged()
+    fun setData(newListData: List<DataModel>) {
+        val callback = DiffUtils(data, newListData)
+        val result = DiffUtil.calculateDiff(callback)
+        data.clear()
+        data.addAll(newListData)
+        result.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

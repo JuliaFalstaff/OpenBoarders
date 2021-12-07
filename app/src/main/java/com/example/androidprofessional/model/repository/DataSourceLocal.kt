@@ -1,10 +1,9 @@
 package com.example.androidprofessional.model.repository
 
 import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.model.room.RoomDataBaseImplementation
-import com.example.androidprofessional.view.Contract
-import io.reactivex.Observable
+import com.example.androidprofessional.model.room.RoomDataBaseImpl
 
-class DataSourceLocal(private val remoteProvider: RoomDataBaseImplementation = RoomDataBaseImplementation()) : Contract.DataSource<List<DataModel>> {
-    override fun getData(word: String): Observable<List<DataModel>> = remoteProvider.getData(word)
+class DataSourceLocal(private val remoteProvider: RoomDataBaseImpl = RoomDataBaseImpl()) :
+    IDataSource<List<DataModel>> {
+    override suspend fun getData(word: String): List<DataModel> = remoteProvider.getData(word)
 }

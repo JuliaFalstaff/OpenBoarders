@@ -3,9 +3,19 @@ package com.example.androidprofessional.model.data
 import com.google.gson.annotations.SerializedName
 
 class Meanings(
-        @field:SerializedName("id") val id: Int,
-        @field:SerializedName("translation") val translation: Translation?,
-        @field:SerializedName("imageUrl") val imageUrl: String?,
-        @field:SerializedName("transcription") val transcription: String?,
-        @field:SerializedName("soundUrl") val soundUrl: String?
-)
+        @SerializedName(ID_MEANINGS) val id: Int,
+        @SerializedName(TRANSLATION_MEANINGS) val translation: Translation?,
+        @SerializedName(IMAGE_URL_MEANINGS) val imageUrl: String?,
+        @SerializedName(TRANSCRIPTION_MEANINGS) val transcription: String?,
+        @SerializedName(SOUND_URL_MEANINGS) val soundUrl: String?,
+) {
+    companion object {
+        private const val ID_MEANINGS = "id"
+        private const val TRANSLATION_MEANINGS = "translation"
+        private const val IMAGE_URL_MEANINGS = "imageUrl"
+        private const val TRANSCRIPTION_MEANINGS = "transcription"
+        private const val SOUND_URL_MEANINGS = "soundUrl"
+    }
+}
+
+

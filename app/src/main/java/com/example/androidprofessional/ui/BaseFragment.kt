@@ -1,21 +1,18 @@
 package com.example.androidprofessional.ui
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.androidprofessional.model.AppState
-import com.example.androidprofessional.view.Contract
+import com.example.androidprofessional.utils.isOnline
+import com.example.androidprofessional.viewmodel.BaseViewModel
 
-abstract class BaseFragment<T : AppState> : Fragment(), Contract.View {
-    protected abstract fun createPresenter(): Contract.Presenter<T, Contract.View>
-    abstract override fun renderData(appState: AppState)
-    protected val presenter: Contract.Presenter<T, Contract.View> by lazy { createPresenter() }
+abstract class BaseFragment<T : AppState> : Fragment() {
+    abstract fun renderData(appState: T)
+    abstract val model: BaseViewModel<T>
+    protected var isNetworkAvailable: Boolean = false
 
-    override fun onStart() {
-        super.onStart()
-        presenter.attachView(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenter.detachView(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isNetworkAvailable = isOnline(context)
     }
 }

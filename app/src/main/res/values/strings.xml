@@ -9,4 +9,6 @@
     <string name="delete_description">X</string>
     <string name="startText">It\'s time to learn something new! Click the button for searching</string>
     <string name="search_helper_text">*Look up in a dictionary</string>
+    <string name="empty" />
+    <string name="error_no_internet">No Internet error</string>
 </resources>

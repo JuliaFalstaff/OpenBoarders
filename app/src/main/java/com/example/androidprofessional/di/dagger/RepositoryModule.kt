@@ -1,0 +1,42 @@
+package com.example.androidprofessional.di.dagger
+
+import com.example.androidprofessional.di.NAME_LOCAL
+import com.example.androidprofessional.di.NAME_REMOTE
+import com.example.androidprofessional.model.data.DataModel
+import com.example.androidprofessional.model.repository.IDataSource
+import com.example.androidprofessional.model.repository.IRepository
+import com.example.androidprofessional.model.repository.RepositoryImpl
+import com.example.androidprofessional.model.retrofit.RetrofitImpl
+import com.example.androidprofessional.model.room.RoomDataBaseImpl
+import dagger.Module
+import dagger.Provides
+import javax.inject.Named
+import javax.inject.Singleton
+
+@Module
+class RepositoryModule {
+    @Provides
+    @Singleton
+    @Named(NAME_REMOTE)
+    internal fun provideRepositoryRemote(
+        @Named(NAME_REMOTE) dataSourceRemote: IDataSource<List<DataModel>>
+    ): IRepository<List<DataModel>> = RepositoryImpl(dataSourceRemote)
+
+    @Provides
+    @Singleton
+    @Named(NAME_LOCAL)
+    internal fun provideRepositoryLocal(
+        @Named(NAME_LOCAL) dataSourceLocal: IDataSource<List<DataModel>>
+    ): IRepository<List<DataModel>> = RepositoryImpl(dataSourceLocal)
+
+    @Provides
+    @Singleton
+    @Named(NAME_REMOTE)
+    internal fun provideDataSourceRemote(): IDataSource<List<DataModel>> = RetrofitImpl()
+
+    @Provides
+    @Singleton
+    @Named(NAME_LOCAL)
+    internal fun provideDataSourceLocal(): IDataSource<List<DataModel>> =
+        RoomDataBaseImpl()
+}

@@ -5,21 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
-import com.example.androidprofessional.adapter.MainAdapter
 import com.example.androidprofessional.databinding.FragmentMainBinding
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.presenter.MainPresenterImpl
-import com.example.androidprofessional.view.Contract
+import com.example.androidprofessional.ui.adapter.MainAdapter
+import com.example.androidprofessional.utils.isOnline
+import com.example.androidprofessional.viewmodel.BaseViewModel
+import com.example.androidprofessional.viewmodel.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<AppState>() {
 
+    val viewModel: MainViewModel by viewModel()
+    override val model: BaseViewModel<AppState>
+        get() = viewModel
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
     private var adapter: MainAdapter? = null
+
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
                 override fun onItemClick(data: DataModel) {
@@ -27,35 +33,47 @@ class MainFragment : BaseFragment<AppState>() {
                 }
             }
 
-    override fun createPresenter(): Contract.Presenter<AppState, Contract.View> {
-        return MainPresenterImpl()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
+    ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
+    private fun initView() {
         binding.startTextViewBeforeSearch.visibility = View.VISIBLE
-        binding.searchFab.setOnClickListener {
-            val searchDialogFragment = SearchDialogFragment.newInstance()
-            searchDialogFragment.setOnSearchClickListener(object :
-                    SearchDialogFragment.OnSearchClickListener {
-                override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord, true)
+        binding.searchFab.setOnClickListener { openDialogFragmentsAndSearch() }
+    }
+
+    private fun openDialogFragmentsAndSearch() {
+        val searchDialogFragment = SearchDialogFragment.newInstance()
+        searchDialogFragment.setOnSearchClickListener(object :
+                SearchDialogFragment.OnSearchClickListener {
+            override fun onClick(searchWord: String) {
+                isNetworkAvailable = isOnline(context)
+                if (isNetworkAvailable) {
+                    model.getData(searchWord, isNetworkAvailable)
+                            .observe(viewLifecycleOwner, Observer { renderData(it) })
+                } else {
+                    Toast.makeText(context, getString(R.string.error_no_internet), Toast.LENGTH_SHORT).show()
                 }
-            })
-            searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
-        }
+            }
+        })
+        searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
     }
 
     override fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
                 val dataModel = appState.data
-                if (dataModel == null || dataModel.isEmpty()) {
+                if (dataModel.isNullOrEmpty()) {
                     showErrorScreen(getString(R.string.empty_server_response_on_success))
                 } else {
                     showViewSuccess()
@@ -90,7 +108,8 @@ class MainFragment : BaseFragment<AppState>() {
         showViewError()
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
-            presenter.getData("", true)
+            model.getData(getString(R.string.empty), isNetworkAvailable)
+                    .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }
 
