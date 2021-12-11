@@ -29,9 +29,16 @@ class MainFragment : BaseFragment<AppState>() {
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
                 override fun onItemClick(data: DataModel) {
-                    Toast.makeText(context, data.text, Toast.LENGTH_SHORT).show()
+                    activity?.supportFragmentManager?.apply {
+                        beginTransaction().replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
+                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
+                        }))
+                            .addToBackStack("")
+                            .commitAllowingStateLoss()
                 }
             }
+
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
