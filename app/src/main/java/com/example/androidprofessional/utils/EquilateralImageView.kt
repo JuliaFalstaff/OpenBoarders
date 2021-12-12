@@ -16,5 +16,4 @@ class EquilateralImageView : AppCompatImageView {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
-
 }

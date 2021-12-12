@@ -1,8 +1,6 @@
 package com.example.androidprofessional.utils
 
-import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.model.data.Meanings
 import com.example.androidprofessional.model.room.entity.HistoryEntity
 
 fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): MutableList<DataModel> {
@@ -15,90 +13,13 @@ fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): MutableList<DataM
     return dataModel
 }
 
-fun convertDataModelToHistoryEntity(searchWord: DataModel): HistoryEntity? {
-    return HistoryEntity(
-        searchWord.id,
-        searchWord.text,
-        searchWord.meanings
+fun convertFromEntityToData(entity: HistoryEntity): List<DataModel> {
+    return listOf(
+        DataModel(id = entity.id, text = entity.word, meanings = entity.meanings)
     )
 }
 
-fun convertDataModelToListHistoryEntity(searchWord: List<DataModel>): List<HistoryEntity> {
-    return searchWord.map {
-        HistoryEntity(
-            id = it.id,
-            word = it.text,
-            meanings = it.meanings
-        )
-    }.toList()
-}
-
-fun parseLocalSearchResults(appState: AppState): AppState {
-    return AppState.Success(mapResult(appState, false).toMutableList())
-}
-
-private fun mapResult(
-    appState: AppState,
-    isOnline: Boolean
-): List<DataModel> {
-    val newSearchResults = arrayListOf<DataModel>()
-    when (appState) {
-        is AppState.Success -> {
-            getSuccessResultData(appState, isOnline, newSearchResults)
-        }
-    }
-    return newSearchResults
-}
-
-private fun getSuccessResultData(
-    appState: AppState.Success,
-    isOnline: Boolean,
-    newDataModels: ArrayList<DataModel>
-) {
-    val dataModels: List<DataModel> = appState.data as List<DataModel>
-    if (dataModels.isNotEmpty()) {
-        if (isOnline) {
-            for (searchResult in dataModels) {
-                parseOnlineResult(searchResult, newDataModels)
-            }
-        } else {
-            for (searchResult in dataModels) {
-                newDataModels.add(DataModel(searchResult.id, searchResult.text, arrayListOf()))
-            }
-        }
-    }
-}
-
-private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<DataModel>) {
-    if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
-        val newMeanings = arrayListOf<Meanings>()
-        for (meaning in dataModel.meanings) {
-            if (meaning.translation != null && !meaning.translation.translation.isNullOrBlank()) {
-                newMeanings.add(
-                    Meanings(
-                        meaning.id,
-                        meaning.translation,
-                        meaning.imageUrl,
-                        meaning.transcription,
-                        meaning.soundUrl
-                    )
-                )
-            }
-        }
-        if (newMeanings.isNotEmpty()) {
-            newDataModels.add(DataModel(dataModel.id, dataModel.text, newMeanings))
-        }
-    }
-}
-
-fun convertMeaningsToString(meanings: List<Meanings>): String {
-    var meaningsSeparatedByComma = String()
-    for ((index, meaning) in meanings.withIndex()) {
-        meaningsSeparatedByComma += if (index + 1 != meanings.size) {
-            String.format("%s%s", meaning.translation?.translation, ", ")
-        } else {
-            meaning.translation?.translation
-        }
-    }
-    return meaningsSeparatedByComma
-}
+fun convertFromDataToEntity(word: DataModel) =
+    HistoryEntity(
+        id = word.id, word = word.text, meanings = word.meanings
+    )

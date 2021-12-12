@@ -66,6 +66,7 @@ ext {
     koinVersion = "3.1.2"
     picassoVersion ="2.71828"
     roomVersion ="2.3.0"
+    stethoVersion = "1.6.0"
 }
 
 dependencies {
@@ -109,6 +110,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
+
+    //Stetho
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-urlconnection:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-js-rhino:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
 
     // Test
     implementation "androidx.appcompat:appcompat:$appcompatVersion"

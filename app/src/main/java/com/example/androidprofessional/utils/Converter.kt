@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 
 class Converter {
     private val gson = Gson()
+
     @TypeConverter
     fun toJson(segments: List<Meanings>?): String {
         return gson.toJson(segments)

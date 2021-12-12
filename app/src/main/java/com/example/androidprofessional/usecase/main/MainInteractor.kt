@@ -14,20 +14,20 @@ class MainInteractor(
     override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
         val appState: AppState
         if (fromRemoteSource) {
-            appState = AppState.Success(remoteRepository.getData(word).toMutableList())
             val data = remoteRepository.getData(word)
-            localRepository.saveToDBWord(data)
+            localRepository.saveToDatabase(data)
+            appState = AppState.Success(data.toMutableList())
         } else {
             appState = AppState.Success(localRepository.getData(word).toMutableList())
         }
         return appState
     }
 
-    override suspend fun saveToDB(searchWord: DataModel) {
-        localRepository.saveToDB(searchWord)
+    override suspend fun getData(word: String): AppState {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun getAllHistory(): AppState {
-        return AppState.SuccessHistoryData(localRepository.getAllHistory())
+    override suspend fun getHistoryData(): AppState {
+      return AppState.Success(localRepository.getHistoryData().toMutableList())
     }
 }

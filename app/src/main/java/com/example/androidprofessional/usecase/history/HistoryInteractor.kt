@@ -21,11 +21,11 @@ class HistoryInteractor(
         )
     }
 
-    override suspend fun saveToDB(searchWord: DataModel) {
-       repositoryLocal.saveToDB(searchWord)
+    override suspend fun getData(word: String): AppState {
+        return AppState.Success(repositoryRemote.getData(word).toMutableList())
     }
 
-    override suspend fun getAllHistory(): AppState {
-       return AppState.SuccessHistoryData(repositoryLocal.getAllHistory())
+    override suspend fun getHistoryData(): AppState {
+        return AppState.Success(repositoryLocal.getHistoryData().toMutableList())
     }
 }

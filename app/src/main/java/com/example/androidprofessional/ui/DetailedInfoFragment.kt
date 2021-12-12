@@ -3,7 +3,6 @@ package com.example.androidprofessional.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentDetailedInfoBinding
 import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.utils.PicassoImageLoader
 import com.squareup.picasso.Picasso
 
 class DetailedInfoFragment : Fragment() {

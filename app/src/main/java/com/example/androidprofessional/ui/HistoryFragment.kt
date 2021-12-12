@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentHistoryListBinding
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.ui.adapter.HistoryAdapter
-import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.androidprofessional.viewmodel.BaseViewModel
 import com.example.androidprofessional.viewmodel.HistoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,7 +17,7 @@ class HistoryFragment : BaseFragment<AppState>() {
 
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
-    private val adapter: HistoryAdapter ? = null
+    private val adapter: HistoryAdapter? = null
     val viewModel: HistoryViewModel by viewModel()
     override val model: BaseViewModel<AppState>
         get() = viewModel
@@ -36,8 +34,8 @@ class HistoryFragment : BaseFragment<AppState>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it)})
-        viewModel.getAllHistory()
+        viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getData()
     }
 
 
@@ -49,17 +47,11 @@ class HistoryFragment : BaseFragment<AppState>() {
         when (appState) {
             is AppState.Success -> {
                 val dataModel = appState.data
-                if (dataModel.isNullOrEmpty()) {
-                    showErrorScreen(getString(R.string.empty_server_response_on_success))
-                } else {
-                    showViewSuccess()
-                    if (adapter == null) {
-                        binding.historyRecyclerView.layoutManager =
-                            LinearLayoutManager(context)
-                        binding.historyRecyclerView.adapter =
-                            HistoryAdapter()
-                    } else {
-                        adapter.let { it?.setData(dataModel) }
+                binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
+                binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
+                adapter.let {
+                    if (dataModel != null) {
+                        it?.setData(dataModel)
                     }
                 }
             }
@@ -81,8 +73,8 @@ class HistoryFragment : BaseFragment<AppState>() {
         showViewError()
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
-            viewModel.getHistoryData()
-                .observe(viewLifecycleOwner, Observer { renderData(it) })
+            viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it) })
+            viewModel.getData()
         }
     }
 

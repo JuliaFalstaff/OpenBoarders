@@ -1,12 +1,14 @@
 package com.example.androidprofessional.model.data
 
 import android.os.Parcelable
+import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Meanings(
         @SerializedName(ID_MEANINGS) val id: Int,
+        @Embedded
         @SerializedName(TRANSLATION_MEANINGS) val translation: Translation? = null,
         @SerializedName(IMAGE_URL_MEANINGS) val imageUrl: String? = "",
         @SerializedName(TRANSCRIPTION_MEANINGS) val transcription: String? = "",
