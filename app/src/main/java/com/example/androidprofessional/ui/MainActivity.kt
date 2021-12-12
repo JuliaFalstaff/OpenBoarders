@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_bar_fav -> {
-                    Toast.makeText(applicationContext, R.string.favourite, Toast.LENGTH_SHORT).show()
+                    openFragment(FavouriteFragment())
                     true
                 }
                 R.id.bottom_bar_history -> {

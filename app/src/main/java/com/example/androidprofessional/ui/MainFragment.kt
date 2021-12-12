@@ -40,6 +40,10 @@ class MainFragment : BaseFragment<AppState>() {
                         .commitAllowingStateLoss()
                 }
             }
+
+            override fun addToFav(data: DataModel) {
+                viewModel.saveToFav(data)
+            }
         }
 
     override fun onCreateView(

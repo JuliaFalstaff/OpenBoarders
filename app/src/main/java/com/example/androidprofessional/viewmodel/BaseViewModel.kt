@@ -21,6 +21,8 @@ abstract class BaseViewModel<T : AppState>(
 
     open fun getHistoryData(): LiveData<T> = liveDataForViewToObserve
 
+    open fun getFavouriteData(): LiveData<T> = liveDataForViewToObserve
+
     override fun onCleared() {
         super.onCleared()
         cancelJob()

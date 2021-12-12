@@ -79,4 +79,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/transcriptionTextView"
         app:layout_constraintStart_toEndOf="@+id/wordTextView"
         app:layout_constraintTop_toTopOf="@+id/transcriptionTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

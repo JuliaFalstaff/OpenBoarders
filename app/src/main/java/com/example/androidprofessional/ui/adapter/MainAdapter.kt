@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.ItemTranslationLayoutBinding
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.utils.DiffUtils
@@ -47,6 +48,9 @@ class MainAdapter(
                 binding.descriptionTextViewRecyclerItem.text = data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener { openInNewWindow(data) }
+                binding.imageViewAddToFav.setOnClickListener {
+                    onListItemClickListener.addToFav(data)
+                    binding.imageViewAddToFav.setImageResource(R.drawable.ic_fav_active)}
             }
         }
     }
@@ -57,5 +61,6 @@ class MainAdapter(
 
     interface OnListItemClickListener {
         fun onItemClick(data: DataModel)
+        fun addToFav(data: DataModel)
     }
 }

@@ -33,7 +33,7 @@
     //CardView
     <dimen name="cardview_elevation">15dp</dimen>
     <dimen name="cardview_corner_radius">8dp</dimen>
-    <dimen name="layout_height_cardview">120dp</dimen>
+    <dimen name="layout_height_cardview">150dp</dimen>
     <dimen name="dialog_fragment_height">350dp</dimen>
     <dimen name="margin_xxxxx_large">75dp</dimen>
 </resources>

@@ -18,4 +18,12 @@ class RepositoryImplLocal(private val dataSource: IDataSourceLocal<List<DataMode
     override suspend fun saveToDatabase(word: List<DataModel>) {
         dataSource.save(word)
     }
+
+    override suspend fun getFavouritesData(): List<DataModel> {
+        return dataSource.getFavouritesData()
+    }
+
+    override suspend fun saveFavouritesData(favWord: DataModel) {
+        dataSource.saveFavouritesData(favWord)
+    }
 }

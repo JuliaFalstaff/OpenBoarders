@@ -2,6 +2,7 @@ package com.example.androidprofessional.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.example.androidprofessional.model.AppState
+import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.usecase.main.MainInteractor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -28,5 +29,9 @@ class MainViewModel(private val interactor: MainInteractor) : BaseViewModel<AppS
 
     override fun handleError(error: Throwable) {
         liveDataForViewToObserve.postValue(AppState.Error(error))
+    }
+
+    fun saveToFav(word: DataModel) {
+        viewModelCoroutineScope.launch { interactor.saveFavouritesData(word) }
     }
 }
