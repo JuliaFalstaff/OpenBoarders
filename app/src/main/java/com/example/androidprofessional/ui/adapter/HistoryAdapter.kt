@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.databinding.ItemHistoryRecyclerViewBinding
 import com.example.androidprofessional.model.data.DataModel
+import com.example.androidprofessional.utils.Converter
 
 class HistoryAdapter(private var data: MutableList<DataModel>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
@@ -34,7 +35,7 @@ class HistoryAdapter(private var data: MutableList<DataModel>) :
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.headerHistoryTextViewRecyclerItem.text = data.text
-//                binding.descriptionHistoryTextViewRecyclerItem.text = data.meanings?.first()?.translation?.translation
+                binding.descriptionHistoryTextViewRecyclerItem.text = data.meanings?.joinToString { it.translation?.translation.toString() }
             }
         }
     }

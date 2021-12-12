@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_x_large"
+            android:layout_marginBottom="@dimen/margin_xxxxx_large"
             android:backgroundTint="@color/colorAccent"
             android:src="@drawable/ic_search"
             app:tint="@color/white" />

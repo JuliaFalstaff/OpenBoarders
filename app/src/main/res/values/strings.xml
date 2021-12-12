@@ -13,4 +13,6 @@
     <string name="error_no_internet">No Internet error</string>
     <string name="image_view_translation">Picture</string>
     <string name="menu_history">History</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
 </resources>

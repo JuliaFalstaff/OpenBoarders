@@ -44,8 +44,7 @@ class MainAdapter(
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.headerTextViewRecyclerItem.text = data.text
-                binding.descriptionTextViewRecyclerItem.text =
-                    data.meanings?.first()?.translation?.translation
+                binding.descriptionTextViewRecyclerItem.text = data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener { openInNewWindow(data) }
             }

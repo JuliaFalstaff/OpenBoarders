@@ -1,6 +1,8 @@
 package com.example.androidprofessional.ui
 
 import android.annotation.SuppressLint
+import android.media.AudioAttributes
+import android.media.SoundPool
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,11 +38,12 @@ class DetailedInfoFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setData() = with(binding) {
         wordTextView.text = wordBundle.text
-        descriptionWordTextView.text = wordBundle.meanings?.first()?.translation?.translation
+        descriptionWordTextView.text = wordBundle.meanings?.joinToString { it.translation?.translation.toString() }
         transcriptionTextView.text = "[${wordBundle.meanings?.firstOrNull()?.transcription}]"
+        mnemonicTextView.text = wordBundle.meanings?.firstOrNull()?.mnemonics.toString()
         val imageLink = wordBundle.meanings?.firstOrNull()?.imageUrl
         usePicassoToLoadPhoto(wordPictureImageView, imageLink)
-    }
+     }
 
     private fun usePicassoToLoadPhoto(imageView: ImageView, imageLink: String?) {
         Picasso.get()
