@@ -27,23 +27,25 @@ class MainFragment : BaseFragment<AppState>() {
     private var adapter: MainAdapter? = null
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
-            object : MainAdapter.OnListItemClickListener {
-                override fun onItemClick(data: DataModel) {
-                    activity?.supportFragmentManager?.apply {
-                        beginTransaction().replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
+        object : MainAdapter.OnListItemClickListener {
+            override fun onItemClick(data: DataModel) {
+                activity?.supportFragmentManager?.apply {
+                    beginTransaction().replace(
+                        R.id.container,
+                        DetailedInfoFragment.newInstance(Bundle().apply {
                             putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                        }))
-                            .addToBackStack("")
-                            .commitAllowingStateLoss()
+                        })
+                    )
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
                 }
             }
-
-    }
+        }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -62,14 +64,18 @@ class MainFragment : BaseFragment<AppState>() {
     private fun openDialogFragmentsAndSearch() {
         val searchDialogFragment = SearchDialogFragment.newInstance()
         searchDialogFragment.setOnSearchClickListener(object :
-                SearchDialogFragment.OnSearchClickListener {
+            SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
                 isNetworkAvailable = isOnline(context)
                 if (isNetworkAvailable) {
                     model.getData(searchWord, isNetworkAvailable)
-                            .observe(viewLifecycleOwner, Observer { renderData(it) })
+                        .observe(viewLifecycleOwner, Observer { renderData(it) })
                 } else {
-                    Toast.makeText(context, getString(R.string.error_no_internet), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        getString(R.string.error_no_internet),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
@@ -86,9 +92,9 @@ class MainFragment : BaseFragment<AppState>() {
                     showViewSuccess()
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
-                                LinearLayoutManager(context)
+                            LinearLayoutManager(context)
                         binding.mainActivityRecyclerview.adapter =
-                                MainAdapter(onListItemClickListener, dataModel)
+                            MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
@@ -116,7 +122,7 @@ class MainFragment : BaseFragment<AppState>() {
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
             model.getData(getString(R.string.empty), isNetworkAvailable)
-                    .observe(viewLifecycleOwner, Observer { renderData(it) })
+                .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }
 

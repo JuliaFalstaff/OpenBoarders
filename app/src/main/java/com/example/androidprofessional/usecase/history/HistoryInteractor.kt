@@ -1,20 +1,22 @@
-package com.example.androidprofessional.usecase
+package com.example.androidprofessional.usecase.history
 
 import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.model.repository.IRepository
+import com.example.androidprofessional.model.repository.IRepositoryLocal
+import com.example.androidprofessional.usecase.Interactor
 
-class MainInteractor(
-    val remoteRepository: IRepository<List<DataModel>>,
-    val localRepository: IRepository<List<DataModel>>,
+class HistoryInteractor(
+    private val repositoryRemote: IRepository<List<DataModel>>,
+    private val repositoryLocal: IRepositoryLocal<List<DataModel>>
 ) : Interactor<AppState> {
 
     override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
         return AppState.Success(
             if (fromRemoteSource) {
-                remoteRepository
+                repositoryRemote
             } else {
-                localRepository
+                repositoryLocal
             }.getData(word).toMutableList()
         )
     }

@@ -2,11 +2,13 @@ package com.example.androidprofessional.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.example.androidprofessional.model.AppState
-import com.example.androidprofessional.usecase.main.MainInteractor
+import com.example.androidprofessional.usecase.history.HistoryInteractor
+import com.example.androidprofessional.utils.parseLocalSearchResults
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val interactor: MainInteractor) : BaseViewModel<AppState>() {
+class HistoryViewModel(private val interactor: HistoryInteractor) :
+    BaseViewModel<AppState>() {
 
     private var job: Job? = null
 
@@ -18,11 +20,11 @@ class MainViewModel(private val interactor: MainInteractor) : BaseViewModel<AppS
     }
 
     private suspend fun startInteractor(word: String, isOnline: Boolean) {
-        liveDataForViewToObserve.postValue(interactor.getData(word, isOnline))
+        liveDataForViewToObserve.postValue(parseLocalSearchResults(interactor.getData(word, isOnline)))
     }
 
     override fun onCleared() {
-        liveDataForViewToObserve.postValue(AppState.Success(null))
+        liveDataForViewToObserve.postValue(AppState.SuccessHistoryData(null))
         super.onCleared()
     }
 
