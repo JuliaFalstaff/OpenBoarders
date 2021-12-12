@@ -36,13 +36,10 @@ class HistoryFragment : BaseFragment<AppState>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        viewModel.getHistoryData().observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it)})
+        viewModel.getAllHistory()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getData("", false)
-    }
 
     private fun initView() {
         binding.historyRecyclerView.adapter = adapter
@@ -84,7 +81,7 @@ class HistoryFragment : BaseFragment<AppState>() {
         showViewError()
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
-            model.getData(getString(R.string.empty), isNetworkAvailable)
+            viewModel.getHistoryData()
                 .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }

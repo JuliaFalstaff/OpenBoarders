@@ -15,10 +15,19 @@ class MainInteractor(
         val appState: AppState
         if (fromRemoteSource) {
             appState = AppState.Success(remoteRepository.getData(word).toMutableList())
-            localRepository.saveToDB(appState)
+            val data = remoteRepository.getData(word)
+            localRepository.saveToDBWord(data)
         } else {
             appState = AppState.Success(localRepository.getData(word).toMutableList())
         }
         return appState
+    }
+
+    override suspend fun saveToDB(searchWord: DataModel) {
+        localRepository.saveToDB(searchWord)
+    }
+
+    override suspend fun getAllHistory(): AppState {
+        return AppState.SuccessHistoryData(localRepository.getAllHistory())
     }
 }

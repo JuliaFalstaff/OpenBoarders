@@ -5,7 +5,7 @@ import com.example.androidprofessional.model.data.DataModel
 import com.example.androidprofessional.model.data.Meanings
 import com.example.androidprofessional.model.room.entity.HistoryEntity
 
-fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): List<DataModel> {
+fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): MutableList<DataModel> {
     val dataModel = ArrayList<DataModel>()
     if (!list.isNullOrEmpty()) {
         for (entity in list) {
@@ -15,22 +15,22 @@ fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): List<DataModel> {
     return dataModel
 }
 
-fun convertDataModelSuccessToEntity(appState: AppState): HistoryEntity? {
-    return when (appState) {
-        is AppState.Success -> {
-            val searchResult = appState.data
-            if (searchResult.isNullOrEmpty() || searchResult.first().text.isNullOrEmpty() || searchResult.first().meanings.isNullOrEmpty()) {
-                null
-            } else {
-                HistoryEntity(
-                    searchResult.first().id,
-                    searchResult.first().text,
-                    searchResult.first().meanings
-                )
-            }
-        }
-        else -> null
-    }
+fun convertDataModelToHistoryEntity(searchWord: DataModel): HistoryEntity? {
+    return HistoryEntity(
+        searchWord.id,
+        searchWord.text,
+        searchWord.meanings
+    )
+}
+
+fun convertDataModelToListHistoryEntity(searchWord: List<DataModel>): List<HistoryEntity> {
+    return searchWord.map {
+        HistoryEntity(
+            id = it.id,
+            word = it.text,
+            meanings = it.meanings
+        )
+    }.toList()
 }
 
 fun parseLocalSearchResults(appState: AppState): AppState {
@@ -74,7 +74,15 @@ private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<Dat
         val newMeanings = arrayListOf<Meanings>()
         for (meaning in dataModel.meanings) {
             if (meaning.translation != null && !meaning.translation.translation.isNullOrBlank()) {
-                newMeanings.add(Meanings(meaning.id, meaning.translation, meaning.imageUrl, meaning.transcription, meaning.soundUrl))
+                newMeanings.add(
+                    Meanings(
+                        meaning.id,
+                        meaning.translation,
+                        meaning.imageUrl,
+                        meaning.transcription,
+                        meaning.soundUrl
+                    )
+                )
             }
         }
         if (newMeanings.isNotEmpty()) {

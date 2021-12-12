@@ -2,7 +2,7 @@ package com.example.androidprofessional.model.retrofit
 
 import com.example.androidprofessional.BuildConfig
 import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.model.repository.IDataSource
+import com.example.androidprofessional.model.datasource.IDataSource
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient

@@ -20,4 +20,12 @@ class HistoryInteractor(
             }.getData(word).toMutableList()
         )
     }
+
+    override suspend fun saveToDB(searchWord: DataModel) {
+       repositoryLocal.saveToDB(searchWord)
+    }
+
+    override suspend fun getAllHistory(): AppState {
+       return AppState.SuccessHistoryData(repositoryLocal.getAllHistory())
+    }
 }

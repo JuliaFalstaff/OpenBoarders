@@ -1,6 +1,7 @@
 package com.example.androidprofessional.model.repository
 
 import com.example.androidprofessional.model.data.DataModel
+import com.example.androidprofessional.model.datasource.IDataSource
 
 class RepositoryImpl(private val dataSource: IDataSource<List<DataModel>>) :
     IRepository<List<DataModel>> {
