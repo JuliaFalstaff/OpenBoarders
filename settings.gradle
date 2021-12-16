@@ -1,3 +1,4 @@
+include ':favouritescreen'
 include ':historyscreen'
 include ':repository'
 include ':model'

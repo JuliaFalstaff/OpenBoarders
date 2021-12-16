@@ -13,7 +13,6 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:paddingStart="@dimen/margin_small"
         android:paddingEnd="@dimen/margin_small"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Word" />
@@ -26,7 +25,6 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:paddingStart="@dimen/margin_small"
         android:paddingEnd="@dimen/margin_small"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wordTextView"
         tools:text="Transcription" />
@@ -39,7 +37,6 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:paddingStart="@dimen/margin_small"
         android:paddingEnd="@dimen/margin_small"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/transcriptionTextView"
         android:layout_marginBottom="@dimen/margin_medium"

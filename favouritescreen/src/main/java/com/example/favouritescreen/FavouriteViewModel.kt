@@ -1,6 +1,5 @@
-package com.example.androidprofessional.viewmodel
+package com.example.favouritescreen
 
-import com.example.androidprofessional.usecase.FavouriteInteractor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

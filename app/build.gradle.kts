@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":utils"))
     implementation(project(":repository"))
     implementation(project(":historyscreen"))
+    implementation(project(":favouritescreen"))
     //Kotlin
     implementation (Kotlin.stdLib)
     implementation (Kotlin.core)

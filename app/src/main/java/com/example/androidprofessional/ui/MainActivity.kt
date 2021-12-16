@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_bar_fav -> {
-                    openFragment(FavouriteFragment())
+                    openFragment(com.example.favouritescreen.FavouriteFragment())
                     true
                 }
                 R.id.bottom_bar_history -> {

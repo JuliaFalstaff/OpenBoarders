@@ -7,11 +7,9 @@ import com.example.repository.repository.*
 import com.example.repository.retrofit.RetrofitImpl
 import com.example.repository.datasource.RoomDataBaseImpl
 import com.example.repository.room.TranslatorDataBase
-import com.example.androidprofessional.usecase.FavouriteInteractor
-import com.example.historyscreen.HistoryInteractor
+import com.example.favouritescreen.FavouriteInteractor
 import com.example.androidprofessional.usecase.main.MainInteractor
-import com.example.androidprofessional.viewmodel.FavouriteViewModel
-import com.example.historyscreen.HistoryViewModel
+import com.example.favouritescreen.FavouriteViewModel
 import com.example.androidprofessional.viewmodel.MainViewModel
 import org.koin.dsl.module
 
@@ -40,6 +38,6 @@ val historyScreen = module {
 }
 
 val favouriteScreen = module {
-    factory { FavouriteViewModel(interactor = get()) }
-    factory { FavouriteInteractor(repositoryLocal = get()) }
+    factory { com.example.favouritescreen.FavouriteViewModel(interactor = get()) }
+    factory { com.example.favouritescreen.FavouriteInteractor(repositoryLocal = get()) }
 }

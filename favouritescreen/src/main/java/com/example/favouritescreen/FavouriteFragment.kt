@@ -1,21 +1,19 @@
-package com.example.androidprofessional.ui
+package com.example.favouritescreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.androidprofessional.databinding.FragmentFavourtesBinding
-import com.example.historyscreen.HistoryAdapter
-import com.example.androidprofessional.viewmodel.FavouriteViewModel
+import com.example.favouritescreen.databinding.FragmentFavourtesBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavouriteFragment: com.example.core.BaseFragment<com.example.module.AppState>() {
 
     private var _binding: FragmentFavourtesBinding? = null
     private val binding get() = _binding!!
-    private val adapter: com.example.historyscreen.HistoryAdapter? = null
-    val viewModel: FavouriteViewModel by viewModel()
+    private val adapter: com.example.favouritescreen.FavouriteAdapter? = null
+    val viewModel: com.example.favouritescreen.FavouriteViewModel by viewModel()
     override val model: com.example.core.BaseViewModel<com.example.module.AppState>
         get() = viewModel
 
@@ -45,7 +43,7 @@ class FavouriteFragment: com.example.core.BaseFragment<com.example.module.AppSta
             is com.example.module.AppState.Success -> {
                 val dataModel = appState.data
                 binding.favouriteRecyclerView.adapter = dataModel?.let {
-                    com.example.historyscreen.HistoryAdapter(
+                    com.example.favouritescreen.FavouriteAdapter(
                         it
                     )
                 }

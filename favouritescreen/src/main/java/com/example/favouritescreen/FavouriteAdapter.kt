@@ -1,9 +1,9 @@
-package com.example.androidprofessional.ui.adapter
+package com.example.favouritescreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidprofessional.databinding.ItemFavouriteRecyclerBinding
+import com.example.favouritescreen.databinding.ItemFavouriteRecyclerBinding
 import com.example.module.data.DataModel
 
 class FavouriteAdapter(private var data: MutableList<DataModel>) :
@@ -35,8 +35,10 @@ class FavouriteAdapter(private var data: MutableList<DataModel>) :
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.wordTextView.text = data.text
-                binding.descriptionWordTextView.text = data.meanings?.joinToString { it.translation?.translation.toString() }
-                binding.transcriptionTextView.text = data.meanings?.first()?.transcription.toString()
+                binding.descriptionWordTextView.text =
+                    data.meanings?.joinToString { it.translation?.translation.toString() }
+                binding.transcriptionTextView.text =
+                    data.meanings?.first()?.transcription.toString()
             }
         }
     }
