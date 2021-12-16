@@ -1,7 +1,7 @@
 package com.example.androidprofessional.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.androidprofessional.model.data.DataModel
+import com.example.module.data.DataModel
 
 class DiffUtils(
     private val oldList: List<DataModel>,

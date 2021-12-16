@@ -2,11 +2,11 @@ package com.example.androidprofessional.di.koin
 
 import androidx.room.Room
 import com.example.androidprofessional.di.DATABASE_NAME
-import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.model.repository.*
-import com.example.androidprofessional.model.retrofit.RetrofitImpl
-import com.example.androidprofessional.model.datasource.RoomDataBaseImpl
-import com.example.androidprofessional.model.room.TranslatorDataBase
+import com.example.module.data.DataModel
+import com.example.repository.repository.*
+import com.example.repository.retrofit.RetrofitImpl
+import com.example.repository.datasource.RoomDataBaseImpl
+import com.example.repository.room.TranslatorDataBase
 import com.example.androidprofessional.usecase.FavouriteInteractor
 import com.example.androidprofessional.usecase.history.HistoryInteractor
 import com.example.androidprofessional.usecase.main.MainInteractor

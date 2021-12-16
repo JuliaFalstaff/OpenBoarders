@@ -5,23 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentFavourtesBinding
-import com.example.androidprofessional.databinding.FragmentHistoryListBinding
-import com.example.androidprofessional.model.AppState
+import com.example.module.AppState
 import com.example.androidprofessional.ui.adapter.HistoryAdapter
-import com.example.androidprofessional.viewmodel.BaseViewModel
 import com.example.androidprofessional.viewmodel.FavouriteViewModel
-import com.example.androidprofessional.viewmodel.HistoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavouriteFragment: BaseFragment<AppState>() {
+class FavouriteFragment: com.example.core.BaseFragment<com.example.module.AppState>() {
 
     private var _binding: FragmentFavourtesBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
     val viewModel: FavouriteViewModel by viewModel()
-    override val model: BaseViewModel<AppState>
+    override val model: com.example.core.BaseViewModel<com.example.module.AppState>
         get() = viewModel
 
     override fun onCreateView(
@@ -45,9 +41,9 @@ class FavouriteFragment: BaseFragment<AppState>() {
         binding.favouriteRecyclerView.adapter = adapter
     }
 
-    override fun renderData(appState: AppState) {
+    override fun renderData(appState: com.example.module.AppState) {
         when (appState) {
-            is AppState.Success -> {
+            is com.example.module.AppState.Success -> {
                 val dataModel = appState.data
                 binding.favouriteRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)

@@ -1,27 +1,26 @@
 package com.example.androidprofessional.usecase
 
-import com.example.androidprofessional.model.AppState
-import com.example.androidprofessional.model.data.DataModel
-import com.example.androidprofessional.model.repository.IRepository
-import com.example.androidprofessional.model.repository.IRepositoryLocal
+import com.example.module.AppState
+import com.example.module.data.DataModel
+import com.example.repository.repository.IRepositoryLocal
 
 class FavouriteInteractor (
 private val repositoryLocal: IRepositoryLocal<List<DataModel>>
-) : Interactor<AppState> {
-    override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
+) : com.example.core.Interactor<com.example.module.AppState> {
+    override suspend fun getData(word: String, fromRemoteSource: Boolean): com.example.module.AppState {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getData(word: String): AppState {
+    override suspend fun getData(word: String): com.example.module.AppState {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getHistoryData(): AppState {
+    override suspend fun getHistoryData(): com.example.module.AppState {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getFavouritesData(): AppState {
-       return AppState.Success(repositoryLocal.getFavouritesData().toMutableList())
+    override suspend fun getFavouritesData(): com.example.module.AppState {
+       return com.example.module.AppState.Success(repositoryLocal.getFavouritesData().toMutableList())
     }
 
     override suspend fun saveFavouritesData(favWord: DataModel) {

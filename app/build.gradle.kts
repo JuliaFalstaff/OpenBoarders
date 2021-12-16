@@ -50,10 +50,10 @@ android {
 }
 
 dependencies {
-//    implementation(project(":core"))
-//    implementation(project(":model"))
-//    implementation(project(":utils"))
-//    implementation(project(":repository"))
+    implementation(project(":core"))
+    implementation(project(":model"))
+    implementation(project(":utils"))
+    implementation(project(":repository"))
     //Kotlin
     implementation (Kotlin.stdLib)
     implementation (Kotlin.core)

@@ -7,19 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentHistoryListBinding
-import com.example.androidprofessional.model.AppState
+import com.example.module.AppState
 import com.example.androidprofessional.ui.adapter.HistoryAdapter
-import com.example.androidprofessional.viewmodel.BaseViewModel
 import com.example.androidprofessional.viewmodel.HistoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HistoryFragment : BaseFragment<AppState>() {
+class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppState>() {
 
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
     val viewModel: HistoryViewModel by viewModel()
-    override val model: BaseViewModel<AppState>
+    override val model: com.example.core.BaseViewModel<com.example.module.AppState>
         get() = viewModel
 
     override fun onCreateView(
@@ -43,9 +42,9 @@ class HistoryFragment : BaseFragment<AppState>() {
         binding.historyRecyclerView.adapter = adapter
     }
 
-    override fun renderData(appState: AppState) {
+    override fun renderData(appState: com.example.module.AppState) {
         when (appState) {
-            is AppState.Success -> {
+            is com.example.module.AppState.Success -> {
                 val dataModel = appState.data
                 binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -55,7 +54,7 @@ class HistoryFragment : BaseFragment<AppState>() {
                     }
                 }
             }
-            is AppState.Loading -> {
+            is com.example.module.AppState.Loading -> {
                 showViewLoading()
                 if (appState.progress != null) {
                     binding.progressBarRound.visibility = View.GONE
@@ -63,7 +62,7 @@ class HistoryFragment : BaseFragment<AppState>() {
                     binding.progressBarRound.visibility = View.VISIBLE
                 }
             }
-            is AppState.Error -> {
+            is com.example.module.AppState.Error -> {
                 showErrorScreen(appState.error.message)
             }
         }

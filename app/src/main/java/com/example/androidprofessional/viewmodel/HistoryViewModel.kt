@@ -1,22 +1,21 @@
 package com.example.androidprofessional.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.androidprofessional.model.AppState
 import com.example.androidprofessional.usecase.history.HistoryInteractor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val interactor: HistoryInteractor) :
-    BaseViewModel<AppState>() {
+    com.example.core.BaseViewModel<com.example.module.AppState>() {
 
     private var job: Job? = null
 
-    override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
+    override fun getData(word: String, isOnline: Boolean): LiveData<com.example.module.AppState> {
         return super.getData(word, isOnline)
     }
 
     override fun onCleared() {
-        liveDataForViewToObserve.postValue(AppState.SuccessHistoryData(null))
+        liveDataForViewToObserve.postValue(com.example.module.AppState.SuccessHistoryData(null))
         super.onCleared()
     }
 
@@ -28,6 +27,6 @@ class HistoryViewModel(private val interactor: HistoryInteractor) :
     }
 
     override fun handleError(error: Throwable) {
-        liveDataForViewToObserve.postValue(AppState.Error(error))
+        liveDataForViewToObserve.postValue(com.example.module.AppState.Error(error))
     }
 }

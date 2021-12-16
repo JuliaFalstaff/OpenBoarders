@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.ItemTranslationLayoutBinding
-import com.example.androidprofessional.model.data.DataModel
+import com.example.module.data.DataModel
 import com.example.androidprofessional.utils.DiffUtils
 
 class MainAdapter(

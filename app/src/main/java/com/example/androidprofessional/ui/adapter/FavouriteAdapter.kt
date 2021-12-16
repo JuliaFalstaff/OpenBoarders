@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.databinding.ItemFavouriteRecyclerBinding
-import com.example.androidprofessional.model.data.DataModel
+import com.example.module.data.DataModel
 
 class FavouriteAdapter(private var data: MutableList<DataModel>) :
     RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
