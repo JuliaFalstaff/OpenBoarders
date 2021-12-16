@@ -1,4 +1,4 @@
-package com.example.androidprofessional.usecase.history
+package com.example.historyscreen
 
 import com.example.module.AppState
 import com.example.module.data.DataModel

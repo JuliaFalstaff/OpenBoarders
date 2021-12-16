@@ -1,7 +1,6 @@
-package com.example.androidprofessional.viewmodel
+package com.example.historyscreen
 
 import androidx.lifecycle.LiveData
-import com.example.androidprofessional.usecase.history.HistoryInteractor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

@@ -1,15 +1,11 @@
-package com.example.androidprofessional.ui
+package com.example.historyscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.androidprofessional.R
-import com.example.androidprofessional.databinding.FragmentHistoryListBinding
-import com.example.module.AppState
-import com.example.androidprofessional.ui.adapter.HistoryAdapter
-import com.example.androidprofessional.viewmodel.HistoryViewModel
+import com.example.historyscreen.databinding.FragmentHistoryListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppState>() {
@@ -17,7 +13,7 @@ class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppStat
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
-    val viewModel: HistoryViewModel by viewModel()
+    val viewModel: com.example.historyscreen.HistoryViewModel by viewModel()
     override val model: com.example.core.BaseViewModel<com.example.module.AppState>
         get() = viewModel
 

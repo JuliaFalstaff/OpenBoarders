@@ -8,10 +8,10 @@ import com.example.repository.retrofit.RetrofitImpl
 import com.example.repository.datasource.RoomDataBaseImpl
 import com.example.repository.room.TranslatorDataBase
 import com.example.androidprofessional.usecase.FavouriteInteractor
-import com.example.androidprofessional.usecase.history.HistoryInteractor
+import com.example.historyscreen.HistoryInteractor
 import com.example.androidprofessional.usecase.main.MainInteractor
 import com.example.androidprofessional.viewmodel.FavouriteViewModel
-import com.example.androidprofessional.viewmodel.HistoryViewModel
+import com.example.historyscreen.HistoryViewModel
 import com.example.androidprofessional.viewmodel.MainViewModel
 import org.koin.dsl.module
 
@@ -30,8 +30,13 @@ val mainScreen = module {
 }
 
 val historyScreen = module {
-    factory { HistoryViewModel(interactor = get()) }
-    factory { HistoryInteractor(repositoryRemote = get(), repositoryLocal = get()) }
+    factory { com.example.historyscreen.HistoryViewModel(interactor = get()) }
+    factory {
+        com.example.historyscreen.HistoryInteractor(
+            repositoryRemote = get(),
+            repositoryLocal = get()
+        )
+    }
 }
 
 val favouriteScreen = module {

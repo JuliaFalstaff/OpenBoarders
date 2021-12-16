@@ -1,9 +1,9 @@
-package com.example.androidprofessional.ui.adapter
+package com.example.historyscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidprofessional.databinding.ItemHistoryRecyclerViewBinding
+import com.example.historyscreen.databinding.ItemHistoryRecyclerViewBinding
 import com.example.module.data.DataModel
 
 class HistoryAdapter(private var data: MutableList<DataModel>) :
@@ -23,7 +23,7 @@ class HistoryAdapter(private var data: MutableList<DataModel>) :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
     }
 
@@ -34,7 +34,8 @@ class HistoryAdapter(private var data: MutableList<DataModel>) :
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.headerHistoryTextViewRecyclerItem.text = data.text
-                binding.descriptionHistoryTextViewRecyclerItem.text = data.meanings?.joinToString { it.translation?.translation.toString() }
+                binding.descriptionHistoryTextViewRecyclerItem.text =
+                    data.meanings?.joinToString { it.translation?.translation.toString() }
             }
         }
     }
