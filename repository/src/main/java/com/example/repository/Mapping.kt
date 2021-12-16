@@ -22,12 +22,16 @@ fun convertFromEntityToData(entity: HistoryEntity): List<DataModel> {
 
 fun convertFromDataToEntity(word: DataModel) =
     HistoryEntity(
-        id = word.id, word = word.text, meanings = word.meanings
+        id = word.id,
+        word = word.text,
+        meanings = word.meanings
     )
 
 fun convertFromDataToFavEntity(word: DataModel) =
     FavouriteEntity(
-        id = word.id, word = word.text, meanings = word.meanings
+        id = word.id,
+        word = word.text,
+        meanings = word.meanings
     )
 
 fun convertFromFavEntityToData(entity: FavouriteEntity): List<DataModel> {

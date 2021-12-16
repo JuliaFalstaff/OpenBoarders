@@ -35,7 +35,7 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
                             putParcelable(DetailedInfoFragment.WORD_INFO, data)
                         })
                     )
-                        .addToBackStack("")
+                        .addToBackStack(null)
                         .commitAllowingStateLoss()
                 }
             }
@@ -108,7 +108,6 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
                 if (appState.progress != null) {
                     binding.progressBarHorizontal.visibility = View.VISIBLE
                     binding.progressBarRound.visibility = View.GONE
-//                    binding.progressBarHorizontal.progress = appState.progress
                 } else {
                     binding.progressBarHorizontal.visibility = View.GONE
                     binding.progressBarRound.visibility = View.VISIBLE

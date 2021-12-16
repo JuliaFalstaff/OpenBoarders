@@ -7,7 +7,7 @@ import com.example.utils.isOnline
 
 abstract class BaseFragment<T : AppState> : Fragment() {
     abstract fun renderData(appState: T)
-    abstract val model: com.example.core.BaseViewModel<T>
+    abstract val model: BaseViewModel<T>
     protected var isNetworkAvailable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
