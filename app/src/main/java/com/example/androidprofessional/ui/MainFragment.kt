@@ -77,7 +77,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         searchDialogFragment.setOnSearchClickListener(object :
             SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
-                isNetworkAvailable = isOnline(context)
                 if (isNetworkAvailable) {
                     model.getData(searchWord, isNetworkAvailable)
                         .observe(viewLifecycleOwner, Observer { renderData(it) })

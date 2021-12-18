@@ -22,16 +22,8 @@ class MainInteractor(
         return appState
     }
 
-    override suspend fun getData(word: String): AppState {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun getHistoryData(): AppState {
       return AppState.Success(localRepository.getHistoryData().toMutableList())
-    }
-
-    override suspend fun getFavouritesData(): AppState {
-        TODO("Not yet implemented")
     }
 
     override suspend fun saveFavouritesData(favWord: DataModel) {

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.BaseFragment
 import com.example.favouritescreen.databinding.FragmentFavourtesBinding
 import com.example.module.AppState
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject

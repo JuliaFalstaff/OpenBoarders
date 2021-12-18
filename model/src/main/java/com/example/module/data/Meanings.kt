@@ -13,8 +13,8 @@ class Meanings(
         @SerializedName(IMAGE_URL_MEANINGS) val imageUrl: String? = "",
         @SerializedName(TRANSCRIPTION_MEANINGS) val transcription: String? = "",
         @SerializedName(SOUND_URL_MEANINGS) val soundUrl: String? = "",
-        @SerializedName(MNEMONICS) val mnemonics: String? = ""
-): Parcelable {
+        @SerializedName(MNEMONICS) val mnemonics: String? = "",
+) : Parcelable {
     companion object {
         private const val ID_MEANINGS = "id"
         private const val TRANSLATION_MEANINGS = "translation"
