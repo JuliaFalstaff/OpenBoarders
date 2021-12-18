@@ -8,10 +8,10 @@ import com.example.repository.repository.IRepositoryLocal
 class HistoryInteractor(
     private val repositoryRemote: IRepository<List<DataModel>>,
     private val repositoryLocal: IRepositoryLocal<List<DataModel>>
-) : com.example.core.Interactor<com.example.module.AppState> {
+) : com.example.core.Interactor<AppState> {
 
-    override suspend fun getData(word: String, fromRemoteSource: Boolean): com.example.module.AppState {
-        return com.example.module.AppState.Success(
+    override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
+        return AppState.Success(
             if (fromRemoteSource) {
                 repositoryRemote
             } else {
@@ -20,15 +20,15 @@ class HistoryInteractor(
         )
     }
 
-    override suspend fun getData(word: String): com.example.module.AppState {
-        return com.example.module.AppState.Success(repositoryRemote.getData(word).toMutableList())
+    override suspend fun getData(word: String): AppState {
+        return AppState.Success(repositoryRemote.getData(word).toMutableList())
     }
 
-    override suspend fun getHistoryData(): com.example.module.AppState {
-        return com.example.module.AppState.Success(repositoryLocal.getHistoryData().toMutableList())
+    override suspend fun getHistoryData(): AppState {
+        return AppState.Success(repositoryLocal.getHistoryData().toMutableList())
     }
 
-    override suspend fun getFavouritesData(): com.example.module.AppState {
+    override suspend fun getFavouritesData(): AppState {
         TODO("Not yet implemented")
     }
 

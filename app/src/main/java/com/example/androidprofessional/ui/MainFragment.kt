@@ -14,12 +14,17 @@ import com.example.module.data.DataModel
 import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.utils.isOnline
 import com.example.androidprofessional.viewmodel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.example.core.BaseFragment
+import org.koin.androidx.scope.createScope
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
-class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>() {
+class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
-    val viewModel: MainViewModel by viewModel()
-    override val model: com.example.core.BaseViewModel<com.example.module.AppState>
+    override val scope: Scope by lazy { createScope(this) }
+    val viewModel: MainViewModel by inject()
+    override val model: com.example.core.BaseViewModel<AppState>
         get() = viewModel
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -69,7 +74,7 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
         searchDialogFragment.setOnSearchClickListener(object :
             SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
-                isNetworkAvailable = com.example.utils.isOnline(context)
+                isNetworkAvailable = isOnline(context)
                 if (isNetworkAvailable) {
                     model.getData(searchWord, isNetworkAvailable)
                         .observe(viewLifecycleOwner, Observer { renderData(it) })
@@ -85,9 +90,9 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
         searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
     }
 
-    override fun renderData(appState: com.example.module.AppState) {
+    override fun renderData(appState: AppState) {
         when (appState) {
-            is com.example.module.AppState.Success -> {
+            is AppState.Success -> {
                 val dataModel = appState.data
                 if (dataModel.isNullOrEmpty()) {
                     showErrorScreen(getString(R.string.empty_server_response_on_success))
@@ -103,7 +108,7 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
                     }
                 }
             }
-            is com.example.module.AppState.Loading -> {
+            is AppState.Loading -> {
                 showViewLoading()
                 if (appState.progress != null) {
                     binding.progressBarHorizontal.visibility = View.VISIBLE
@@ -113,7 +118,7 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
                     binding.progressBarRound.visibility = View.VISIBLE
                 }
             }
-            is com.example.module.AppState.Error -> {
+            is AppState.Error -> {
                 showErrorScreen(appState.error.message)
             }
         }
@@ -147,6 +152,11 @@ class MainFragment : com.example.core.BaseFragment<com.example.module.AppState>(
         loadingFrameLayout.visibility = View.GONE
         errorLinearLayout.visibility = View.VISIBLE
         startTextViewBeforeSearch.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        scope.close()
+        super.onStop()
     }
 
     companion object {
