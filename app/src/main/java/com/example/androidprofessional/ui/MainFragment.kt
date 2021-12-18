@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.utils.isOnline
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.core.BaseFragment
+import com.example.utils.fragmentViewById
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
@@ -29,6 +31,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
+    private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
@@ -111,10 +114,10 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Loading -> {
                 showViewLoading()
                 if (appState.progress != null) {
-                    binding.progressBarHorizontal.visibility = View.VISIBLE
+                    horizontalProgressBar.visibility = View.VISIBLE
                     binding.progressBarRound.visibility = View.GONE
                 } else {
-                    binding.progressBarHorizontal.visibility = View.GONE
+                    horizontalProgressBar.visibility = View.GONE
                     binding.progressBarRound.visibility = View.VISIBLE
                 }
             }
