@@ -21,6 +21,35 @@ allprojects {
     }
 }
 
+// For all subprojects - generate compileSdkVersion, minSdkVersion,
+// targetSdkVersion and Java compatibility
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')) {
+            android {
+                compileSdkVersion Config.compileSdkVersion
+
+
+                buildFeatures {
+                    viewBinding true
+                }
+
+
+                defaultConfig {
+                    minSdkVersion Config.minSdkVersion
+                    targetSdkVersion Config.targetSdkVersion
+                }
+
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+        }
+    }
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

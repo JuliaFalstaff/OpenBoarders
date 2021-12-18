@@ -1,13 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-    <style name="BaseTextStyle" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TranscriptionTextStyle" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/color_text_main</item>
         <item name="android:textSize">@dimen/text_size_standard</item>
         <item name="android:textStyle">normal</item>
@@ -19,7 +19,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TranscriptionTextStyle" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="BaseTextStyle" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/color_text_main</item>
         <item name="android:textSize">@dimen/text_size_standard</item>
         <item name="android:textStyle">bold</item>
@@ -63,5 +63,18 @@
         <item name="boxStrokeColor">@color/color_pale_grey</item>
         <item name="hintTextColor">@color/colorAccent</item>
         <item name="android:textCursorDrawable">@drawable/my_cursor_drawable</item>
+    </style>
+
+    <style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="iconTint">@color/white</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:layout_marginTop">@dimen/margin_x_small</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="itemIconTint">@color/color_white</item>
+        <item name="itemRippleColor">@color/color_pale_grey</item>
+        <item name="itemTextColor">@color/white</item>
     </style>
 </resources>

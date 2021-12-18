@@ -1,0 +1,97 @@
+package com.example.historyscreen
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.historyscreen.databinding.FragmentHistoryListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppState>() {
+
+    private var _binding: FragmentHistoryListBinding? = null
+    private val binding get() = _binding!!
+    private val adapter: HistoryAdapter? = null
+    val viewModel: com.example.historyscreen.HistoryViewModel by viewModel()
+    override val model: com.example.core.BaseViewModel<com.example.module.AppState>
+        get() = viewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        _binding = FragmentHistoryListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getData()
+    }
+
+
+    private fun initView() {
+        binding.historyRecyclerView.adapter = adapter
+    }
+
+    override fun renderData(appState: com.example.module.AppState) {
+        when (appState) {
+            is com.example.module.AppState.Success -> {
+                val dataModel = appState.data
+                binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
+                binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
+                adapter.let {
+                    if (dataModel != null) {
+                        it?.setData(dataModel)
+                    }
+                }
+            }
+            is com.example.module.AppState.Loading -> {
+                showViewLoading()
+                if (appState.progress != null) {
+                    binding.progressBarRound.visibility = View.GONE
+                } else {
+                    binding.progressBarRound.visibility = View.VISIBLE
+                }
+            }
+            is com.example.module.AppState.Error -> {
+                showErrorScreen(appState.error.message)
+            }
+        }
+    }
+
+    private fun showErrorScreen(error: String?) = with(binding) {
+        showViewError()
+        errorTextView.text = error ?: getString(R.string.undefined_error)
+        reloadButton.setOnClickListener {
+            viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it) })
+            viewModel.getData()
+        }
+    }
+
+    private fun showViewSuccess() = with(binding) {
+        successFrameLayout.visibility = View.VISIBLE
+        loadingFrameLayout.visibility = View.GONE
+        errorLinearLayout.visibility = View.GONE
+    }
+
+    private fun showViewLoading() = with(binding) {
+        successFrameLayout.visibility = View.GONE
+        loadingFrameLayout.visibility = View.VISIBLE
+        errorLinearLayout.visibility = View.GONE
+    }
+
+    private fun showViewError() = with(binding) {
+        successFrameLayout.visibility = View.GONE
+        loadingFrameLayout.visibility = View.GONE
+        errorLinearLayout.visibility = View.VISIBLE
+    }
+
+    companion object {
+        fun newInstance(): HistoryFragment = HistoryFragment()
+    }
+}

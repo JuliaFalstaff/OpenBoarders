@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.example.androidprofessional.utils.EquilateralImageView
+        android:id="@+id/wordPictureImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/image_view_translation"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="@dimen/margin_x_large"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/wordTextView"
+        style="@style/HeaderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_xxx_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wordPictureImageView"
+        tools:text="Word" />
+
+    <TextView
+        android:id="@+id/transcriptionTextView"
+        style="@style/TranscriptionTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wordTextView"
+        tools:text="Transcription" />
+
+    <TextView
+        android:id="@+id/descriptionWordTextView"
+        style="@style/BaseTextStyle"
+        android:layout_marginTop="@dimen/margin_x_large"
+        android:paddingStart="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transcriptionTextView"
+        tools:text="Description" />
+
+    <TextView
+        android:id="@+id/mnemonicTextView"
+        style="@style/BaseTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_x_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionWordTextView"
+        tools:text="Mnemonic" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/playSoundButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:src="@drawable/ic_audio"
+        app:layout_constraintBottom_toBottomOf="@+id/transcriptionTextView"
+        app:layout_constraintStart_toEndOf="@+id/wordTextView"
+        app:layout_constraintTop_toTopOf="@+id/transcriptionTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
