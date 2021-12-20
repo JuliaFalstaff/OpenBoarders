@@ -23,7 +23,6 @@ class FavouriteAdapter(private var data: MutableList<DataModel>) :
         return ViewHolder(binding)
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
     }
@@ -42,5 +41,4 @@ class FavouriteAdapter(private var data: MutableList<DataModel>) :
             }
         }
     }
-
 }

@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentDetailedInfoBinding
 import com.example.module.data.DataModel
+import com.example.utils.OnlineLiveData
 import com.squareup.picasso.Picasso
 
 class DetailedInfoFragment : Fragment() {
@@ -30,7 +33,17 @@ class DetailedInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         wordBundle = arguments?.getParcelable(WORD_INFO) ?: DataModel()
-        setData()
+        startLoadingOrShowError()
+    }
+
+    private fun startLoadingOrShowError() {
+        OnlineLiveData(requireContext()).observe(viewLifecycleOwner, Observer {
+            if (it) {
+                setData()
+            } else {
+                Toast.makeText(context, getString(R.string.error_no_internet), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")

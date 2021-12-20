@@ -5,22 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.core.BaseFragment
+import com.example.core.BaseViewModel
 import com.example.historyscreen.databinding.FragmentHistoryListBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.example.module.AppState
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.createScope
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
-class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppState>() {
+class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
+
+    override val scope: Scope by lazy { createScope(this) }
 
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
-    val viewModel: com.example.historyscreen.HistoryViewModel by viewModel()
-    override val model: com.example.core.BaseViewModel<com.example.module.AppState>
+    val viewModel: HistoryViewModel by inject()
+    override val model: BaseViewModel<AppState>
         get() = viewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentHistoryListBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,14 +41,13 @@ class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppStat
         viewModel.getData()
     }
 
-
     private fun initView() {
         binding.historyRecyclerView.adapter = adapter
     }
 
-    override fun renderData(appState: com.example.module.AppState) {
+    override fun renderData(appState: AppState) {
         when (appState) {
-            is com.example.module.AppState.Success -> {
+            is AppState.Success -> {
                 val dataModel = appState.data
                 binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -50,7 +57,7 @@ class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppStat
                     }
                 }
             }
-            is com.example.module.AppState.Loading -> {
+            is AppState.Loading -> {
                 showViewLoading()
                 if (appState.progress != null) {
                     binding.progressBarRound.visibility = View.GONE
@@ -58,7 +65,7 @@ class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppStat
                     binding.progressBarRound.visibility = View.VISIBLE
                 }
             }
-            is com.example.module.AppState.Error -> {
+            is AppState.Error -> {
                 showErrorScreen(appState.error.message)
             }
         }
@@ -89,6 +96,11 @@ class HistoryFragment : com.example.core.BaseFragment<com.example.module.AppStat
         successFrameLayout.visibility = View.GONE
         loadingFrameLayout.visibility = View.GONE
         errorLinearLayout.visibility = View.VISIBLE
+    }
+
+    override fun onStop() {
+        scope.close()
+        super.onStop()
     }
 
     companion object {
