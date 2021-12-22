@@ -60,6 +60,9 @@ dependencies {
     implementation (Kotlin.stdLib)
     implementation (Kotlin.core)
 
+    //SplashScreen
+    implementation (SplashScreen.splashScreen)
+
     // Rx-Java
     implementation (RXJava.rxJava2Android)
     implementation (RXJava.rxJava2)

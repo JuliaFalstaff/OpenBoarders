@@ -90,3 +90,7 @@ object Testing {
     const val testJunit = "androidx.test.ext:junit:${Versions.junitVersion}"
     const val espressoTest = "androidx.test.espresso:espresso-core:${Versions.epressoCoreVersion}"
 }
+
+object SplashScreen {
+    const val splashScreen = "androidx.core:core-splashscreen:1.0.0-alpha02"
+}

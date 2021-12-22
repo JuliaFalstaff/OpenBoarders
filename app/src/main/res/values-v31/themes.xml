@@ -1,0 +1,7 @@
+<resources>
+    <style name="AppTheme.NewSplash" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_android_marin_24dp</item>
+        <item name="windowSplashScreenBackground">@color/color_pale_grey</item>
+    </style>
+</resources>
