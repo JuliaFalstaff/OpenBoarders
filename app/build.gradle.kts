@@ -100,6 +100,9 @@ dependencies {
     implementation (Stetho.stethoJsRhino)
     implementation (Stetho.stethoOkhttp3)
 
+    //SplashScree
+    implementation (SplashScreen.splashScreen)
+
     // Test
     implementation (Design.androidxAppcompat)
     implementation (Design.material)

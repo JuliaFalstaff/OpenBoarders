@@ -3,10 +3,8 @@ package com.example.androidprofessional.ui
 import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.Menu
 import android.view.View
-import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -22,12 +20,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setSplashScreenAnimation()
+        } else {
+            setTheme(R.style.AppTheme)
         }
-        setSplashScreenDuration()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigationView()
@@ -39,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     @RequiresApi(31)
     private fun setSplashScreenAnimation() {
         val splashScreen = installSplashScreen()
@@ -47,40 +43,14 @@ class MainActivity : AppCompatActivity() {
             ObjectAnimator.ofFloat(
                 splashScreenProvider.view,
                 View.TRANSLATION_Y,
-                0f,
+                START_ANIMATION,
                 -splashScreenProvider.view.height.toFloat()
             ).apply {
                 interpolator = AnticipateInterpolator()
-                duration = 1500
+                duration = SLIDE_UP_DURATION
                 doOnEnd { splashScreenProvider.remove() }
             }.start()
         }
-
-    }
-
-    private fun setSplashScreenDuration() {
-        var isHideSplashScreen = false
-
-        object : CountDownTimer(2000, 1000) {
-            override fun onTick(p0: Long) {}
-            override fun onFinish() {
-                isHideSplashScreen = true
-            }
-        }.start()
-
-        val content: View = findViewById(android.R.id.content)
-        content.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    return if (isHideSplashScreen) {
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        true
-                    } else {
-                        false
-                    }
-                }
-            }
-        )
     }
 
     private fun initBottomNavigationView() {
@@ -113,5 +83,10 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    companion object {
+        private const val SLIDE_UP_DURATION = 1500L
+        private const val START_ANIMATION = 0f
     }
 }

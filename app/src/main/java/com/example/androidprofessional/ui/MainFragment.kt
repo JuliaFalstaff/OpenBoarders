@@ -10,12 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMainBinding
-import com.example.module.AppState
-import com.example.module.data.DataModel
 import com.example.androidprofessional.ui.adapter.MainAdapter
-import com.example.utils.isOnline
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.core.BaseFragment
+import com.example.module.AppState
+import com.example.module.data.DataModel
 import com.example.utils.fragmentViewById
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
