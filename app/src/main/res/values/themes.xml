@@ -67,13 +67,13 @@
     </style>
 
     <style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
-        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
         <item name="iconTint">@color/white</item>
     </style>
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:layout_marginTop">@dimen/margin_x_small</item>
-        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
         <item name="itemIconTint">@color/color_white</item>
         <item name="itemRippleColor">@color/color_pale_grey</item>
         <item name="itemTextColor">@color/white</item>
