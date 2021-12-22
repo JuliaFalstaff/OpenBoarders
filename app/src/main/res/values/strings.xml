@@ -15,4 +15,5 @@
     <string name="menu_history">History</string>
     <string name="home">Home</string>
     <string name="favourite">Favourite</string>
+    <string name="widget_text">Hello! Its time to learn English!</string>
 </resources>
