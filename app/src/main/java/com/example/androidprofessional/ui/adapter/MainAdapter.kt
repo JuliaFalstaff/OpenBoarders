@@ -12,15 +12,14 @@ import com.example.androidprofessional.utils.DiffUtils
 
 class MainAdapter(
     private var onListItemClickListener: OnListItemClickListener,
-    private var data: MutableList<DataModel>,
+    private var data: List<DataModel>,
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     fun setData(newListData: List<DataModel>) {
         val callback = DiffUtils(data, newListData)
         val result = DiffUtil.calculateDiff(callback)
-        data.clear()
-        data.addAll(newListData)
         result.dispatchUpdatesTo(this)
+        this.data = newListData
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

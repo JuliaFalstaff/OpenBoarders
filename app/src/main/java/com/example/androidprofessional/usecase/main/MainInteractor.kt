@@ -15,15 +15,15 @@ class MainInteractor(
         if (fromRemoteSource) {
             val data = remoteRepository.getData(word)
             localRepository.saveToDatabase(data)
-            appState = AppState.Success(data.toMutableList())
+            appState = AppState.Success(data)
         } else {
-            appState = AppState.Success(localRepository.getData(word).toMutableList())
+            appState = AppState.Success(localRepository.getData(word))
         }
         return appState
     }
 
     override suspend fun getHistoryData(): AppState {
-      return AppState.Success(localRepository.getHistoryData().toMutableList())
+      return AppState.Success(localRepository.getHistoryData())
     }
 
     override suspend fun saveFavouritesData(favWord: DataModel) {

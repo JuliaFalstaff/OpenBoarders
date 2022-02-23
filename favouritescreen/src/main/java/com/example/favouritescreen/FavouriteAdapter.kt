@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.favouritescreen.databinding.ItemFavouriteRecyclerBinding
 import com.example.module.data.DataModel
 
-class FavouriteAdapter(private var data: MutableList<DataModel>) :
+class FavouriteAdapter(private var data: List<DataModel>) :
     RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
-    fun setData(data: MutableList<DataModel>) {
+    fun setData(data: List<DataModel>) {
         this.data = data
         notifyDataSetChanged()
     }

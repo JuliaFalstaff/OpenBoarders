@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.historyscreen.databinding.ItemHistoryRecyclerViewBinding
 import com.example.module.data.DataModel
 
-class HistoryAdapter(private var data: MutableList<DataModel>) :
+class HistoryAdapter(private var data: List<DataModel>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    fun setData(data: MutableList<DataModel>) {
+    fun setData(data: List<DataModel>) {
         this.data = data
         notifyDataSetChanged()
     }
