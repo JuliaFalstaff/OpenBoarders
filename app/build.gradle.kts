@@ -110,4 +110,7 @@ dependencies {
     testImplementation ("junit:junit:4.+")
     androidTestImplementation (Testing.testJunit)
     androidTestImplementation (Testing.espressoTest)
+
+    //ExoPlayer
+    implementation (ExoPlayer.exoPlayer)
 }
