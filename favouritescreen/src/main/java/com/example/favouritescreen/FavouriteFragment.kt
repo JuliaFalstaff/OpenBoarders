@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.BaseFragment
 import com.example.favouritescreen.databinding.FragmentFavourtesBinding
@@ -39,7 +40,6 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         viewModel.getData()
     }
 
-
     private fun initView() {
         binding.favouriteRecyclerView.adapter = adapter
     }
@@ -59,8 +59,15 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         it?.setData(dataModel)
                     }
                 }
+                addRecyclerDecorator()
             }
         }
+    }
+
+    private fun addRecyclerDecorator() {
+        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
+        binding.favouriteRecyclerView.addItemDecoration(itemDecoration)
     }
 
     override fun onStop() {

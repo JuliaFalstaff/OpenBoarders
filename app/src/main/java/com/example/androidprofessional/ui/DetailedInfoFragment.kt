@@ -40,7 +40,6 @@ class DetailedInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         wordBundle = arguments?.getParcelable(WORD_INFO) ?: DataModel()
         startLoadingOrShowError()
-
     }
 
     override fun onStart() {
@@ -126,6 +125,7 @@ class DetailedInfoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         player = null
+        _binding = null
     }
 
 

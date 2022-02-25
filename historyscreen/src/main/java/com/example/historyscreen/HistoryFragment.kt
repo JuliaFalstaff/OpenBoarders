@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
@@ -56,6 +57,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         it?.setData(dataModel)
                     }
                 }
+                addRecyclerDecorator()
             }
             is AppState.Loading -> {
                 showViewLoading()
@@ -69,6 +71,12 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 showErrorScreen(appState.error.message)
             }
         }
+    }
+
+    private fun addRecyclerDecorator() {
+        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
+        binding.historyRecyclerView.addItemDecoration(itemDecoration)
     }
 
     private fun showErrorScreen(error: String?) = with(binding) {

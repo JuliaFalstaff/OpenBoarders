@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:id="@+id/error_linear_layout"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/margin_medium"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_x_small"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_x_small"
+    android:elevation="@dimen/cardview_elevation"
+    app:cardCornerRadius="@dimen/cardview_corner_radius">
 
-    <TextView
-        android:id="@+id/headerHistoryTextViewRecyclerItem"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_height="wrap_content"
-        style="@style/HeaderTextStyle"
-        tools:text="Header"/>
-
-    <TextView
-        android:id="@+id/descriptionHistoryTextViewRecyclerItem"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_height="wrap_content"
-        style="@style/BaseTextStyle"
-        tools:text="Header"/>
-
-    <View
+    <LinearLayout
+        android:id="@+id/error_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/hairline"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@color/color_gray"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/headerHistoryTextViewRecyclerItem"
+            style="@style/HeaderTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            tools:text="Header" />
+
+        <TextView
+            android:id="@+id/descriptionHistoryTextViewRecyclerItem"
+            style="@style/BaseTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            tools:text="Header" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

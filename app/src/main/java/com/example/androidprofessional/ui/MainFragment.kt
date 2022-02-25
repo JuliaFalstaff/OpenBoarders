@@ -1,5 +1,6 @@
 package com.example.androidprofessional.ui
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMainBinding
@@ -107,6 +109,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
+                    addRecyclerDecorator()
                 }
             }
             is AppState.Loading -> {
@@ -123,6 +126,12 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 showErrorScreen(appState.error.message)
             }
         }
+    }
+
+    private fun addRecyclerDecorator() {
+        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
+        binding.mainActivityRecyclerview.addItemDecoration(itemDecoration)
     }
 
     private fun showErrorScreen(error: String?) = with(binding) {
