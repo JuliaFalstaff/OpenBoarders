@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentDetailedInfoBinding
+import com.example.androidprofessional.utils.ExoPlayerFactory
 import com.example.module.data.DataModel
 import com.example.utils.OnlineLiveData
 import com.google.android.exoplayer2.ExoPlayer
@@ -25,18 +26,6 @@ class DetailedInfoFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var wordBundle: DataModel
     private var player: ExoPlayer? = null
-
-//    private val player2: ExoPlayer? by lazy {
-//        val b = ExoPlayer.Builder(requireContext())
-//                .build()
-//        MediaItem.fromUri(Uri.parse("https://d2fmfepycn0xw0.cloudfront.net/?gender=male&accent=british&text=sʌn&transcription=1"))
-//                .run {
-//                    b.addMediaItem(this)
-//                }
-//        b.prepare()
-//        return@lazy b
-//    }
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -116,8 +105,7 @@ class DetailedInfoFragment : Fragment() {
     }
 
     private fun initializePlayer() {
-        player = ExoPlayer.Builder(requireContext())
-                .build()
+        player = ExoPlayerFactory().create(requireContext())
     }
 
     private fun useExoPlayerToLoadSoundUrl(url: String) {
