@@ -56,19 +56,6 @@
         app:layout_constraintTop_toBottomOf="@+id/transcriptionTextView"
         tools:text="Description" />
 
-    <TextView
-        android:id="@+id/mnemonicTextView"
-        style="@style/BaseTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/margin_small"
-        android:paddingEnd="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_x_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionWordTextView"
-        tools:text="Mnemonic" />
-
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/playSoundButton"
         android:layout_width="wrap_content"

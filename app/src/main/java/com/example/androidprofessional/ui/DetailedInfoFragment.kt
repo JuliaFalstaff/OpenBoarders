@@ -91,16 +91,14 @@ class DetailedInfoFragment : Fragment() {
         descriptionWordTextView.text =
                 wordBundle.meanings?.joinToString { it.translation?.translation.toString() }
         transcriptionTextView.text = "[${wordBundle.meanings?.firstOrNull()?.transcription}]"
-        mnemonicTextView.text = wordBundle.meanings?.firstOrNull()?.mnemonics.toString()
 
         val imageLink = wordBundle.meanings?.firstOrNull()?.imageUrl
         usePicassoToLoadPhoto(wordPictureImageView, imageLink)
-        val urlSound = wordBundle.meanings?.first()?.soundUrl.toString()
-        useExoPlayerToLoadSoundUrl(urlSound)
 
+        val urlSound = wordBundle.meanings?.firstOrNull()?.soundUrl.toString()
+        useExoPlayerToLoadSoundUrl(urlSound)
         playSoundButton.setOnClickListener {
             player?.play()
-
         }
     }
 
@@ -110,11 +108,11 @@ class DetailedInfoFragment : Fragment() {
 
     private fun useExoPlayerToLoadSoundUrl(url: String) {
         val mediaItem = MediaItem.fromUri(Uri.parse("https://$url"))
-        player?.setMediaItem(mediaItem)
-        player?.prepare()
-        player?.playWhenReady
+        player?.run {
+            setMediaItem(mediaItem)
+            prepare()
+        }
     }
-
 
     private fun usePicassoToLoadPhoto(imageView: ImageView, imageLink: String?) {
         Picasso.get()
