@@ -1,6 +1,5 @@
 package com.example.androidprofessional.ui
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,29 +34,29 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
-        object : MainAdapter.OnListItemClickListener {
-            override fun onItemClick(data: DataModel) {
-                activity?.supportFragmentManager?.apply {
-                    beginTransaction().replace(
-                        R.id.container,
-                        DetailedInfoFragment.newInstance(Bundle().apply {
-                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                        })
-                    )
-                        .addToBackStack(null)
-                        .commitAllowingStateLoss()
+            object : MainAdapter.OnListItemClickListener {
+                override fun onItemClick(data: DataModel) {
+                    activity?.supportFragmentManager?.apply {
+                        beginTransaction().replace(
+                                R.id.container,
+                                DetailedInfoFragment.newInstance(Bundle().apply {
+                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
+                                })
+                        )
+                                .addToBackStack(null)
+                                .commitAllowingStateLoss()
+                    }
+                }
+
+                override fun addToFav(data: DataModel) {
+                    viewModel.saveToFav(data)
                 }
             }
 
-            override fun addToFav(data: DataModel) {
-                viewModel.saveToFav(data)
-            }
-        }
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,16 +75,16 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private fun openDialogFragmentsAndSearch() {
         val searchDialogFragment = SearchDialogFragment.newInstance()
         searchDialogFragment.setOnSearchClickListener(object :
-            SearchDialogFragment.OnSearchClickListener {
+                SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
                 if (isNetworkAvailable) {
                     model.getData(searchWord, isNetworkAvailable)
-                        .observe(viewLifecycleOwner, Observer { renderData(it) })
+                            .observe(viewLifecycleOwner, Observer { renderData(it) })
                 } else {
                     Toast.makeText(
-                        context,
-                        getString(R.string.error_no_internet),
-                        Toast.LENGTH_SHORT
+                            context,
+                            getString(R.string.error_no_internet),
+                            Toast.LENGTH_SHORT
                     ).show()
                 }
             }
@@ -103,9 +102,9 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     showViewSuccess()
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
-                            LinearLayoutManager(context)
+                                LinearLayoutManager(context)
                         binding.mainActivityRecyclerview.adapter =
-                            MainAdapter(onListItemClickListener, dataModel)
+                                MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
@@ -139,7 +138,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
             model.getData(getString(R.string.empty), isNetworkAvailable)
-                .observe(viewLifecycleOwner, Observer { renderData(it) })
+                    .observe(viewLifecycleOwner, Observer { renderData(it) })
         }
     }
 

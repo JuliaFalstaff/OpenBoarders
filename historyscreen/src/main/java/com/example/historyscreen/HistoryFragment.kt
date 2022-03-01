@@ -49,6 +49,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
+                showViewSuccess()
                 val dataModel = appState.data
                 binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
