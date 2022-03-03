@@ -95,9 +95,8 @@ class DetailedInfoFragment : Fragment() {
         usePicassoToLoadPhoto(wordPictureImageView, imageLink)
 
         val urlSound = wordBundle.meanings?.firstOrNull()?.soundUrl.toString()
-        useExoPlayerToLoadSoundUrl(urlSound)
         playSoundButton.setOnClickListener {
-            player?.play()
+            useExoPlayerToLoadSoundUrl(urlSound)
         }
     }
 
@@ -110,6 +109,7 @@ class DetailedInfoFragment : Fragment() {
         player?.run {
             setMediaItem(mediaItem)
             prepare()
+            play()
         }
     }
 
