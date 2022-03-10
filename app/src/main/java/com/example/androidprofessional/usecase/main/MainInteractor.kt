@@ -29,4 +29,8 @@ class MainInteractor(
     override suspend fun saveFavouritesData(favWord: DataModel) {
         localRepository.saveFavouritesData(favWord)
     }
+
+    override suspend fun deleteFavouritesData(favWord: DataModel) {
+        localRepository.deleteFavouritesData(favWord)
+    }
 }

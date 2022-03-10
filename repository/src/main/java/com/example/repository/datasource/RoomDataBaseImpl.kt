@@ -12,12 +12,11 @@ class RoomDataBaseImpl(private val historyDao: HistoryDao, private val favourite
     }
 
     override suspend fun getData(): List<DataModel> {
-        val dataList = historyDao.getAll().let { data ->
+        return historyDao.getAll().let { data ->
             data.flatMap { entity ->
                 convertFromEntityToData(entity)
             }
         }
-        return dataList
     }
 
     override suspend fun save(word: DataModel) {
@@ -33,16 +32,20 @@ class RoomDataBaseImpl(private val historyDao: HistoryDao, private val favourite
     }
 
     override suspend fun getFavouritesData(): List<DataModel> {
-        val dataList = favouriteDao.getAll().let { data ->
+        return favouriteDao.getAll().let { data ->
             data.flatMap { entity ->
                 convertFromFavEntityToData(entity)
             }
         }
-        return dataList
     }
 
     override suspend fun saveFavouritesData(favWord: DataModel) {
         val data = convertFromDataToFavEntity(favWord)
         favouriteDao.insert(data)
+    }
+
+    override suspend fun deleteFavouritesData(favWord: DataModel) {
+        val data = convertFromDataToFavEntity(favWord)
+        favouriteDao.delete(data)
     }
 }

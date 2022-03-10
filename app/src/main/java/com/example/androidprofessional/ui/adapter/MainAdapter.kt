@@ -51,8 +51,15 @@ class MainAdapter(
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener { openInNewWindow(data) }
                 binding.imageViewAddToFav.setOnClickListener {
-                    onListItemClickListener.addToFav(data)
-                    binding.imageViewAddToFav.setImageResource(R.drawable.ic_fav_active)
+                    if (!isFavourite) {
+                        onListItemClickListener.addToFav(data)
+                        binding.imageViewAddToFav.setImageResource(R.drawable.ic_fav_active)
+                        isFavourite = true
+                    } else {
+                        onListItemClickListener.deleteFromFav(data)
+                        binding.imageViewAddToFav.setImageResource(R.drawable.ic_fav_not_active)
+                        isFavourite = false
+                    }
                 }
             }
         }
@@ -65,5 +72,6 @@ class MainAdapter(
     interface OnListItemClickListener {
         fun onItemClick(data: DataModel)
         fun addToFav(data: DataModel)
+        fun deleteFromFav(data: DataModel)
     }
 }

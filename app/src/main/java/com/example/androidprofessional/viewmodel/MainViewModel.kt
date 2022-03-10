@@ -34,4 +34,8 @@ class MainViewModel(private val interactor: MainInteractor) :
     fun saveToFav(word: DataModel) {
         viewModelCoroutineScope.launch { interactor.saveFavouritesData(word) }
     }
+
+    fun deleteFromFav(word: DataModel) {
+        viewModelCoroutineScope.launch { interactor.deleteFavouritesData(word) }
+    }
 }

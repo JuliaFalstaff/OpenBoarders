@@ -51,6 +51,10 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 override fun addToFav(data: DataModel) {
                     viewModel.saveToFav(data)
                 }
+
+                override fun deleteFromFav(data: DataModel) {
+                    viewModel.deleteFromFav(data)
+                }
             }
 
     override fun onCreateView(
