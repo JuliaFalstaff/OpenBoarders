@@ -11,9 +11,11 @@ import com.example.androidprofessional.utils.DiffUtils
 import com.example.module.data.DataModel
 
 class MainAdapter(
-    private var onListItemClickListener: OnListItemClickListener,
-    private var data: List<DataModel>,
+        private var onListItemClickListener: OnListItemClickListener,
+        private var data: List<DataModel>,
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+
+    private var isFavourite: Boolean = false
 
     fun setData(newListData: List<DataModel>) {
         val callback = DiffUtils(data, newListData)
@@ -24,11 +26,11 @@ class MainAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemTranslationLayoutBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+                ItemTranslationLayoutBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                )
         )
     }
 
@@ -39,13 +41,13 @@ class MainAdapter(
     override fun getItemCount(): Int = data.size
 
     inner class ViewHolder(val binding: ItemTranslationLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.headerTextViewRecyclerItem.text = data.text
                 binding.descriptionTextViewRecyclerItem.text =
-                    data.meanings?.joinToString { it.translation?.translation.toString() }
+                        data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener { openInNewWindow(data) }
                 binding.imageViewAddToFav.setOnClickListener {
