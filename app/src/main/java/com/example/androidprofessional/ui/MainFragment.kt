@@ -73,6 +73,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     private fun initView() {
         binding.startTextViewBeforeSearch.visibility = View.VISIBLE
+        binding.startImageView.visibility = View.VISIBLE
         binding.searchFab.setOnClickListener { openDialogFragmentsAndSearch() }
     }
 
@@ -151,6 +152,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         loadingFrameLayout.visibility = View.GONE
         errorLinearLayout.visibility = View.GONE
         startTextViewBeforeSearch.visibility = View.GONE
+        startImageView.visibility = View.GONE
     }
 
     private fun showViewLoading() = with(binding) {
@@ -158,6 +160,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         loadingFrameLayout.visibility = View.VISIBLE
         errorLinearLayout.visibility = View.GONE
         startTextViewBeforeSearch.visibility = View.GONE
+        startImageView.visibility = View.GONE
     }
 
     private fun showViewError() = with(binding) {
@@ -165,6 +168,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         loadingFrameLayout.visibility = View.GONE
         errorLinearLayout.visibility = View.VISIBLE
         startTextViewBeforeSearch.visibility = View.GONE
+        startImageView.visibility = View.GONE
     }
 
     override fun onStop() {
