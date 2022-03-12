@@ -1,4 +1,4 @@
-package com.example.androidprofessional.utils
+package com.example.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.module.data.DataModel

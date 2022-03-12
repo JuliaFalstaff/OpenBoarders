@@ -2,16 +2,20 @@ package com.example.historyscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.historyscreen.databinding.ItemHistoryRecyclerViewBinding
 import com.example.module.data.DataModel
+import com.example.utils.DiffUtils
 
 class HistoryAdapter(private var data: List<DataModel>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    fun setData(data: List<DataModel>) {
-        this.data = data
-        notifyDataSetChanged()
+    fun setData(newListData: List<DataModel>) {
+        val callback = DiffUtils(data, newListData)
+        val result = DiffUtil.calculateDiff(callback)
+        result.dispatchUpdatesTo(this)
+        this.data = newListData
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
