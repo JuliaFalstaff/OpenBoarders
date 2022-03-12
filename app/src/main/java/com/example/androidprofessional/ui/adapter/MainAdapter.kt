@@ -3,6 +3,7 @@ package com.example.androidprofessional.ui.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.R
@@ -60,6 +61,7 @@ class MainAdapter(
                         binding.imageViewAddToFav.setImageResource(R.drawable.ic_fav_not_active)
                         isFavourite = false
                     }
+                    binding.imageViewAddToFav.startAnimation(AnimationUtils.loadAnimation(binding.root.context, R.anim.shake))
                 }
             }
         }

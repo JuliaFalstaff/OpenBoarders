@@ -53,9 +53,9 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 val dataModel = appState.data
                 binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
-                adapter.let {
+                adapter.let { adapter ->
                     if (dataModel != null) {
-                        it?.setData(dataModel)
+                        adapter?.setData(dataModel.sortedWith(compareBy { it.text }))
                     }
                 }
                 addRecyclerDecorator()

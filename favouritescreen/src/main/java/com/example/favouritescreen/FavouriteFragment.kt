@@ -48,9 +48,9 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         when (appState) {
             is AppState.Success -> {
                 val dataModel = appState.data
-                binding.favouriteRecyclerView.adapter = dataModel?.let {
+                binding.favouriteRecyclerView.adapter = dataModel?.let { list ->
                     FavouriteAdapter(
-                            it
+                            list.sortedWith(compareBy { it.text })
                     )
                 }
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)

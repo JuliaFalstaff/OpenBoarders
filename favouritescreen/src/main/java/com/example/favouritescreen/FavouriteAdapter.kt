@@ -13,7 +13,7 @@ class FavouriteAdapter(private var data: List<DataModel>) :
         RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
     fun setData(newListData: List<DataModel>) {
-        val callback = DiffUtils(data, newListData)
+        val callback = DiffUtils(data.sortedWith(compareBy { it.text }), newListData)
         val result = DiffUtil.calculateDiff(callback)
         result.dispatchUpdatesTo(this)
         this.data = newListData
