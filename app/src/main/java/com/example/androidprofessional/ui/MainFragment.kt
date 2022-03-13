@@ -37,7 +37,13 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             object : MainAdapter.OnListItemClickListener {
                 override fun onItemClick(data: DataModel) {
                     activity?.supportFragmentManager?.apply {
-                        beginTransaction().replace(
+                        beginTransaction()
+                                .setCustomAnimations(
+                                        R.anim.slide_in,
+                                        R.anim.fade_out,
+                                        R.anim.fade_in,
+                                        R.anim.slide_out)
+                                .replace(
                                 R.id.container,
                                 DetailedInfoFragment.newInstance(Bundle().apply {
                                     putParcelable(DetailedInfoFragment.WORD_INFO, data)
