@@ -78,4 +78,8 @@
         <item name="itemRippleColor">@color/color_pale_grey</item>
         <item name="itemTextColor">@color/white</item>
     </style>
+
+    <style name="AppTheme.Splash">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
 </resources>
