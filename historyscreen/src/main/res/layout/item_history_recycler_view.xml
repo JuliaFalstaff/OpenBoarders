@@ -10,26 +10,45 @@
     android:elevation="@dimen/cardview_elevation"
     app:cardCornerRadius="@dimen/cardview_corner_radius">
 
-    <LinearLayout
-        android:id="@+id/error_linear_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/headerHistoryTextViewRecyclerItem"
             style="@style/HeaderTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Header" />
+
+        <TextView
+            android:id="@+id/transcriptionHistoryTextView"
+            style="@style/TranscriptionTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerHistoryTextViewRecyclerItem"
+            tools:text="Transcription" />
 
         <TextView
             android:id="@+id/descriptionHistoryTextViewRecyclerItem"
             style="@style/BaseTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
-            tools:text="Header" />
-    </LinearLayout>
+            android:layout_marginTop="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/transcriptionHistoryTextView"
+            tools:text="Description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

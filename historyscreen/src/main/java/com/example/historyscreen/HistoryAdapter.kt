@@ -1,5 +1,6 @@
 package com.example.historyscreen
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -35,11 +36,13 @@ class HistoryAdapter(private var data: List<DataModel>) :
 
     inner class ViewHolder(val binding: ItemHistoryRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.headerHistoryTextViewRecyclerItem.text = data.text
                 binding.descriptionHistoryTextViewRecyclerItem.text =
                     data.meanings?.joinToString { it.translation?.translation.toString() }
+                binding.transcriptionHistoryTextView.text = "[${data.meanings?.first()?.transcription}]"
             }
         }
     }
