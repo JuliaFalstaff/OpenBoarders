@@ -46,8 +46,6 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         }
     }
 
-
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

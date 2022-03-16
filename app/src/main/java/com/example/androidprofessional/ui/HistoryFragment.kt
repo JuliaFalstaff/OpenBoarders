@@ -1,4 +1,4 @@
-package com.example.historyscreen
+package com.example.androidprofessional.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidprofessional.R
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
+import com.example.historyscreen.HistoryAdapter
+import com.example.historyscreen.HistoryViewModel
+import com.example.historyscreen.IOnListItemClickListener
 import com.example.historyscreen.databinding.FragmentHistoryListBinding
 import com.example.module.AppState
+import com.example.module.data.DataModel
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject
@@ -25,6 +30,20 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: HistoryViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
+
+    private val onListItemClickListener: IOnListItemClickListener =
+        object : IOnListItemClickListener {
+            override fun onItemClick(data: DataModel) {
+                activity?.supportFragmentManager?.apply {
+                    beginTransaction()
+                        .replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
+                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
+                        }))
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+        }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -51,7 +70,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Success -> {
                 showViewSuccess()
                 val dataModel = appState.data
-                binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it) }
+                binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it, onListItemClickListener) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let { adapter ->
                     if (dataModel != null) {

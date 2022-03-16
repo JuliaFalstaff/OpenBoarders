@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_bar_history -> {
-                    openFragment(com.example.historyscreen.HistoryFragment())
+                    openFragment(HistoryFragment())
                     true
                 }
                 else -> false

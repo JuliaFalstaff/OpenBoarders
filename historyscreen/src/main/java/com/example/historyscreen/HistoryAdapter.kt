@@ -9,7 +9,7 @@ import com.example.historyscreen.databinding.ItemHistoryRecyclerViewBinding
 import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 
-class HistoryAdapter(private var data: List<DataModel>) :
+class HistoryAdapter(private var data: List<DataModel>, private var listener: IOnListItemClickListener) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     fun setData(newListData: List<DataModel>) {
@@ -43,6 +43,9 @@ class HistoryAdapter(private var data: List<DataModel>) :
                 binding.descriptionHistoryTextViewRecyclerItem.text =
                     data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionHistoryTextView.text = "[${data.meanings?.first()?.transcription}]"
+                itemView.setOnClickListener {
+                    listener.onItemClick(data)
+                }
             }
         }
     }

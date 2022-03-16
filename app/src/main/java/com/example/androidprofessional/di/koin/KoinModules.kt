@@ -8,7 +8,7 @@ import com.example.androidprofessional.usecase.main.MainInteractor
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.favouritescreen.FavouriteInteractor
 import com.example.favouritescreen.FavouriteViewModel
-import com.example.historyscreen.HistoryFragment
+import com.example.androidprofessional.ui.HistoryFragment
 import com.example.historyscreen.HistoryInteractor
 import com.example.historyscreen.HistoryViewModel
 import com.example.module.data.DataModel
