@@ -9,7 +9,7 @@ import com.example.favouritescreen.databinding.ItemFavouriteRecyclerBinding
 import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 
-class FavouriteAdapter(private var data: List<DataModel>) :
+class FavouriteAdapter(private var data: List<DataModel>, private var onListItemClickListener: IOnListItemClickListener) :
         RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
     fun setData(newListData: List<DataModel>) {
@@ -43,8 +43,10 @@ class FavouriteAdapter(private var data: List<DataModel>) :
                 binding.descriptionWordTextView.text =
                         data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
+                itemView.setOnClickListener {
+                    onListItemClickListener.onItemClick(data)
+                }
             }
         }
-
     }
 }

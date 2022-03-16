@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.example.core.BaseFragment
 import com.example.favouritescreen.databinding.FragmentFavourtesBinding
 import com.example.module.AppState
+import com.example.module.data.DataModel
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject
@@ -23,6 +26,24 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: FavouriteViewModel by inject()
     override val model: com.example.core.BaseViewModel<AppState>
         get() = viewModel
+
+    private val onListItemClickListener: IOnListItemClickListener = object : IOnListItemClickListener {
+        override fun onItemClick(data: DataModel) {
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                        .replace(
+                                R.id.container,
+                                DetailedInfoFragment.newInstance(Bundle().apply {
+                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
+                                })
+                        )
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss()
+            }
+        }
+    }
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -50,7 +71,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 val dataModel = appState.data
                 binding.favouriteRecyclerView.adapter = dataModel?.let { list ->
                     FavouriteAdapter(
-                            list.sortedWith(compareBy { it.text })
+                            list.sortedWith(compareBy { it.text }), onListItemClickListener
                     )
                 }
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -73,5 +94,14 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onStop() {
         scope.close()
         super.onStop()
+    }
+
+    companion object {
+        const val WORD_INFO = "WORD"
+        fun newInstance(bundle: Bundle): DetailedInfoFragment {
+            val fragment = DetailedInfoFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }
