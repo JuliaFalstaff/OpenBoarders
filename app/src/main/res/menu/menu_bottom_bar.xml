@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bottom_bar_fav"
-        android:icon="@drawable/ic_favourite_menu"
-        android:title="@string/favourite"
+        android:id="@+id/bottom_bar_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home"
         app:showAsAction="always" />
 
     <item
@@ -14,8 +14,8 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/bottom_bar_home"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/home"
+        android:id="@+id/bottom_bar_fav"
+        android:icon="@drawable/ic_favourite_menu"
+        android:title="@string/favourite"
         app:showAsAction="always" />
 </menu>
