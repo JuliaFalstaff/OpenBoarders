@@ -25,4 +25,6 @@ abstract class BaseFragment<T : AppState> : Fragment() {
             }
         })
     }
+
+
 }

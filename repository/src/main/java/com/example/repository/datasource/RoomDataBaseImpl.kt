@@ -5,6 +5,7 @@ import com.example.repository.room.dao.FavouriteDao
 import com.example.repository.room.dao.HistoryDao
 import com.example.androidprofessional.utils.*
 
+
 class RoomDataBaseImpl(private val historyDao: HistoryDao, private val favouriteDao: FavouriteDao) : IDataSourceLocal<List<DataModel>> {
 
     override suspend fun getData(word: String): List<DataModel> {
@@ -48,4 +49,5 @@ class RoomDataBaseImpl(private val historyDao: HistoryDao, private val favourite
         val data = convertFromDataToFavEntity(favWord)
         favouriteDao.delete(data)
     }
+
 }

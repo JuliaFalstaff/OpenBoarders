@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity() {
                     openFragment(HistoryFragment())
                     true
                 }
+                R.id.bottom_bar_fav_card -> {
+                    openFragment(MemoryCardsFragment())
+                    true
+                }
                 else -> false
             }
         }

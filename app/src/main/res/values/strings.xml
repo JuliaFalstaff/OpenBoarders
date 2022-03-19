@@ -16,4 +16,8 @@
     <string name="home">Home</string>
     <string name="favourite">Favourite</string>
     <string name="widget_text">Hello! Its time to learn English!</string>
+    <string name="cards">favourite_cards</string>
+    <string name="show_translation">Show Translation</string>
+    <string name="do_you_remember_translation">Do you remember translation?</string>
+    <string name="next_card">Next</string>
 </resources>

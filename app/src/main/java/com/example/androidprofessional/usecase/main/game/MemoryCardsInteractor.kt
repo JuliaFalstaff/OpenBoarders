@@ -1,0 +1,19 @@
+package com.example.androidprofessional.usecase.main.game
+
+import com.example.favouritescreen.IFavouriteInteractor
+import com.example.module.AppState
+import com.example.module.data.DataModel
+import com.example.repository.repository.IRepositoryLocal
+
+class MemoryCardsInteractor (
+        private val repositoryLocal: IRepositoryLocal<List<DataModel>>
+) : IFavouriteInteractor<AppState> {
+
+    override suspend fun getFavouritesData(): AppState {
+        return AppState.SuccessCard(
+                repositoryLocal.getFavouritesData().random()
+        )
+    }
+
+
+}

@@ -18,4 +18,10 @@
         android:icon="@drawable/ic_favourite_menu"
         android:title="@string/favourite"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/bottom_bar_fav_card"
+        android:icon="@drawable/ic_fav_cards"
+        android:title="@string/cards"
+        app:showAsAction="always" />
 </menu>

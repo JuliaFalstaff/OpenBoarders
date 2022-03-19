@@ -2,6 +2,7 @@ package com.example.repository.datasource
 
 import com.example.module.data.DataModel
 
+
 interface IDataSourceLocal<T> : IDataSource<T> {
     suspend fun getData(): List<DataModel>
     suspend fun save(word: DataModel)
