@@ -3,9 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:strokeWidth="1dp"
-    app:strokeColor="@color/color_pale_grey"
+    android:layout_marginStart="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_small"
+    app:cardCornerRadius="@dimen/margin_medium"
+    app:cardElevation="@dimen/margin_medium"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,9 +18,9 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cardHeader"
+            style="@style/HeaderTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/showTranslationButton"
             android:text="@string/do_you_remember_translation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +32,11 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/image_view_translation"
+            android:layout_marginTop="@dimen/margin_medium"
             android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/showTranslationButton" />
+            app:layout_constraintTop_toBottomOf="@id/cardHeader" />
 
         <TextView
             android:id="@+id/cardWordTextView"
@@ -64,13 +69,13 @@
             style="@style/BaseTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_x_large"
             android:paddingStart="@dimen/margin_small"
             android:paddingEnd="@dimen/margin_small"
             android:visibility="invisible"
+            android:layout_marginTop="@dimen/margin_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardTranscriptionTextView"
+            app:layout_constraintTop_toBottomOf="@+id/showTranslationButton"
             tools:text="Description" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -87,12 +92,14 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/showTranslationButton"
             style="@style/OutlineSearchButton"
+            android:textColor="@color/color_text_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/show_translation"
+            android:text="@string/show_translation"
+            android:layout_marginTop="@dimen/margin_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardHeader" />
+            app:layout_constraintTop_toBottomOf="@id/cardTranscriptionTextView" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextCardButton"
@@ -101,6 +108,7 @@
             android:layout_height="wrap_content"
             android:text="@string/next_card"
             app:icon="@drawable/ic_next"
+            android:layout_marginEnd="@dimen/margin_medium"
             app:iconGravity="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
