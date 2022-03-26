@@ -53,8 +53,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initBottomNavigationView() {
-        binding.bottomApiNavigationView.setOnItemSelectedListener {
+    private fun initBottomNavigationView() = with(binding) {
+        bottomApiNavigationView.itemIconTintList = null
+        bottomApiNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_bar_home -> {
                     openFragment(MainFragment())

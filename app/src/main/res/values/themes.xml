@@ -73,7 +73,7 @@
 
     <style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
         <item name="backgroundTint">@color/colorPrimary</item>
-        <item name="iconTint">@color/white</item>
+
     </style>
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">

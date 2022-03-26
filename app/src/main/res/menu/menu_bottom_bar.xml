@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/bottom_bar_home"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_homepage_menu"
         android:title="@string/home"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/bottom_bar_history"
-        android:icon="@drawable/ic_history_foreground"
+        android:icon="@drawable/ic_new_history_clock_menu"
         android:title="@string/menu_history"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/bottom_bar_fav"
-        android:icon="@drawable/ic_favourite_menu"
+        android:icon="@drawable/ic_new_favourite_menu"
         android:title="@string/favourite"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/bottom_bar_fav_card"
-        android:icon="@drawable/ic_fav_cards"
+        android:icon="@drawable/ic_study_cards_menu"
         android:title="@string/cards"
         app:showAsAction="always" />
 </menu>
