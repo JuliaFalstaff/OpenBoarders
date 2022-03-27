@@ -113,4 +113,7 @@ dependencies {
 
     //ExoPlayer
     implementation (ExoPlayer.exoPlayer)
+
+    //ShowCase
+    implementation(ShowCase.showCase)
 }

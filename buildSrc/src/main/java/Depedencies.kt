@@ -108,3 +108,8 @@ object SplashScreen {
 object ExoPlayer {
     const val exoPlayer =  "com.google.android.exoplayer:exoplayer:${Versions.exoPlayer}"
 }
+
+object ShowCase {
+    const val showCase = "com.github.mreram:showcaseview:1.4.0"
+}
+

@@ -13,6 +13,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.ActivityMainBinding
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +38,19 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commit()
         }
+
+        openShowCase()
+    }
+
+    private fun openShowCase() {
+        val showCase = GuideView.Builder(this)
+            .setTitle("Навигационное меню")
+            .setGravity(Gravity.center)
+            .setDismissType(DismissType.anywhere)
+            .setTargetView(binding.bottomApiNavigationView)
+            .build()
+            .show()
+
     }
 
     @RequiresApi(31)
@@ -87,10 +104,11 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.apply {
             beginTransaction()
             .setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out)
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit()
