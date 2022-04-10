@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dictionary</string>
+    <string name="app_name" translatable="false">Dictionary</string>
     <string name="error_textview_stub">Error</string>
     <string name="reload_button">Reload</string>
     <string name="undefined_error">Undefined error</string>
@@ -20,4 +20,7 @@
     <string name="show_translation">Show Translation</string>
     <string name="do_you_remember_translation">Do you remember this translation?</string>
     <string name="next_card">Next</string>
+    <string name="error_no_favourites_words">No favourites words. Add some for learning</string>
+    <string name="loading">Loading</string>
+    <string name="error_null_data">Error - data is null</string>
 </resources>
