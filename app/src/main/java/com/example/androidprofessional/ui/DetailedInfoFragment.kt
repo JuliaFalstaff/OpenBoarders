@@ -105,7 +105,7 @@ class DetailedInfoFragment : Fragment() {
     }
 
     private fun useExoPlayerToLoadSoundUrl(url: String) {
-        val mediaItem = MediaItem.fromUri(Uri.parse("https://$url"))
+        val mediaItem = MediaItem.fromUri(Uri.parse(url))
         player?.run {
             setMediaItem(mediaItem)
             prepare()
