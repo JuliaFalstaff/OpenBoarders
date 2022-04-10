@@ -67,18 +67,30 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.SuccessCard -> {
                 val dataModel = appState.data
                 if (dataModel == null) {
-                    Toast.makeText(requireContext(), "Error - null", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.error_null_data, Toast.LENGTH_SHORT).show()
+
                 } else {
                     setData(dataModel)
                 }
             }
             is AppState.Loading -> {
-                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.loading, Toast.LENGTH_SHORT).show()
             }
             is AppState.Error -> {
                 Toast.makeText(requireContext(), appState.error.message.toString(), Toast.LENGTH_SHORT).show()
+                showErrorPicture()
             }
         }
+    }
+
+    private fun showErrorPicture() = with(binding){
+        cardHeader.text = getString(R.string.error_no_favourites_words)
+        cardPlaySoundButton.visibility = View.INVISIBLE
+        cardTranscriptionTextView.visibility = View.INVISIBLE
+        showTranslationButton.visibility = View.INVISIBLE
+        nextCardButton.visibility = View.INVISIBLE
+        cardWordPictureImageView.setImageResource(R.drawable.no_favs_data)
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -101,7 +113,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         Picasso.get()
                 .load("https:$imageLink")
                 .placeholder(R.drawable.progress_animation)
-                .error(R.drawable.ic_load_error_vector)
+                .error(R.drawable.no_favs_data)
                 .into(imageView)
     }
 
@@ -110,7 +122,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     private fun useExoPlayerToLoadSoundUrl(url: String) {
-        val mediaItem = MediaItem.fromUri(Uri.parse("https://$url"))
+        val mediaItem = MediaItem.fromUri(Uri.parse("$url"))
         player?.run {
             setMediaItem(mediaItem)
             prepare()
