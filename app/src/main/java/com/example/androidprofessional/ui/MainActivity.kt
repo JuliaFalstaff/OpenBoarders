@@ -1,6 +1,8 @@
 package com.example.androidprofessional.ui
 
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -13,14 +15,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.ActivityMainBinding
-import smartdevelop.ir.eram.showcaseviewlib.GuideView
-import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
-import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,22 +35,9 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commit()
+                    .replace(R.id.container, MainFragment.newInstance())
+                    .commit()
         }
-
-        openShowCase()
-    }
-
-    private fun openShowCase() {
-        val showCase = GuideView.Builder(this)
-            .setTitle("Навигационное меню")
-            .setGravity(Gravity.center)
-            .setDismissType(DismissType.anywhere)
-            .setTargetView(binding.bottomApiNavigationView)
-            .build()
-            .show()
-
     }
 
     @RequiresApi(31)
@@ -58,10 +45,10 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setOnExitAnimationListener { splashScreenProvider ->
             ObjectAnimator.ofFloat(
-                splashScreenProvider.view,
-                View.TRANSLATION_Y,
-                START_ANIMATION,
-                -splashScreenProvider.view.height.toFloat()
+                    splashScreenProvider.view,
+                    View.TRANSLATION_Y,
+                    START_ANIMATION,
+                    -splashScreenProvider.view.height.toFloat()
             ).apply {
                 interpolator = AnticipateInterpolator()
                 duration = SLIDE_UP_DURATION
@@ -103,20 +90,23 @@ class MainActivity : AppCompatActivity() {
     private fun openFragment(fragment: Fragment) {
         supportFragmentManager.apply {
             beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_in,
-                R.anim.fade_out,
-                R.anim.fade_in,
-                R.anim.slide_out
-            )
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit()
+                    .setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    )
+                    .replace(R.id.container, fragment)
+                    .addToBackStack(null)
+                    .commit()
         }
     }
 
     companion object {
         private const val SLIDE_UP_DURATION = 1500L
         private const val START_ANIMATION = 0f
+
+        private const val ON_BOARDING_PREF = "OnBoarding"
+        private const val ON_BOARDING_PREF_COMPLETE = "OnBoarding complete"
     }
 }
