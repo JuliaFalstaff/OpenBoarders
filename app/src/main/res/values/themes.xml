@@ -73,7 +73,6 @@
 
     <style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
         <item name="backgroundTint">@color/colorPrimary</item>
-
     </style>
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
@@ -81,7 +80,7 @@
         <item name="backgroundTint">@color/colorPrimary</item>
         <item name="itemIconTint">@color/color_white</item>
         <item name="itemRippleColor">@color/color_pale_grey</item>
-        <item name="itemTextColor">@color/white</item>
+        <item name="itemTextColor">@color/black</item>
     </style>
 
     <style name="AppTheme.Splash">
