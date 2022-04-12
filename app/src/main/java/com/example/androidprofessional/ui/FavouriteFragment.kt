@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.R
 import com.example.core.BaseFragment
 import com.example.favouritescreen.FavouriteAdapter
@@ -58,6 +60,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        setupSwipeListener()
         viewModel.getFavouriteData().observe(viewLifecycleOwner, { renderData(it) })
         viewModel.getData()
     }
@@ -78,7 +81,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let {
                     if (dataModel != null) {
-                        it?.setData(dataModel)
+                        it?.setFavoriteData(dataModel)
                     }
                 }
                 addRecyclerDecorator()
@@ -90,6 +93,29 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
         binding.favouriteRecyclerView.addItemDecoration(itemDecoration)
+    }
+
+    private fun setupSwipeListener() {
+        val callback = object : ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+
+            override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder,
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.layoutPosition
+                val item = adapter?.data?.get(position)
+                item?.let { viewModel.deleteFavWordBySwipe(it) }
+                adapter?.notifyItemRemoved(position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.favouriteRecyclerView)
     }
 
     override fun onStop() {

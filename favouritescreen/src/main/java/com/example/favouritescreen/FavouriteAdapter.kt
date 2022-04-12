@@ -9,10 +9,10 @@ import com.example.favouritescreen.databinding.ItemFavouriteRecyclerBinding
 import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 
-class FavouriteAdapter(private var data: List<DataModel>, private var onListItemClickListener: IOnListItemClickListener) :
+class FavouriteAdapter(var data: List<DataModel>, private var onListItemClickListener: IOnListItemClickListener) :
         RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
-    fun setData(newListData: List<DataModel>) {
+    fun setFavoriteData(newListData: List<DataModel>) {
         val callback = DiffUtils(data.sortedWith(compareBy { it.text }), newListData)
         val result = DiffUtil.calculateDiff(callback)
         result.dispatchUpdatesTo(this)

@@ -1,5 +1,6 @@
 package com.example.favouritescreen
 
+import com.example.module.data.DataModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -16,6 +17,12 @@ class FavouriteViewModel(private val interactor: FavouriteInteractor) :
         job?.cancel()
         job = viewModelCoroutineScope.launch {
             liveDataForViewToObserve.postValue(interactor.getFavouritesData())
+        }
+    }
+
+    fun deleteFavWordBySwipe (word: DataModel) {
+        viewModelCoroutineScope.launch {
+            interactor.deleteFavouritesData(word)
         }
     }
 
