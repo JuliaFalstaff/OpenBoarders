@@ -3,6 +3,8 @@ package com.example.androidprofessional
 import android.app.Application
 import com.example.androidprofessional.di.koin.*
 import com.facebook.stetho.Stetho
+import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.Router
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

@@ -96,4 +96,8 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         scope.close()
         super.onStop()
     }
+
+    companion object {
+        fun newInstance(): FavouriteFragment = FavouriteFragment()
+    }
 }

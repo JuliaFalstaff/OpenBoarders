@@ -113,4 +113,7 @@ dependencies {
 
     //ExoPlayer
     implementation (ExoPlayer.exoPlayer)
+
+    //Cicerone
+    implementation ("com.github.terrakok:cicerone:7.1")
 }

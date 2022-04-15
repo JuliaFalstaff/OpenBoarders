@@ -167,4 +167,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         _binding = null
     }
 
+    companion object {
+        fun newInstance(): MemoryCardsFragment = MemoryCardsFragment()
+    }
 }

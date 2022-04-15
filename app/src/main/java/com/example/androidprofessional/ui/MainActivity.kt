@@ -11,12 +11,40 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.androidprofessional.R
+import com.example.androidprofessional.TranslatorApp
 import com.example.androidprofessional.databinding.ActivityMainBinding
+import com.example.androidprofessional.navigation.AndroidScreens
+import com.example.androidprofessional.navigation.IScreens
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.github.terrakok.cicerone.androidx.FragmentScreen
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var screens: IScreens = AndroidScreens()
+    private val navigatorHolder: NavigatorHolder by inject()
+     val router: Router by inject()
+
+
+    val navigator = object: AppNavigator(this, R.id.container) {
+        override fun setupFragmentTransaction(
+            screen: FragmentScreen,
+            fragmentTransaction: FragmentTransaction,
+            currentFragment: Fragment?,
+            nextFragment: Fragment,
+        ) {
+            fragmentTransaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +58,10 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigationView()
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commit()
+            router.replaceScreen(screens.mainFragment())
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.container, MainFragment.newInstance())
+//                .commit()
         }
     }
 
@@ -58,19 +87,23 @@ class MainActivity : AppCompatActivity() {
         bottomApiNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_bar_home -> {
-                    openFragment(MainFragment())
+                    router.navigateTo(screens.mainFragment())
+//                    openFragment(MainFragment())
                     true
                 }
                 R.id.bottom_bar_fav -> {
-                    openFragment(FavouriteFragment())
+                    router.navigateTo(screens.favouriteFragment())
+//                    openFragment(FavouriteFragment())
                     true
                 }
                 R.id.bottom_bar_history -> {
-                    openFragment(HistoryFragment())
+                    router.navigateTo(screens.historyFragment())
+//                    openFragment(HistoryFragment())
                     true
                 }
                 R.id.bottom_bar_fav_card -> {
-                    openFragment(MemoryCardsFragment())
+                    router.navigateTo(screens.memoryCardsFragment())
+//                    openFragment(MemoryCardsFragment())
                     true
                 }
                 else -> false
@@ -83,19 +116,33 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun openFragment(fragment: Fragment) {
-        supportFragmentManager.apply {
-            beginTransaction()
-            .setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out)
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        navigatorHolder.setNavigator(navigator)
+
     }
+
+    override fun onPause() {
+        navigatorHolder.removeNavigator()
+        super.onPause()
+
+    }
+
+
+
+//    private fun openFragment(fragment: Fragment) {
+//        supportFragmentManager.apply {
+//            beginTransaction()
+//            .setCustomAnimations(
+//                    R.anim.slide_in,
+//                    R.anim.fade_out,
+//                    R.anim.fade_in,
+//                    R.anim.slide_out)
+//                .replace(R.id.container, fragment)
+//                .addToBackStack(null)
+//                .commit()
+//        }
+//    }
 
     companion object {
         private const val SLIDE_UP_DURATION = 1500L

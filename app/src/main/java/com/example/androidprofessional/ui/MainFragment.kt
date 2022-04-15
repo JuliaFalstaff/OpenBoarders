@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMainBinding
+import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.core.BaseFragment
 import com.example.module.AppState
 import com.example.module.data.DataModel
 import com.example.utils.fragmentViewById
+import com.github.terrakok.cicerone.Router
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
@@ -25,6 +27,7 @@ import org.koin.core.scope.Scope
 class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     override val scope: Scope by lazy { createScope(this) }
+    val screens = AndroidScreens()
     val viewModel: MainViewModel by inject()
     override val model: com.example.core.BaseViewModel<AppState>
         get() = viewModel
@@ -32,26 +35,30 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
+    val router: Router by inject<Router>()
+
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
                 override fun onItemClick(data: DataModel) {
-                    activity?.supportFragmentManager?.apply {
-                        beginTransaction()
-                                .setCustomAnimations(
-                                        R.anim.slide_in,
-                                        R.anim.fade_out,
-                                        R.anim.fade_in,
-                                        R.anim.slide_out)
-                                .replace(
-                                R.id.container,
-                                DetailedInfoFragment.newInstance(Bundle().apply {
-                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                                })
-                        )
-                                .addToBackStack(null)
-                                .commitAllowingStateLoss()
-                    }
+                    router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data)}))
+//                    activity?.supportFragmentManager?.apply {
+//                        beginTransaction()
+//                                .setCustomAnimations(
+//                                        R.anim.slide_in,
+//                                        R.anim.fade_out,
+//                                        R.anim.fade_in,
+//                                        R.anim.slide_out)
+//                                .replace(
+//                                R.id.container,
+//                                DetailedInfoFragment.newInstance(Bundle().apply {
+//                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
+//                                })
+//                        )
+//                                .addToBackStack(null)
+//                                .commitAllowingStateLoss()
+//                    }
                 }
 
                 override fun addToFav(data: DataModel) {
