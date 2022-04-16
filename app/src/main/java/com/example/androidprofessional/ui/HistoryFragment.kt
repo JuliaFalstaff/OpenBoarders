@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
+import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.historyscreen.HistoryAdapter
@@ -32,18 +33,21 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override val model: BaseViewModel<AppState>
         get() = viewModel
     private val router: Router by inject<Router>()
+    val screens = AndroidScreens()
 
     private val onListItemClickListener: IOnListItemClickListener =
         object : IOnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                activity?.supportFragmentManager?.apply {
-                    beginTransaction()
-                        .replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
-                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                        }))
-                        .addToBackStack(null)
-                        .commit()
-                }
+                router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data)}))
+//                activity?.supportFragmentManager?.apply {
+//                    beginTransaction()
+//                        .replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
+//                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
+//                        }))
+//                        .addToBackStack(null)
+//                        .commit()
+//                }
             }
         }
 
