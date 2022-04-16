@@ -13,19 +13,24 @@ import androidx.lifecycle.Observer
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentDetailedInfoBinding
 import com.example.androidprofessional.utils.ExoPlayerFactory
+import com.example.core.BackButtonClickListener
 import com.example.module.data.DataModel
 import com.example.utils.OnlineLiveData
+import com.github.terrakok.cicerone.Router
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.Util
 import com.squareup.picasso.Picasso
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent.inject
 
-class DetailedInfoFragment : Fragment() {
+class DetailedInfoFragment : Fragment(), BackButtonClickListener {
 
     private var _binding: FragmentDetailedInfoBinding? = null
     private val binding get() = _binding!!
     private lateinit var wordBundle: DataModel
     private var player: ExoPlayer? = null
+    private val router: Router by inject<Router>()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -128,6 +133,10 @@ class DetailedInfoFragment : Fragment() {
         _binding = null
     }
 
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
 
     companion object {
         const val WORD_INFO = "WORD"

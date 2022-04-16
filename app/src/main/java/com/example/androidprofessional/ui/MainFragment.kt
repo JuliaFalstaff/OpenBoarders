@@ -35,7 +35,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
-    val router: Router by inject<Router>()
+    private val router: Router by inject<Router>()
 
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
@@ -184,9 +184,19 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         startImageView.visibility = View.GONE
     }
 
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
     override fun onStop() {
         scope.close()
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     companion object {

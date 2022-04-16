@@ -15,6 +15,7 @@ import com.example.historyscreen.IOnListItemClickListener
 import com.example.historyscreen.databinding.FragmentHistoryListBinding
 import com.example.module.AppState
 import com.example.module.data.DataModel
+import com.github.terrakok.cicerone.Router
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject
@@ -30,6 +31,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: HistoryViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
+    private val router: Router by inject<Router>()
 
     private val onListItemClickListener: IOnListItemClickListener =
         object : IOnListItemClickListener {
@@ -129,6 +131,16 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onStop() {
         scope.close()
         super.onStop()
+    }
+
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     companion object {

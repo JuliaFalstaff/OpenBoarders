@@ -15,6 +15,7 @@ import com.example.favouritescreen.IOnListItemClickListener
 import com.example.favouritescreen.databinding.FragmentFavourtesBinding
 import com.example.module.AppState
 import com.example.module.data.DataModel
+import com.github.terrakok.cicerone.Router
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject
@@ -29,6 +30,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: FavouriteViewModel by inject()
     override val model: com.example.core.BaseViewModel<AppState>
         get() = viewModel
+    private val router: Router by inject<Router>()
 
     private val onListItemClickListener: IOnListItemClickListener = object : IOnListItemClickListener {
         override fun onItemClick(data: DataModel) {
@@ -95,6 +97,16 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onStop() {
         scope.close()
         super.onStop()
+    }
+
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     companion object {

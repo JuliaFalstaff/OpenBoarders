@@ -17,6 +17,8 @@ import com.example.androidprofessional.TranslatorApp
 import com.example.androidprofessional.databinding.ActivityMainBinding
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.navigation.IScreens
+import com.example.core.BackButtonClickListener
+import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -28,10 +30,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var screens: IScreens = AndroidScreens()
     private val navigatorHolder: NavigatorHolder by inject()
-     val router: Router by inject()
+     private val router by inject<Router>()
 
 
-    val navigator = object: AppNavigator(this, R.id.container) {
+    private val navigator = object: AppNavigator(this, R.id.container) {
         override fun setupFragmentTransaction(
             screen: FragmentScreen,
             fragmentTransaction: FragmentTransaction,
@@ -43,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                 R.anim.fade_out,
                 R.anim.fade_in,
                 R.anim.slide_out)
+        }
+
+        override fun applyCommands(commands: Array<out Command>) {
+            super.applyCommands(commands)
+            supportFragmentManager.executePendingTransactions()
         }
     }
 
@@ -125,7 +132,16 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         navigatorHolder.removeNavigator()
         super.onPause()
+    }
 
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.forEach {
+            if (it is BackButtonClickListener && it.backPressed()) {
+                return
+            }
+        }
+        router.exit()
+        super.onBackPressed()
     }
 
 

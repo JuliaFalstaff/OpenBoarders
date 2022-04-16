@@ -64,7 +64,6 @@ class SearchDialogFragment: BottomSheetDialogFragment() {
         }
     }
 
-
     interface OnSearchClickListener {
         fun onClick(searchWord: String)
     }

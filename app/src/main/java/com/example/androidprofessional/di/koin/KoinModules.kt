@@ -35,7 +35,7 @@ val application = module {
     single<IRepositoryLocal<List<DataModel>>> {
         RepositoryImplLocal(RoomDataBaseImpl(historyDao = get(), favouriteDao = get()))
     }
-    single { Cicerone.create(Router()) }
+    single { Cicerone.create() as Cicerone<Router> }
     single { get<Cicerone<Router>>().router }
     single { get<Cicerone<Router>>().getNavigatorHolder() }
 }
