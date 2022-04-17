@@ -23,4 +23,6 @@
     <string name="error_no_favourites_words">Не добавлены слова в Избранное. Добавьте слова для изучения</string>
     <string name="loading">Загрузка</string>
     <string name="error_null_data">Ошибка - нет данных</string>
+    <string name="search_word_onboarding">Поиск слова</string>
+    <string name="content_text_onboarding">Используйте эту кнопку для ввода слова и поиска его перевода</string>
 </resources>

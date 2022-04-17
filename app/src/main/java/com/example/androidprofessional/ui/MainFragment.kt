@@ -45,7 +45,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         requireActivity().getSharedPreferences(ON_BOARDING_PREF, Context.MODE_PRIVATE)
     }
 
-
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
                 override fun onItemClick(data: DataModel) {
@@ -94,8 +93,8 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     private fun openShowCase() {
         GuideView.Builder(requireContext())
-                .setTitle("Поиск слова")
-                .setContentText("Используйте эту кнопку для ввода слова и поиска его перевода")
+                .setTitle(getString(R.string.search_word_onboarding))
+                .setContentText(getString(R.string.content_text_onboarding))
                 .setGravity(Gravity.center)
                 .setDismissType(DismissType.anywhere)
                 .setTargetView(binding.searchFab)

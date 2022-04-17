@@ -23,4 +23,6 @@
     <string name="error_no_favourites_words">No favourites words. Add some for learning</string>
     <string name="loading">Loading</string>
     <string name="error_null_data">Error - data is null</string>
+    <string name="search_word_onboarding">Search here</string>
+    <string name="content_text_onboarding">Use this button for typing a word and find its translation</string>
 </resources>
