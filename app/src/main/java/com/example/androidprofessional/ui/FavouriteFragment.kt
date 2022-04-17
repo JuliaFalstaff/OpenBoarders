@@ -36,19 +36,10 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     private val onListItemClickListener: IOnListItemClickListener = object : IOnListItemClickListener {
         override fun onItemClick(data: DataModel) {
-            router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
-                    DetailedInfoFragment.WORD_INFO, data)}))
-//            activity?.supportFragmentManager?.apply {
-//                beginTransaction()
-//                        .replace(
-//                                R.id.container,
-//                                DetailedInfoFragment.newInstance(Bundle().apply {
-//                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
-//                                })
-//                        )
-//                        .addToBackStack(null)
-//                        .commitAllowingStateLoss()
-//            }
+            router.navigateTo(screens.detailedFragment(Bundle().apply {
+                putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data)
+            }))
         }
     }
 

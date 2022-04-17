@@ -32,7 +32,6 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: MemoryCardsViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
-
     private var _binding: FragmentMemoryCardBinding? = null
     private val binding get() = _binding!!
     private var player: ExoPlayer? = null
@@ -85,7 +84,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         }
     }
 
-    private fun showErrorPicture() = with(binding){
+    private fun showErrorPicture() = with(binding) {
         cardHeader.text = getString(R.string.error_no_favourites_words)
         cardPlaySoundButton.visibility = View.INVISIBLE
         cardTranscriptionTextView.visibility = View.INVISIBLE

@@ -37,28 +37,13 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
     private val router: Router by inject<Router>()
 
-
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
                 override fun onItemClick(data: DataModel) {
-                    router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
-                        DetailedInfoFragment.WORD_INFO, data)}))
-//                    activity?.supportFragmentManager?.apply {
-//                        beginTransaction()
-//                                .setCustomAnimations(
-//                                        R.anim.slide_in,
-//                                        R.anim.fade_out,
-//                                        R.anim.fade_in,
-//                                        R.anim.slide_out)
-//                                .replace(
-//                                R.id.container,
-//                                DetailedInfoFragment.newInstance(Bundle().apply {
-//                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
-//                                })
-//                        )
-//                                .addToBackStack(null)
-//                                .commitAllowingStateLoss()
-//                    }
+                    router.navigateTo(screens.detailedFragment(Bundle().apply {
+                        putParcelable(
+                                DetailedInfoFragment.WORD_INFO, data)
+                    }))
                 }
 
                 override fun addToFav(data: DataModel) {

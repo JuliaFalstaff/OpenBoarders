@@ -25,7 +25,6 @@ import org.koin.core.scope.Scope
 class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     override val scope: Scope by lazy { createScope(this) }
-
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
@@ -40,14 +39,6 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
             override fun onItemClick(data: DataModel) {
                 router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
                         DetailedInfoFragment.WORD_INFO, data)}))
-//                activity?.supportFragmentManager?.apply {
-//                    beginTransaction()
-//                        .replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
-//                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
-//                        }))
-//                        .addToBackStack(null)
-//                        .commit()
-//                }
             }
         }
 

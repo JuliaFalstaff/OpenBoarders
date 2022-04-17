@@ -13,7 +13,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.androidprofessional.R
-import com.example.androidprofessional.TranslatorApp
 import com.example.androidprofessional.databinding.ActivityMainBinding
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.navigation.IScreens
@@ -30,26 +29,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var screens: IScreens = AndroidScreens()
     private val navigatorHolder: NavigatorHolder by inject()
-     private val router by inject<Router>()
-
-
-    private val navigator = object: AppNavigator(this, R.id.container) {
+    private val router by inject<Router>()
+    private val navigator = object : AppNavigator(this, R.id.container) {
         override fun setupFragmentTransaction(
-            screen: FragmentScreen,
-            fragmentTransaction: FragmentTransaction,
-            currentFragment: Fragment?,
-            nextFragment: Fragment,
+                screen: FragmentScreen,
+                fragmentTransaction: FragmentTransaction,
+                currentFragment: Fragment?,
+                nextFragment: Fragment,
         ) {
             fragmentTransaction.setCustomAnimations(
-                R.anim.slide_in,
-                R.anim.fade_out,
-                R.anim.fade_in,
-                R.anim.slide_out)
-        }
-
-        override fun applyCommands(commands: Array<out Command>) {
-            super.applyCommands(commands)
-            supportFragmentManager.executePendingTransactions()
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out)
         }
     }
 
@@ -66,9 +58,6 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             router.replaceScreen(screens.mainFragment())
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, MainFragment.newInstance())
-//                .commit()
         }
     }
 
@@ -77,10 +66,10 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setOnExitAnimationListener { splashScreenProvider ->
             ObjectAnimator.ofFloat(
-                splashScreenProvider.view,
-                View.TRANSLATION_Y,
-                START_ANIMATION,
-                -splashScreenProvider.view.height.toFloat()
+                    splashScreenProvider.view,
+                    View.TRANSLATION_Y,
+                    START_ANIMATION,
+                    -splashScreenProvider.view.height.toFloat()
             ).apply {
                 interpolator = AnticipateInterpolator()
                 duration = SLIDE_UP_DURATION
@@ -95,22 +84,18 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.bottom_bar_home -> {
                     router.navigateTo(screens.mainFragment())
-//                    openFragment(MainFragment())
                     true
                 }
                 R.id.bottom_bar_fav -> {
                     router.navigateTo(screens.favouriteFragment())
-//                    openFragment(FavouriteFragment())
                     true
                 }
                 R.id.bottom_bar_history -> {
                     router.navigateTo(screens.historyFragment())
-//                    openFragment(HistoryFragment())
                     true
                 }
                 R.id.bottom_bar_fav_card -> {
                     router.navigateTo(screens.memoryCardsFragment())
-//                    openFragment(MemoryCardsFragment())
                     true
                 }
                 else -> false
@@ -143,22 +128,6 @@ class MainActivity : AppCompatActivity() {
         router.exit()
         super.onBackPressed()
     }
-
-
-
-//    private fun openFragment(fragment: Fragment) {
-//        supportFragmentManager.apply {
-//            beginTransaction()
-//            .setCustomAnimations(
-//                    R.anim.slide_in,
-//                    R.anim.fade_out,
-//                    R.anim.fade_in,
-//                    R.anim.slide_out)
-//                .replace(R.id.container, fragment)
-//                .addToBackStack(null)
-//                .commit()
-//        }
-//    }
 
     companion object {
         private const val SLIDE_UP_DURATION = 1500L

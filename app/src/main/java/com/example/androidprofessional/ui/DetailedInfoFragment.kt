@@ -22,7 +22,6 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.Util
 import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
-import org.koin.java.KoinJavaComponent.inject
 
 class DetailedInfoFragment : Fragment(), BackButtonClickListener {
 
