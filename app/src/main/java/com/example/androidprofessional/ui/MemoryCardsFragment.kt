@@ -17,6 +17,7 @@ import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.module.AppState
 import com.example.module.data.DataModel
+import com.github.terrakok.cicerone.Router
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.Util
@@ -31,10 +32,10 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: MemoryCardsViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
-
     private var _binding: FragmentMemoryCardBinding? = null
     private val binding get() = _binding!!
     private var player: ExoPlayer? = null
+    private val router by inject<Router>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -82,6 +83,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
             }
         }
     }
+
 
     private fun showErrorPicture() = with(binding){
         cardHeader.text = getString(R.string.error_no_favourites_words)
@@ -167,4 +169,12 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         _binding = null
     }
 
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
+    companion object {
+        fun newInstance(): MemoryCardsFragment = MemoryCardsFragment()
+    }
 }

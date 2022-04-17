@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
+import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.core.BaseFragment
 import com.example.favouritescreen.FavouriteAdapter
 import com.example.favouritescreen.FavouriteViewModel
@@ -15,6 +16,7 @@ import com.example.favouritescreen.IOnListItemClickListener
 import com.example.favouritescreen.databinding.FragmentFavourtesBinding
 import com.example.module.AppState
 import com.example.module.data.DataModel
+import com.github.terrakok.cicerone.Router
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject
@@ -29,20 +31,15 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: FavouriteViewModel by inject()
     override val model: com.example.core.BaseViewModel<AppState>
         get() = viewModel
+    private val router: Router by inject()
+    private val screens: AndroidScreens by inject()
 
     private val onListItemClickListener: IOnListItemClickListener = object : IOnListItemClickListener {
         override fun onItemClick(data: DataModel) {
-            activity?.supportFragmentManager?.apply {
-                beginTransaction()
-                        .replace(
-                                R.id.container,
-                                DetailedInfoFragment.newInstance(Bundle().apply {
-                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                                })
-                        )
-                        .addToBackStack(null)
-                        .commitAllowingStateLoss()
-            }
+            router.navigateTo(screens.detailedFragment(Bundle().apply {
+                putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data)
+            }))
         }
     }
 
@@ -95,5 +92,19 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onStop() {
         scope.close()
         super.onStop()
+    }
+
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
+    companion object {
+        fun newInstance(): FavouriteFragment = FavouriteFragment()
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
+import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.historyscreen.HistoryAdapter
@@ -15,6 +16,7 @@ import com.example.historyscreen.IOnListItemClickListener
 import com.example.historyscreen.databinding.FragmentHistoryListBinding
 import com.example.module.AppState
 import com.example.module.data.DataModel
+import com.github.terrakok.cicerone.Router
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
 import org.koin.core.component.inject
@@ -23,25 +25,20 @@ import org.koin.core.scope.Scope
 class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     override val scope: Scope by lazy { createScope(this) }
-
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
     val viewModel: HistoryViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
+    private val router: Router by inject()
+    private val screens: AndroidScreens by inject()
 
     private val onListItemClickListener: IOnListItemClickListener =
         object : IOnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                activity?.supportFragmentManager?.apply {
-                    beginTransaction()
-                        .replace(R.id.container, DetailedInfoFragment.newInstance(Bundle().apply {
-                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                        }))
-                        .addToBackStack(null)
-                        .commit()
-                }
+                router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data)}))
             }
         }
 
@@ -129,6 +126,16 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onStop() {
         scope.close()
         super.onStop()
+    }
+
+    override fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     companion object {

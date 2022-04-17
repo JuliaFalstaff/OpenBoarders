@@ -10,7 +10,7 @@ import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.SearchDialogFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SearchDialogFragment: BottomSheetDialogFragment() {
+class SearchDialogFragment : BottomSheetDialogFragment() {
     private var _binding: SearchDialogFragmentBinding? = null
     private val binding get() = _binding!!
     private var onSearchClickListener: OnSearchClickListener? = null
