@@ -116,4 +116,7 @@ dependencies {
 
     //Cicerone
     implementation ("com.github.terrakok:cicerone:7.1")
+
+    //ShowCase
+    implementation(ShowCase.showCase)
 }

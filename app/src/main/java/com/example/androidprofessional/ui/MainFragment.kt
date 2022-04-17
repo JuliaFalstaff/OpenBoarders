@@ -1,5 +1,7 @@
 package com.example.androidprofessional.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,9 @@ import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 
 class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
@@ -36,6 +41,10 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private var adapter: MainAdapter? = null
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
     private val router: Router by inject()
+    private val pref: SharedPreferences by lazy {
+        requireActivity().getSharedPreferences(ON_BOARDING_PREF, Context.MODE_PRIVATE)
+    }
+
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
@@ -44,6 +53,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         putParcelable(
                                 DetailedInfoFragment.WORD_INFO, data)
                     }))
+
                 }
 
                 override fun addToFav(data: DataModel) {
@@ -66,13 +76,32 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkPref()
         initView()
+    }
+
+    private fun checkPref() {
+        if (pref.getBoolean(ON_BOARDING_PREF_COMPLETE, true)) {
+            openShowCase()
+        }
     }
 
     private fun initView() {
         binding.startTextViewBeforeSearch.visibility = View.VISIBLE
         binding.startImageView.visibility = View.VISIBLE
         binding.searchFab.setOnClickListener { openDialogFragmentsAndSearch() }
+    }
+
+    private fun openShowCase() {
+        GuideView.Builder(requireContext())
+                .setTitle("Поиск слова")
+                .setContentText("Используйте эту кнопку для ввода слова и поиска его перевода")
+                .setGravity(Gravity.center)
+                .setDismissType(DismissType.anywhere)
+                .setTargetView(binding.searchFab)
+                .build()
+                .show()
+        pref.edit().putBoolean(ON_BOARDING_PREF_COMPLETE, false).apply()
     }
 
     private fun openDialogFragmentsAndSearch() {
@@ -187,5 +216,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     companion object {
         fun newInstance(): MainFragment = MainFragment()
         private const val TAG_SEARCH = "Search"
+        private const val ON_BOARDING_PREF = "OnBoarding"
+        private const val ON_BOARDING_PREF_COMPLETE = "OnBoarding complete"
     }
 }
