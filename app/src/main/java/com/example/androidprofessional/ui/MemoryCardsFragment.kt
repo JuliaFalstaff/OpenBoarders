@@ -36,6 +36,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val binding get() = _binding!!
     private var player: ExoPlayer? = null
     private val router by inject<Router>()
+    private var isTextVisible = false
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,7 +60,12 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
             binding.cardDescriptionWordTextView.visibility = View.INVISIBLE
         }
         binding.showTranslationButton.setOnClickListener {
-            binding.cardDescriptionWordTextView.visibility = View.VISIBLE
+            if (!isTextVisible) {
+                binding.cardDescriptionWordTextView.visibility = View.VISIBLE
+            } else {
+                binding.cardDescriptionWordTextView.visibility = View.INVISIBLE
+            }
+            isTextVisible = !isTextVisible
         }
     }
 
