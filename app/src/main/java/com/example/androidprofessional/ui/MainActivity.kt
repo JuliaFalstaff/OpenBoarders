@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -32,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigationView()
+
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -107,6 +107,6 @@ class MainActivity : AppCompatActivity() {
         private const val START_ANIMATION = 0f
 
         private const val ON_BOARDING_PREF = "OnBoarding"
-        private const val ON_BOARDING_PREF_COMPLETE = "OnBoarding complete"
+        private const val ON_BOARDING_PREF_KEY_COMPLETE = "OnBoarding complete"
     }
 }

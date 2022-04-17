@@ -39,6 +39,9 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
 
 
+
+
+
     private val pref: SharedPreferences by lazy {
         requireActivity().getSharedPreferences(ON_BOARDING_PREF, Context.MODE_PRIVATE) }
 
@@ -90,11 +93,16 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     private fun checkPref() {
-        var isFirstRun = pref?.getBoolean(ON_BOARDING_PREF_COMPLETE, true)
-        if (isFirstRun) {
+
+        if (pref.getBoolean(ON_BOARDING_PREF_COMPLETE, true)){
             openShowCase()
-            pref.edit().putBoolean(ON_BOARDING_PREF, false).apply()
         }
+
+//        var isFirstRun = pref?.getBoolean(ON_BOARDING_PREF_COMPLETE, true)
+//        if (isFirstRun) {
+//            openShowCase()
+//            pref.edit().putBoolean(ON_BOARDING_PREF, false).apply()
+//        }
     }
 
     private fun initView() {
@@ -112,6 +120,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     .setTargetView(binding.searchFab)
                     .build()
                     .show()
+        pref.edit().putBoolean(ON_BOARDING_PREF_COMPLETE, false).apply()
         }
 
     private fun openDialogFragmentsAndSearch() {
