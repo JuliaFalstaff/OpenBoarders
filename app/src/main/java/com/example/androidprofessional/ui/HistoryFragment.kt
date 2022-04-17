@@ -31,8 +31,8 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     val viewModel: HistoryViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
-    private val router: Router by inject<Router>()
-    val screens = AndroidScreens()
+    private val router: Router by inject()
+    private val screens: AndroidScreens by inject()
 
     private val onListItemClickListener: IOnListItemClickListener =
         object : IOnListItemClickListener {

@@ -2,6 +2,8 @@ package com.example.androidprofessional.di.koin
 
 import androidx.room.Room
 import com.example.androidprofessional.di.DATABASE_NAME
+import com.example.androidprofessional.navigation.AndroidScreens
+import com.example.androidprofessional.navigation.IScreens
 import com.example.androidprofessional.ui.FavouriteFragment
 import com.example.androidprofessional.ui.MainFragment
 import com.example.androidprofessional.usecase.main.MainInteractor
@@ -35,9 +37,10 @@ val application = module {
     single<IRepositoryLocal<List<DataModel>>> {
         RepositoryImplLocal(RoomDataBaseImpl(historyDao = get(), favouriteDao = get()))
     }
-    single { Cicerone.create() as Cicerone<Router> }
+    single { Cicerone.create() }
     single { get<Cicerone<Router>>().router }
     single { get<Cicerone<Router>>().getNavigatorHolder() }
+    single { AndroidScreens()}
 }
 
 val mainScreen = module {

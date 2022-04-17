@@ -27,7 +27,7 @@ import org.koin.core.scope.Scope
 class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     override val scope: Scope by lazy { createScope(this) }
-    val screens = AndroidScreens()
+    private val screens: AndroidScreens by inject()
     val viewModel: MainViewModel by inject()
     override val model: com.example.core.BaseViewModel<AppState>
         get() = viewModel
@@ -35,7 +35,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
-    private val router: Router by inject<Router>()
+    private val router: Router by inject()
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {

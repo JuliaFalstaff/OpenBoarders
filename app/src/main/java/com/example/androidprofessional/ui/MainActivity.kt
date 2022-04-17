@@ -23,11 +23,12 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import org.koin.android.ext.android.inject
+import org.koin.core.component.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var screens: IScreens = AndroidScreens()
+    private val screens: AndroidScreens by inject()
     private val navigatorHolder: NavigatorHolder by inject()
     private val router by inject<Router>()
     private val navigator = object : AppNavigator(this, R.id.container) {
