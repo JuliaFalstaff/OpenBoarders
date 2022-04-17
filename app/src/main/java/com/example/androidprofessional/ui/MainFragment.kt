@@ -37,14 +37,9 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
     private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
-
-
-
-
-
     private val pref: SharedPreferences by lazy {
-        requireActivity().getSharedPreferences(ON_BOARDING_PREF, Context.MODE_PRIVATE) }
-
+        requireActivity().getSharedPreferences(ON_BOARDING_PREF, Context.MODE_PRIVATE)
+    }
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
             object : MainAdapter.OnListItemClickListener {
@@ -57,11 +52,11 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                                         R.anim.fade_in,
                                         R.anim.slide_out)
                                 .replace(
-                                R.id.container,
-                                DetailedInfoFragment.newInstance(Bundle().apply {
-                                    putParcelable(DetailedInfoFragment.WORD_INFO, data)
-                                })
-                        )
+                                        R.id.container,
+                                        DetailedInfoFragment.newInstance(Bundle().apply {
+                                            putParcelable(DetailedInfoFragment.WORD_INFO, data)
+                                        })
+                                )
                                 .addToBackStack(null)
                                 .commitAllowingStateLoss()
                     }
@@ -88,21 +83,13 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPref()
-//        openShowCase()
         initView()
     }
 
     private fun checkPref() {
-
-        if (pref.getBoolean(ON_BOARDING_PREF_COMPLETE, true)){
+        if (pref.getBoolean(ON_BOARDING_PREF_COMPLETE, true)) {
             openShowCase()
         }
-
-//        var isFirstRun = pref?.getBoolean(ON_BOARDING_PREF_COMPLETE, true)
-//        if (isFirstRun) {
-//            openShowCase()
-//            pref.edit().putBoolean(ON_BOARDING_PREF, false).apply()
-//        }
     }
 
     private fun initView() {
@@ -112,16 +99,16 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     private fun openShowCase() {
-            val showCase = GuideView.Builder(requireContext())
-                    .setTitle("Поиск слова")
-                    .setContentText("Используйте эту кнопку для ввода слова и поиска его перевода")
-                    .setGravity(Gravity.center)
-                    .setDismissType(DismissType.anywhere)
-                    .setTargetView(binding.searchFab)
-                    .build()
-                    .show()
+        GuideView.Builder(requireContext())
+                .setTitle("Поиск слова")
+                .setContentText("Используйте эту кнопку для ввода слова и поиска его перевода")
+                .setGravity(Gravity.center)
+                .setDismissType(DismissType.anywhere)
+                .setTargetView(binding.searchFab)
+                .build()
+                .show()
         pref.edit().putBoolean(ON_BOARDING_PREF_COMPLETE, false).apply()
-        }
+    }
 
     private fun openDialogFragmentsAndSearch() {
         val searchDialogFragment = SearchDialogFragment.newInstance()
