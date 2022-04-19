@@ -10,13 +10,15 @@ import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 
 class FavouriteAdapter(var data: List<DataModel>, private var onListItemClickListener: IOnListItemClickListener) :
-        RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+        RecyclerView.Adapter<FavouriteAdapter.ViewHolder>(), ItemTouchHelperAdapter {
+    
+    private var changeData = data.toMutableList()
 
     fun setFavoriteData(newListData: List<DataModel>) {
         val callback = DiffUtils(data.sortedWith(compareBy { it.text }), newListData)
         val result = DiffUtil.calculateDiff(callback)
         result.dispatchUpdatesTo(this)
-        this.data = newListData
+        changeData = newListData.toMutableList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,10 +31,22 @@ class FavouriteAdapter(var data: List<DataModel>, private var onListItemClickLis
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(changeData[position])
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = changeData.size
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        changeData.removeAt(fromPosition).apply {
+            changeData.add(if (toPosition > fromPosition) toPosition - 1 else toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        changeData.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
     inner class ViewHolder(val binding: ItemFavouriteRecyclerBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -46,7 +60,19 @@ class FavouriteAdapter(var data: List<DataModel>, private var onListItemClickLis
                 itemView.setOnClickListener {
                     onListItemClickListener.onItemClick(data)
                 }
+                itemView.setOnLongClickListener { removeItem()
+                true}
             }
+
+        }
+
+
+        private fun removeItem(){
+            changeData.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
         }
     }
+
+
+
 }

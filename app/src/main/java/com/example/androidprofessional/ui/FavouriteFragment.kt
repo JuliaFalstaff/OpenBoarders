@@ -44,6 +44,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         )
                         .addToBackStack(null)
                         .commitAllowingStateLoss()
+
             }
         }
     }
@@ -60,13 +61,14 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        setupSwipeListener()
+
         viewModel.getFavouriteData().observe(viewLifecycleOwner, { renderData(it) })
         viewModel.getData()
     }
 
     private fun initView() {
         binding.favouriteRecyclerView.adapter = adapter
+        setupSwipeListener()
     }
 
     override fun renderData(appState: AppState) {
@@ -83,7 +85,9 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     if (dataModel != null) {
                         it?.setFavoriteData(dataModel)
                     }
+
                 }
+
                 addRecyclerDecorator()
             }
         }
@@ -104,14 +108,16 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     viewHolder: RecyclerView.ViewHolder,
                     target: RecyclerView.ViewHolder,
             ): Boolean {
-                return false
+                adapter?.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+                return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.layoutPosition
+
+                val position = viewHolder.adapterPosition
                 val item = adapter?.data?.get(position)
                 item?.let { viewModel.deleteFavWordBySwipe(it) }
-                adapter?.notifyItemRemoved(position)
+                adapter?.onItemDismiss(position)
             }
         }
         val itemTouchHelper = ItemTouchHelper(callback)
