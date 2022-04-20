@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import com.example.module.AppState
 import com.example.utils.OnlineLiveData
 
-abstract class BaseFragment<T : AppState> : Fragment(), BackButtonClickListener{
+abstract class BaseFragment<T : AppState> : Fragment(), BackButtonClickListener {
     abstract fun renderData(appState: T)
     abstract val model: BaseViewModel<T>
     protected var isNetworkAvailable: Boolean = true

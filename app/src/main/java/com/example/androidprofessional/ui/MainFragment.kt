@@ -52,7 +52,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         putParcelable(
                                 DetailedInfoFragment.WORD_INFO, data)
                     }))
-
                 }
 
                 override fun addToFav(data: DataModel) {

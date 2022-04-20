@@ -15,7 +15,6 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private var onSearchClickListener: OnSearchClickListener? = null
     private val textWatcher = object : TextWatcher {
-
         override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = with(binding) {
             if (searchEditText.text != null && searchEditText.text.toString().isNotEmpty()) {
                 searchButton.isEnabled = true

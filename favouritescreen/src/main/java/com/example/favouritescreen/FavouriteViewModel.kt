@@ -5,7 +5,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class FavouriteViewModel(private val interactor: FavouriteInteractor) :
-    com.example.core.BaseViewModel<com.example.module.AppState>() {
+        com.example.core.BaseViewModel<com.example.module.AppState>() {
 
     private var job: Job? = null
 
@@ -20,7 +20,7 @@ class FavouriteViewModel(private val interactor: FavouriteInteractor) :
         }
     }
 
-    fun deleteFavouriteWord (word: DataModel) {
+    fun deleteFavouriteWord(word: DataModel) {
         viewModelCoroutineScope.launch {
             interactor.deleteFavouritesData(word)
         }

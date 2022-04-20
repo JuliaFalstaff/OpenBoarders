@@ -5,7 +5,6 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-
 @Entity
 data class MeaningsEntity(
         @SerializedName(ID_MEANINGS) val id: Int,

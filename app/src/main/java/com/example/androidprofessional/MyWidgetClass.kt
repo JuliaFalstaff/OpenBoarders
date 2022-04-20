@@ -5,12 +5,12 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.os.Bundle
 
-class MyWidgetClass: AppWidgetProvider() {
+class MyWidgetClass : AppWidgetProvider() {
 
     override fun onUpdate(
-        context: Context?,
-        appWidgetManager: AppWidgetManager?,
-        appWidgetIds: IntArray?
+            context: Context?,
+            appWidgetManager: AppWidgetManager?,
+            appWidgetIds: IntArray?,
     ) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
     }
@@ -20,10 +20,10 @@ class MyWidgetClass: AppWidgetProvider() {
     }
 
     override fun onAppWidgetOptionsChanged(
-        context: Context?,
-        appWidgetManager: AppWidgetManager?,
-        appWidgetId: Int,
-        newOptions: Bundle?
+            context: Context?,
+            appWidgetManager: AppWidgetManager?,
+            appWidgetId: Int,
+            newOptions: Bundle?,
     ) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
     }

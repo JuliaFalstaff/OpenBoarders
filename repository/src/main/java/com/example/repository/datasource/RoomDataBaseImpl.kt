@@ -1,10 +1,9 @@
 package com.example.repository.datasource
 
+import com.example.androidprofessional.utils.*
 import com.example.module.data.DataModel
 import com.example.repository.room.dao.FavouriteDao
 import com.example.repository.room.dao.HistoryDao
-import com.example.androidprofessional.utils.*
-
 
 class RoomDataBaseImpl(private val historyDao: HistoryDao, private val favouriteDao: FavouriteDao) : IDataSourceLocal<List<DataModel>> {
 
@@ -49,5 +48,4 @@ class RoomDataBaseImpl(private val historyDao: HistoryDao, private val favourite
         val data = convertFromDataToFavEntity(favWord)
         favouriteDao.delete(data)
     }
-
 }

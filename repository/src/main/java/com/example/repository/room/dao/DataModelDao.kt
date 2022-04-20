@@ -5,7 +5,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.repository.room.entity.DataModelEntity
 
-
 @Dao
 interface DataModelDao {
 
@@ -17,5 +16,4 @@ interface DataModelDao {
 
     @Update
     suspend fun update(entity: DataModelEntity)
-
 }

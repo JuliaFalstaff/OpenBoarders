@@ -38,7 +38,6 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val router by inject<Router>()
     private var isTextVisible = false
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMemoryCardBinding.inflate(inflater, container, false)
         return binding.root
@@ -75,7 +74,6 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 val dataModel = appState.data
                 if (dataModel == null) {
                     Toast.makeText(requireContext(), R.string.error_null_data, Toast.LENGTH_SHORT).show()
-
                 } else {
                     setData(dataModel)
                 }
@@ -91,14 +89,13 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
 
-    private fun showErrorPicture() = with(binding){
+    private fun showErrorPicture() = with(binding) {
         cardHeader.text = getString(R.string.error_no_favourites_words)
         cardPlaySoundButton.visibility = View.INVISIBLE
         cardTranscriptionTextView.visibility = View.INVISIBLE
         showTranslationButton.visibility = View.INVISIBLE
         nextCardButton.visibility = View.INVISIBLE
         cardWordPictureImageView.setImageResource(R.drawable.no_favs_data)
-
     }
 
     @SuppressLint("SetTextI18n")

@@ -7,7 +7,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val interactor: MainInteractor) :
-    com.example.core.BaseViewModel<com.example.module.AppState>() {
+        com.example.core.BaseViewModel<com.example.module.AppState>() {
 
     private var job: Job? = null
 

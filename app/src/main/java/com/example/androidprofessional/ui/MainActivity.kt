@@ -15,15 +15,12 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.ActivityMainBinding
 import com.example.androidprofessional.navigation.AndroidScreens
-import com.example.androidprofessional.navigation.IScreens
 import com.example.core.BackButtonClickListener
-import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import org.koin.android.ext.android.inject
-import org.koin.core.component.inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigationView()
-
         if (savedInstanceState == null) {
             router.replaceScreen(screens.mainFragment())
         }
@@ -112,7 +108,6 @@ class MainActivity : AppCompatActivity() {
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
-
     }
 
     override fun onPause() {

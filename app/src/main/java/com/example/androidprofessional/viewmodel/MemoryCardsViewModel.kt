@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import com.example.androidprofessional.usecase.main.game.MemoryCardsInteractor
 import com.example.core.BaseViewModel
 import com.example.module.AppState
-import com.example.module.data.DataModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MemoryCardsViewModel(private val interactor: MemoryCardsInteractor): BaseViewModel<AppState>() {
+class MemoryCardsViewModel(private val interactor: MemoryCardsInteractor) : BaseViewModel<AppState>() {
 
     private var job: Job? = null
 

@@ -15,8 +15,8 @@
     <string name="menu_history">История</string>
     <string name="home">На Главную</string>
     <string name="favourite">Избранные</string>
-    <string name="widget_text">Привет! Время учить аннлийский язык!</string>
-    <string name="cards">Карточки для запоминания</string>
+    <string name="widget_text">Привет! Время учить английский язык!</string>
+    <string name="cards">Карточки</string>
     <string name="show_translation">Показать перевод</string>
     <string name="do_you_remember_translation">Помните ли Вы перевод слова?</string>
     <string name="next_card">Далее</string>
