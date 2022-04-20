@@ -20,7 +20,7 @@ class FavouriteViewModel(private val interactor: FavouriteInteractor) :
         }
     }
 
-    fun deleteFavWordBySwipe (word: DataModel) {
+    fun deleteFavouriteWord (word: DataModel) {
         viewModelCoroutineScope.launch {
             interactor.deleteFavouritesData(word)
         }
