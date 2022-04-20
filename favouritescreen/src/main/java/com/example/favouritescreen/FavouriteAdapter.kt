@@ -11,12 +11,14 @@ import com.example.utils.DiffUtils
 
 class FavouriteAdapter(private var data: List<DataModel>, private var onListItemClickListener: IOnListItemClickListener) :
         RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+    
+    var changeData = data.toMutableList()
 
-    fun setData(newListData: List<DataModel>) {
-        val callback = DiffUtils(data.sortedWith(compareBy { it.text }), newListData)
+    fun setFavoriteData(newListData: List<DataModel>) {
+        val callback = DiffUtils(changeData.sortedWith(compareBy { it.text }), newListData)
         val result = DiffUtil.calculateDiff(callback)
         result.dispatchUpdatesTo(this)
-        this.data = newListData
+        changeData = newListData.toMutableList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,10 +31,10 @@ class FavouriteAdapter(private var data: List<DataModel>, private var onListItem
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(changeData[position])
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = changeData.size
 
     inner class ViewHolder(val binding: ItemFavouriteRecyclerBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -46,7 +48,16 @@ class FavouriteAdapter(private var data: List<DataModel>, private var onListItem
                 itemView.setOnClickListener {
                     onListItemClickListener.onItemClick(data)
                 }
+                binding.deleteImageView.setOnClickListener {
+                    removeItem()
+                    onListItemClickListener.onItemDelete(data)
+                }
             }
+        }
+
+        private fun removeItem(){
+            changeData.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
         }
     }
 }

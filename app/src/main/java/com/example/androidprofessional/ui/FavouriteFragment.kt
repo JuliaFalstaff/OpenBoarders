@@ -41,6 +41,10 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         DetailedInfoFragment.WORD_INFO, data)
             }))
         }
+
+        override fun onItemDelete(data: DataModel) {
+            viewModel.deleteFavouriteWord(data)
+        }
     }
 
     override fun onCreateView(
@@ -75,7 +79,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let {
                     if (dataModel != null) {
-                        it?.setData(dataModel)
+                        it?.setFavoriteData(dataModel)
                     }
                 }
                 addRecyclerDecorator()
