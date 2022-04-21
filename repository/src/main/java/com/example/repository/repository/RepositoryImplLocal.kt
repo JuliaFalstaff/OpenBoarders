@@ -25,4 +25,8 @@ class RepositoryImplLocal(private val dataSource: IDataSourceLocal<List<DataMode
     override suspend fun saveFavouritesData(favWord: DataModel) {
         dataSource.saveFavouritesData(favWord)
     }
+
+    override suspend fun deleteFavouritesData(favWord: DataModel) {
+        dataSource.deleteFavouritesData(favWord)
+    }
 }

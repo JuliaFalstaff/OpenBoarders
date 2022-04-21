@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_textview_stub">Ошибка</string>
+    <string name="reload_button">Перезагрузить</string>
+    <string name="undefined_error">Непредвиденная ошибкаr</string>
+    <string name="empty_server_response_on_success">Ответ от севера не содержит данных</string>
+    <string name="button_search">Поиск</string>
+    <string name="search_hint">Новое слово</string>
+    <string name="delete_description">X</string>
+    <string name="startText">Пора узнать что-то новое! Нажмите на кнопку для поиска перевода слова</string>
+    <string name="search_helper_text">*Поиск в словаре</string>
+    <string name="empty" />
+    <string name="error_no_internet">Нет связи с Интернетом</string>
+    <string name="image_view_translation">Картинка</string>
+    <string name="menu_history">История</string>
+    <string name="home">На Главную</string>
+    <string name="favourite">Избранные</string>
+    <string name="widget_text">Привет! Время учить английский язык!</string>
+    <string name="cards">Карточки</string>
+    <string name="show_translation">Показать перевод</string>
+    <string name="do_you_remember_translation">Помните ли Вы перевод слова?</string>
+    <string name="next_card">Далее</string>
+    <string name="error_no_favourites_words">Не добавлены слова в Избранное. Добавьте слова для изучения</string>
+    <string name="loading">Загрузка</string>
+    <string name="error_null_data">Ошибка - нет данных</string>
+    <string name="search_word_onboarding">Поиск слова</string>
+    <string name="content_text_onboarding">Используйте эту кнопку для ввода слова и поиска его перевода</string>
+</resources>

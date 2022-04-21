@@ -7,7 +7,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val interactor: MainInteractor) :
-    com.example.core.BaseViewModel<com.example.module.AppState>() {
+        com.example.core.BaseViewModel<com.example.module.AppState>() {
 
     private var job: Job? = null
 
@@ -33,5 +33,9 @@ class MainViewModel(private val interactor: MainInteractor) :
 
     fun saveToFav(word: DataModel) {
         viewModelCoroutineScope.launch { interactor.saveFavouritesData(word) }
+    }
+
+    fun deleteFromFav(word: DataModel) {
+        viewModelCoroutineScope.launch { interactor.deleteFavouritesData(word) }
     }
 }

@@ -1,10 +1,7 @@
 package com.example.androidprofessional
 
 import android.app.Application
-import com.example.androidprofessional.di.koin.application
-import com.example.androidprofessional.di.koin.favouriteScreen
-import com.example.androidprofessional.di.koin.historyScreen
-import com.example.androidprofessional.di.koin.mainScreen
+import com.example.androidprofessional.di.koin.*
 import com.facebook.stetho.Stetho
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -15,7 +12,7 @@ class TranslatorApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(listOf(application, mainScreen, historyScreen, favouriteScreen))
+            modules(listOf(application, mainScreen, historyScreen, favouriteScreen, memoryCardsScreen))
         }
         Stetho.initializeWithDefaults(this)
     }

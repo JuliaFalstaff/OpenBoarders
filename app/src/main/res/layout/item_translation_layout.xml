@@ -39,8 +39,8 @@
             android:id="@+id/imageViewAddToFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_fav"
-            android:layout_gravity="end|top"/>
+            android:layout_gravity="end|top"
+            android:src="@drawable/ic_fav_not_active" />
 
         <TextView
             android:id="@+id/transcriptionTextView"

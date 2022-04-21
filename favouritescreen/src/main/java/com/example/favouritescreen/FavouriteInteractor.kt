@@ -13,4 +13,8 @@ class FavouriteInteractor(
             repositoryLocal.getFavouritesData().toMutableList()
         )
     }
+
+    override suspend fun deleteFavouritesData(favWord: DataModel) {
+        repositoryLocal.deleteFavouritesData(favWord)
+    }
 }

@@ -60,6 +60,9 @@ dependencies {
     implementation (Kotlin.stdLib)
     implementation (Kotlin.core)
 
+    //SplashScreen
+    implementation (SplashScreen.splashScreen)
+
     // Rx-Java
     implementation (RXJava.rxJava2Android)
     implementation (RXJava.rxJava2)
@@ -97,6 +100,9 @@ dependencies {
     implementation (Stetho.stethoJsRhino)
     implementation (Stetho.stethoOkhttp3)
 
+    //SplashScree
+    implementation (SplashScreen.splashScreen)
+
     // Test
     implementation (Design.androidxAppcompat)
     implementation (Design.material)
@@ -104,4 +110,13 @@ dependencies {
     testImplementation ("junit:junit:4.+")
     androidTestImplementation (Testing.testJunit)
     androidTestImplementation (Testing.espressoTest)
+
+    //ExoPlayer
+    implementation (ExoPlayer.exoPlayer)
+
+    //Cicerone
+    implementation ("com.github.terrakok:cicerone:7.1")
+
+    //ShowCase
+    implementation(ShowCase.showCase)
 }

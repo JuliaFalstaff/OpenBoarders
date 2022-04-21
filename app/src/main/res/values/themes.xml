@@ -35,6 +35,11 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
+    <style name="OutlineNextButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
     <style name="BaseEditTextStyle">
         <item name="android:background">@null</item>
         <item name="android:imeOptions">actionNext</item>
@@ -67,15 +72,18 @@
     </style>
 
     <style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
-        <item name="backgroundTint">?attr/colorSecondary</item>
-        <item name="iconTint">@color/white</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
     </style>
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:layout_marginTop">@dimen/margin_x_small</item>
-        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
         <item name="itemIconTint">@color/color_white</item>
         <item name="itemRippleColor">@color/color_pale_grey</item>
-        <item name="itemTextColor">@color/white</item>
+        <item name="itemTextColor">@color/black</item>
+    </style>
+
+    <style name="AppTheme.Splash">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
     </style>
 </resources>

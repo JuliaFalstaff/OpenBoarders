@@ -7,4 +7,5 @@ interface IRepositoryLocal<T> : IRepository<T> {
     suspend fun saveToDatabase(word: List<DataModel>)
     suspend fun getFavouritesData(): List<DataModel>
     suspend fun saveFavouritesData(favWord: DataModel)
+    suspend fun deleteFavouritesData(favWord: DataModel)
 }

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 import kotlin.reflect.KProperty
 
@@ -26,7 +25,6 @@ class ViewByIdDelegate<out T : View>(
                 throw IllegalStateException(EXCEPTION_MSG)
             }
             view = currentRoot.findViewById(viewId)
-
             viewRef = view
             rootReference = WeakReference(currentRoot)
         }

@@ -2,20 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bottom_bar_fav"
-        android:icon="@drawable/ic_favourite_menu"
-        android:title="@string/favourite"
+        android:id="@+id/bottom_bar_home"
+        android:icon="@drawable/home"
+        android:title="@string/home"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/bottom_bar_history"
-        android:icon="@drawable/ic_history_foreground"
+        android:icon="@drawable/history"
         android:title="@string/menu_history"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/bottom_bar_home"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/home"
+        android:id="@+id/bottom_bar_fav"
+        android:icon="@drawable/favourite_ic"
+        android:title="@string/favourite"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/bottom_bar_fav_card"
+        android:icon="@drawable/graduate_cap"
+        android:title="@string/cards"
         app:showAsAction="always" />
 </menu>

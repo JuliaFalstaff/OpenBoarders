@@ -1,6 +1,6 @@
 package com.example.historyscreen
 
-import androidx.lifecycle.LiveData
+
 import com.example.core.BaseViewModel
 import com.example.module.AppState
 import kotlinx.coroutines.Job
@@ -10,10 +10,6 @@ class HistoryViewModel(private val interactor: HistoryInteractor) :
         BaseViewModel<AppState>() {
 
     private var job: Job? = null
-
-//    override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
-//        return super.getData(word, isOnline)
-//    }
 
     override fun onCleared() {
         liveDataForViewToObserve.postValue(AppState.SuccessHistoryData(null))

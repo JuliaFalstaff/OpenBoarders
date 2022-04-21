@@ -23,6 +23,8 @@ abstract class BaseViewModel<T : AppState>(
 
     open fun getFavouriteData(): LiveData<T> = liveDataForViewToObserve
 
+    open fun getCardsLiveData(): LiveData<T> = liveDataForViewToObserve
+
     override fun onCleared() {
         super.onCleared()
         cancelJob()

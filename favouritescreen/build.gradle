@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":model"))
     implementation(project(":repository"))
+    implementation(project(":utils"))
     //Koin
     implementation (Koin.core)
     implementation (Koin.koinAndroid)
