@@ -6,6 +6,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/london_splash" />
+            android:src="@drawable/uk_splash_ic" />
     </item>
 </layer-list>
