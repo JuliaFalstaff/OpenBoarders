@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMemoryCardBinding
 import com.example.androidprofessional.utils.ExoPlayerFactory
+import com.example.androidprofessional.utils.PicassoImageLoader
 import com.example.androidprofessional.viewmodel.MemoryCardsViewModel
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
@@ -106,20 +107,12 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         cardTranscriptionTextView.text = "[${dataModel.meanings?.firstOrNull()?.transcription}]"
 
         val imageLink = dataModel.meanings?.firstOrNull()?.imageUrl
-        usePicassoToLoadPhoto(cardWordPictureImageView, imageLink)
+        PicassoImageLoader.usePicassoToLoadPhoto(cardWordPictureImageView, imageLink)
 
         val urlSound = dataModel.meanings?.firstOrNull()?.soundUrl.toString()
         cardPlaySoundButton.setOnClickListener {
             useExoPlayerToLoadSoundUrl(urlSound)
         }
-    }
-
-    private fun usePicassoToLoadPhoto(imageView: ImageView, imageLink: String?) {
-        Picasso.get()
-                .load("https:$imageLink")
-                .placeholder(R.drawable.progress_animation)
-                .error(R.drawable.no_favs_data)
-                .into(imageView)
     }
 
     private fun initializePlayer() {

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentDetailedInfoBinding
 import com.example.androidprofessional.utils.ExoPlayerFactory
+import com.example.androidprofessional.utils.PicassoImageLoader
 import com.example.core.BackButtonClickListener
 import com.example.module.data.DataModel
 import com.example.utils.OnlineLiveData
@@ -96,7 +97,7 @@ class DetailedInfoFragment : Fragment(), BackButtonClickListener {
         transcriptionTextView.text = "[${wordBundle.meanings?.firstOrNull()?.transcription}]"
 
         val imageLink = wordBundle.meanings?.firstOrNull()?.imageUrl
-        usePicassoToLoadPhoto(wordPictureImageView, imageLink)
+        PicassoImageLoader.usePicassoToLoadPhoto(wordPictureImageView, imageLink)
 
         val urlSound = wordBundle.meanings?.firstOrNull()?.soundUrl.toString()
         playSoundButton.setOnClickListener {
@@ -116,15 +117,6 @@ class DetailedInfoFragment : Fragment(), BackButtonClickListener {
             play()
         }
     }
-
-    private fun usePicassoToLoadPhoto(imageView: ImageView, imageLink: String?) {
-        Picasso.get()
-                .load("https:$imageLink")
-                .placeholder(R.drawable.progress_animation)
-                .error(R.drawable.ic_load_error_vector)
-                .into(imageView)
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()
