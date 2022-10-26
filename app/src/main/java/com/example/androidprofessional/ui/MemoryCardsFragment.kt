@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.androidprofessional.R
@@ -22,7 +21,6 @@ import com.github.terrakok.cicerone.Router
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.Util
-import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
@@ -30,7 +28,7 @@ import org.koin.core.scope.Scope
 
 class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override val scope: Scope by lazy { createScope(this) }
-    val viewModel: MemoryCardsViewModel by inject()
+    private val viewModel: MemoryCardsViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
     private var _binding: FragmentMemoryCardBinding? = null
@@ -39,7 +37,11 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val router by inject<Router>()
     private var isTextVisible = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentMemoryCardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -74,7 +76,8 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.SuccessCard -> {
                 val dataModel = appState.data
                 if (dataModel == null) {
-                    Toast.makeText(requireContext(), R.string.error_null_data, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.error_null_data, Toast.LENGTH_SHORT)
+                        .show()
                 } else {
                     setData(dataModel)
                 }
@@ -83,12 +86,15 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 Toast.makeText(requireContext(), R.string.loading, Toast.LENGTH_SHORT).show()
             }
             is AppState.Error -> {
-                Toast.makeText(requireContext(), appState.error.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    appState.error.message.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
                 showErrorPicture()
             }
         }
     }
-
 
     private fun showErrorPicture() = with(binding) {
         cardHeader.text = getString(R.string.error_no_favourites_words)
@@ -103,7 +109,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private fun setData(dataModel: DataModel) = with(binding) {
         cardWordTextView.text = dataModel.text
         cardDescriptionWordTextView.text =
-                dataModel.meanings?.joinToString { it.translation?.translation.toString() }
+            dataModel.meanings?.joinToString { it.translation?.translation.toString() }
         cardTranscriptionTextView.text = "[${dataModel.meanings?.firstOrNull()?.transcription}]"
 
         val imageLink = dataModel.meanings?.firstOrNull()?.imageUrl

@@ -24,11 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_xxxxx_large"
+            android:layout_margin="@dimen/margin_fab"
             android:backgroundTint="@color/colorAccent"
             android:src="@drawable/ic_search"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="@string/search_the_world_fab" />
     </FrameLayout>
 
     <FrameLayout
@@ -78,24 +78,25 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/startImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/start_main_image"
+            android:visibility="gone" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/startTextViewBeforeSearch"
             style="@style/BaseTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_xxx_large"
+            android:layout_marginTop="@dimen/margin_xx_small"
             android:paddingStart="@dimen/margin_medium"
             android:paddingEnd="@dimen/margin_medium"
             android:text="@string/startText"
             android:textAlignment="center"
             android:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/startImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/flag_medium"
-            android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>

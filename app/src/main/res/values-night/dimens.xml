@@ -36,4 +36,5 @@
     <dimen name="layout_height_cardview">120dp</dimen>
     <dimen name="dialog_fragment_height">350dp</dimen>
     <dimen name="margin_xxxxx_large">75dp</dimen>
+    <dimen name="margin_fab">16dp</dimen>
 </resources>

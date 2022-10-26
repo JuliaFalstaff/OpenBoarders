@@ -15,6 +15,7 @@
     <dimen name="margin_x_large">35dp</dimen>
     <dimen name="margin_xx_large">40dp</dimen>
     <dimen name="margin_xxx_large">45dp</dimen>
+    <dimen name="margin_fab">16dp</dimen>
 
     //Paddings
     <dimen name="padding_bottom_sheet">0dp</dimen>

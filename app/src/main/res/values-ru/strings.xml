@@ -25,4 +25,5 @@
     <string name="error_null_data">Ошибка - нет данных</string>
     <string name="search_word_onboarding">Поиск слова</string>
     <string name="content_text_onboarding">Используйте эту кнопку для ввода слова и поиска его перевода</string>
+    <string name="search_the_world_fab">Search the world</string>
 </resources>
