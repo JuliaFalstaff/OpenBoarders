@@ -2,17 +2,19 @@ package com.example.androidprofessional.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.example.androidprofessional.usecase.main.MainInteractor
+import com.example.core.BaseViewModel
+import com.example.module.AppState
 import com.example.module.data.DataModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val interactor: MainInteractor) :
-        com.example.core.BaseViewModel<com.example.module.AppState>() {
+        BaseViewModel<AppState>() {
 
     private var job: Job? = null
 
-    override fun getData(word: String, isOnline: Boolean): LiveData<com.example.module.AppState> {
-        liveDataForViewToObserve.postValue(com.example.module.AppState.Loading(null))
+    override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
+        liveDataForViewToObserve.postValue(AppState.Loading(null))
         job?.cancel()
         job = viewModelCoroutineScope.launch { startInteractor(word, isOnline) }
         return super.getData(word, isOnline)
@@ -23,12 +25,12 @@ class MainViewModel(private val interactor: MainInteractor) :
     }
 
     override fun onCleared() {
-        liveDataForViewToObserve.postValue(com.example.module.AppState.Success(null))
+        liveDataForViewToObserve.postValue(AppState.Success(null))
         super.onCleared()
     }
 
     override fun handleError(error: Throwable) {
-        liveDataForViewToObserve.postValue(com.example.module.AppState.Error(error))
+        liveDataForViewToObserve.postValue(AppState.Error(error))
     }
 
     fun saveToFav(word: DataModel) {

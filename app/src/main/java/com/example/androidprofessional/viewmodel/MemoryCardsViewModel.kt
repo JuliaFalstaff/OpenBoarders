@@ -20,6 +20,6 @@ class MemoryCardsViewModel(private val interactor: MemoryCardsInteractor) : Base
     }
 
     override fun handleError(error: Throwable) {
-        liveDataForViewToObserve.postValue(com.example.module.AppState.Error(error))
+        liveDataForViewToObserve.postValue(AppState.Error(error))
     }
 }

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginStart="@dimen/margin_small"
-    android:layout_marginEnd="@dimen/margin_small"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/margin_medium"
     app:cardElevation="@dimen/margin_medium"
     app:strokeWidth="1dp">
@@ -23,7 +22,6 @@
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginEnd="@dimen/margin_large"
-            android:gravity="center"
             android:text="@string/do_you_remember_translation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
