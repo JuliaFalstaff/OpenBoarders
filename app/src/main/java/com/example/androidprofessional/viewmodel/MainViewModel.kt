@@ -1,7 +1,7 @@
 package com.example.androidprofessional.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.androidprofessional.usecase.main.MainInteractor
+import com.example.androidprofessional.usecase.main.main.MainInteractor
 import com.example.core.BaseViewModel
 import com.example.module.AppState
 import com.example.module.data.DataModel

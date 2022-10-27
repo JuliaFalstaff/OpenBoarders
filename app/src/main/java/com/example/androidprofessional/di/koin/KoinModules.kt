@@ -3,10 +3,9 @@ package com.example.androidprofessional.di.koin
 import androidx.room.Room
 import com.example.androidprofessional.di.DATABASE_NAME
 import com.example.androidprofessional.navigation.AndroidScreens
-import com.example.androidprofessional.navigation.IScreens
 import com.example.androidprofessional.ui.FavouriteFragment
 import com.example.androidprofessional.ui.MainFragment
-import com.example.androidprofessional.usecase.main.MainInteractor
+import com.example.androidprofessional.usecase.main.main.MainInteractor
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.favouritescreen.FavouriteInteractor
 import com.example.favouritescreen.FavouriteViewModel

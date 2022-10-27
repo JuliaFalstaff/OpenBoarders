@@ -1,4 +1,4 @@
-package com.example.androidprofessional.usecase.main
+package com.example.androidprofessional.usecase.main.main
 
 import com.example.module.AppState
 import com.example.module.data.DataModel

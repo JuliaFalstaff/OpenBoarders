@@ -5,8 +5,7 @@
     android:id="@+id/bottom_sheet_dialog_layout"
     style="@style/AppBottomSheetDialogTheme"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dialog_fragment_height"
-    android:layout_marginBottom="@dimen/margin_medium"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -24,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginBottom="@dimen/margin_xxx_medium">
 

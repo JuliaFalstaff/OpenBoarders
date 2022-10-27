@@ -37,4 +37,5 @@
     <dimen name="dialog_fragment_height">350dp</dimen>
     <dimen name="margin_xxxxx_large">75dp</dimen>
     <dimen name="card_elevation">3dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
 </resources>
