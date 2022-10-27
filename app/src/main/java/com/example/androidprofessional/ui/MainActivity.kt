@@ -1,15 +1,8 @@
 package com.example.androidprofessional.ui
 
-import android.animation.ObjectAnimator
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import android.view.animation.AnticipateInterpolator
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.doOnEnd
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.androidprofessional.R
@@ -30,48 +23,28 @@ class MainActivity : AppCompatActivity() {
     private val router by inject<Router>()
     private val navigator = object : AppNavigator(this, R.id.container) {
         override fun setupFragmentTransaction(
-                screen: FragmentScreen,
-                fragmentTransaction: FragmentTransaction,
-                currentFragment: Fragment?,
-                nextFragment: Fragment,
+            screen: FragmentScreen,
+            fragmentTransaction: FragmentTransaction,
+            currentFragment: Fragment?,
+            nextFragment: Fragment,
         ) {
             fragmentTransaction.setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out)
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setSplashScreenAnimation()
-        } else {
-            setTheme(R.style.AppTheme)
-        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigationView()
         if (savedInstanceState == null) {
             router.replaceScreen(screens.mainFragment())
-        }
-    }
-
-    @RequiresApi(31)
-    private fun setSplashScreenAnimation() {
-        val splashScreen = installSplashScreen()
-        splashScreen.setOnExitAnimationListener { splashScreenProvider ->
-            ObjectAnimator.ofFloat(
-                    splashScreenProvider.view,
-                    View.TRANSLATION_Y,
-                    START_ANIMATION,
-                    -splashScreenProvider.view.height.toFloat()
-            ).apply {
-                interpolator = AnticipateInterpolator()
-                duration = SLIDE_UP_DURATION
-                doOnEnd { splashScreenProvider.remove() }
-            }.start()
         }
     }
 
