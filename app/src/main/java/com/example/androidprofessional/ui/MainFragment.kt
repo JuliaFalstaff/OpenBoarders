@@ -17,9 +17,11 @@ import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.ui.adapter.MainAdapter
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.core.BaseFragment
+import com.example.core.BaseViewModel
 import com.example.module.AppState
 import com.example.module.data.DataModel
 import com.example.utils.fragmentViewById
+import com.example.utils.isOnline
 import com.github.terrakok.cicerone.Router
 import org.koin.androidx.scope.createScope
 import org.koin.core.component.KoinScopeComponent
@@ -34,7 +36,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override val scope: Scope by lazy { createScope(this) }
     private val screens: AndroidScreens by inject()
     val viewModel: MainViewModel by inject()
-    override val model: com.example.core.BaseViewModel<AppState>
+    override val model: BaseViewModel<AppState>
         get() = viewModel
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -107,14 +109,14 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
-                if (isNetworkAvailable) {
+                isNetworkAvailable = isOnline(requireContext())
                     model.getData(searchWord, isNetworkAvailable)
                             .observe(viewLifecycleOwner, Observer { renderData(it) })
-                } else {
+                if (!isNetworkAvailable) {
                     Toast.makeText(
                             context,
-                            getString(R.string.error_no_internet),
-                            Toast.LENGTH_SHORT
+                            getString(R.string.error_offline_network),
+                            Toast.LENGTH_LONG
                     ).show()
                 }
             }

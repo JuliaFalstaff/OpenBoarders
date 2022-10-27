@@ -21,7 +21,12 @@ abstract class BaseFragment<T : AppState> : Fragment(), BackButtonClickListener 
         OnlineLiveData(requireContext()).observe(this, Observer<Boolean> {
             isNetworkAvailable = it
             if (!isNetworkAvailable) {
-                Toast.makeText(requireContext(), getString(R.string.error_offline_network), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_offline_network),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             }
         })
     }

@@ -97,9 +97,4 @@ class MainActivity : AppCompatActivity() {
         router.exit()
         super.onBackPressed()
     }
-
-    companion object {
-        private const val SLIDE_UP_DURATION = 1500L
-        private const val START_ANIMATION = 0f
-    }
 }
