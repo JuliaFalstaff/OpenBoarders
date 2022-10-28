@@ -1,17 +1,14 @@
-package com.example.androidprofessional.ui
+package com.example.androidprofessional.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentHistoryListBinding
-import com.example.androidprofessional.history.HistoryAdapter
-import com.example.androidprofessional.history.HistoryViewModel
-import com.example.androidprofessional.history.IOnListItemClickListener
 import com.example.androidprofessional.navigation.AndroidScreens
+import com.example.androidprofessional.ui.DetailedInfoFragment
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.module.AppState
@@ -78,7 +75,6 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         adapter?.setData(dataModel.sortedWith(compareBy { it.text }))
                     }
                 }
-                addRecyclerDecorator()
             }
             is AppState.Loading -> {
                 showViewLoading()
@@ -92,12 +88,6 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 showErrorScreen(appState.error.message)
             }
         }
-    }
-
-    private fun addRecyclerDecorator() {
-        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
-        binding.historyRecyclerView.addItemDecoration(itemDecoration)
     }
 
     private fun showErrorScreen(error: String?) = with(binding) {

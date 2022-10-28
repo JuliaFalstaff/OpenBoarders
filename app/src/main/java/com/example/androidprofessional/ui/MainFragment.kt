@@ -140,7 +140,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
-                    addRecyclerDecorator()
                 }
             }
             is AppState.Loading -> {
@@ -157,12 +156,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 showErrorScreen(appState.error.message)
             }
         }
-    }
-
-    private fun addRecyclerDecorator() {
-        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
-        binding.mainActivityRecyclerview.addItemDecoration(itemDecoration)
     }
 
     private fun showErrorScreen(error: String?) = with(binding) {

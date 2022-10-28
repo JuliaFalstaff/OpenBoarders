@@ -8,7 +8,7 @@ import com.example.androidprofessional.fav.FavouriteViewModel
 import com.example.androidprofessional.history.HistoryInteractor
 import com.example.androidprofessional.history.HistoryViewModel
 import com.example.androidprofessional.navigation.AndroidScreens
-import com.example.androidprofessional.ui.HistoryFragment
+import com.example.androidprofessional.history.HistoryFragment
 import com.example.androidprofessional.ui.MainFragment
 import com.example.androidprofessional.ui.MemoryCardsFragment
 import com.example.androidprofessional.usecase.main.game.MemoryCardsInteractor

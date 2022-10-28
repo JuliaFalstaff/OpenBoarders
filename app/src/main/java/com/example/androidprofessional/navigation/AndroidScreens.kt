@@ -2,6 +2,7 @@ package com.example.androidprofessional.navigation
 
 import android.os.Bundle
 import com.example.androidprofessional.fav.FavouriteFragment
+import com.example.androidprofessional.history.HistoryFragment
 import com.example.androidprofessional.ui.*
 import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.FragmentScreen

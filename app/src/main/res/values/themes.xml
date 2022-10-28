@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnSurface">@color/color_pale_grey</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:statusBarColor" >@color/colorPrimary</item>
     </style>
 
     <style name="TranscriptionTextStyle" parent="TextAppearance.MaterialComponents.Body1">

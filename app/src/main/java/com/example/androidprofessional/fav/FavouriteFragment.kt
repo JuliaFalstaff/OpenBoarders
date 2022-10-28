@@ -79,15 +79,8 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                         it?.setFavoriteData(dataModel)
                     }
                 }
-                addRecyclerDecorator()
             }
         }
-    }
-
-    private fun addRecyclerDecorator() {
-        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        itemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_separator, null))
-        binding.favouriteRecyclerView.addItemDecoration(itemDecoration)
     }
 
     override fun onStop() {
