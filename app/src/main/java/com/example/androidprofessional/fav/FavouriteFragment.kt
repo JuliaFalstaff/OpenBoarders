@@ -1,4 +1,4 @@
-package com.example.androidprofessional.ui
+package com.example.androidprofessional.fav
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
+import com.example.androidprofessional.databinding.FragmentFavourtesBinding
 import com.example.androidprofessional.navigation.AndroidScreens
+import com.example.androidprofessional.ui.DetailedInfoFragment
 import com.example.core.BaseFragment
-import com.example.favouritescreen.FavouriteAdapter
-import com.example.favouritescreen.FavouriteViewModel
-import com.example.favouritescreen.IOnListItemClickListener
-import com.example.favouritescreen.databinding.FragmentFavourtesBinding
 import com.example.module.AppState
 import com.example.module.data.DataModel
 import com.github.terrakok.cicerone.Router
@@ -37,7 +35,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         override fun onItemClick(data: DataModel) {
             router.navigateTo(screens.detailedFragment(Bundle().apply {
                 putParcelable(
-                        DetailedInfoFragment.WORD_INFO, data)
+                    DetailedInfoFragment.WORD_INFO, data)
             }))
         }
 

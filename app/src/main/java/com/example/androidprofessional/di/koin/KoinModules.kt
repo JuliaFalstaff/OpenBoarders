@@ -2,16 +2,16 @@ package com.example.androidprofessional.di.koin
 
 import androidx.room.Room
 import com.example.androidprofessional.di.DATABASE_NAME
+import com.example.androidprofessional.fav.FavouriteFragment
+import com.example.androidprofessional.fav.FavouriteInteractor
+import com.example.androidprofessional.fav.FavouriteViewModel
 import com.example.androidprofessional.navigation.AndroidScreens
-import com.example.androidprofessional.ui.FavouriteFragment
-import com.example.androidprofessional.ui.MainFragment
-import com.example.androidprofessional.usecase.main.main.MainInteractor
-import com.example.androidprofessional.viewmodel.MainViewModel
-import com.example.favouritescreen.FavouriteInteractor
-import com.example.favouritescreen.FavouriteViewModel
 import com.example.androidprofessional.ui.HistoryFragment
+import com.example.androidprofessional.ui.MainFragment
 import com.example.androidprofessional.ui.MemoryCardsFragment
 import com.example.androidprofessional.usecase.main.game.MemoryCardsInteractor
+import com.example.androidprofessional.usecase.main.main.MainInteractor
+import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.androidprofessional.viewmodel.MemoryCardsViewModel
 import com.example.historyscreen.HistoryInteractor
 import com.example.historyscreen.HistoryViewModel
@@ -29,7 +29,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val application = module {
-    single { Room.databaseBuilder(get(), TranslatorDataBase::class.java, DATABASE_NAME).fallbackToDestructiveMigration().build() }
+    single {
+        Room.databaseBuilder(get(), TranslatorDataBase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration().build()
+    }
     single { get<TranslatorDataBase>().historyDao() }
     single { get<TranslatorDataBase>().favouriteDao() }
     single<IRepository<List<DataModel>>> { RepositoryImpl(RetrofitImpl()) }
@@ -39,7 +42,7 @@ val application = module {
     single { Cicerone.create() }
     single { get<Cicerone<Router>>().router }
     single { get<Cicerone<Router>>().getNavigatorHolder() }
-    single { AndroidScreens()}
+    single { AndroidScreens() }
 }
 
 val mainScreen = module {
@@ -53,8 +56,9 @@ val historyScreen = module {
     scope<HistoryFragment> {
         scoped {
             HistoryInteractor(
-                    repositoryRemote = get(),
-                    repositoryLocal = get())
+                repositoryRemote = get(),
+                repositoryLocal = get()
+            )
         }
         viewModel { HistoryViewModel(interactor = get()) }
     }
