@@ -1,4 +1,4 @@
-package com.example.historyscreen
+package com.example.androidprofessional.history
 
 
 import com.example.core.BaseViewModel
@@ -7,7 +7,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val interactor: HistoryInteractor) :
-        BaseViewModel<AppState>() {
+    BaseViewModel<AppState>() {
 
     private var job: Job? = null
 

@@ -5,6 +5,8 @@ import com.example.androidprofessional.di.DATABASE_NAME
 import com.example.androidprofessional.fav.FavouriteFragment
 import com.example.androidprofessional.fav.FavouriteInteractor
 import com.example.androidprofessional.fav.FavouriteViewModel
+import com.example.androidprofessional.history.HistoryInteractor
+import com.example.androidprofessional.history.HistoryViewModel
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.ui.HistoryFragment
 import com.example.androidprofessional.ui.MainFragment
@@ -13,8 +15,6 @@ import com.example.androidprofessional.usecase.main.game.MemoryCardsInteractor
 import com.example.androidprofessional.usecase.main.main.MainInteractor
 import com.example.androidprofessional.viewmodel.MainViewModel
 import com.example.androidprofessional.viewmodel.MemoryCardsViewModel
-import com.example.historyscreen.HistoryInteractor
-import com.example.historyscreen.HistoryViewModel
 import com.example.module.data.DataModel
 import com.example.repository.datasource.RoomDataBaseImpl
 import com.example.repository.repository.IRepository

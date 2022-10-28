@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
+import com.example.androidprofessional.databinding.FragmentHistoryListBinding
+import com.example.androidprofessional.history.HistoryAdapter
+import com.example.androidprofessional.history.HistoryViewModel
+import com.example.androidprofessional.history.IOnListItemClickListener
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
-import com.example.historyscreen.HistoryAdapter
-import com.example.historyscreen.HistoryViewModel
-import com.example.historyscreen.IOnListItemClickListener
-import com.example.historyscreen.databinding.FragmentHistoryListBinding
 import com.example.module.AppState
 import com.example.module.data.DataModel
 import com.github.terrakok.cicerone.Router
@@ -37,15 +37,18 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val onListItemClickListener: IOnListItemClickListener =
         object : IOnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                router.navigateTo(screens.detailedFragment(Bundle().apply {putParcelable(
-                        DetailedInfoFragment.WORD_INFO, data)}))
+                router.navigateTo(screens.detailedFragment(Bundle().apply {
+                    putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data
+                    )
+                }))
             }
         }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentHistoryListBinding.inflate(inflater, container, false)
         return binding.root
@@ -67,7 +70,8 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Success -> {
                 showViewSuccess()
                 val dataModel = appState.data
-                binding.historyRecyclerView.adapter = dataModel?.let { HistoryAdapter(it, onListItemClickListener) }
+                binding.historyRecyclerView.adapter =
+                    dataModel?.let { HistoryAdapter(it, onListItemClickListener) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let { adapter ->
                     if (dataModel != null) {

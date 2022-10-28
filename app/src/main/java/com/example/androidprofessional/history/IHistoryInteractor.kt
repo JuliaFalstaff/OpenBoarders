@@ -1,4 +1,4 @@
-package com.example.historyscreen
+package com.example.androidprofessional.history
 
 
 interface IHistoryInteractor<AppState> {

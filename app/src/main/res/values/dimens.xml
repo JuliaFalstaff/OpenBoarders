@@ -19,6 +19,7 @@
 
     //Paddings
     <dimen name="padding_bottom_sheet">0dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
 
     //Text size
     <dimen name="text_size_tip">10sp</dimen>
