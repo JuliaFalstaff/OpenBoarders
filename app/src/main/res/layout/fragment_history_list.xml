@@ -18,6 +18,14 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_history_recycler_view" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/noHistoryDataImageView"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_data_image"/>
     </FrameLayout>
 
     <FrameLayout

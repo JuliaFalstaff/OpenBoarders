@@ -2,9 +2,9 @@ package com.example.androidprofessional.di.koin
 
 import androidx.room.Room
 import com.example.androidprofessional.di.DATABASE_NAME
-import com.example.androidprofessional.fav.FavouriteFragment
-import com.example.androidprofessional.fav.FavouriteInteractor
-import com.example.androidprofessional.fav.FavouriteViewModel
+import com.example.androidprofessional.favourite.FavouriteFragment
+import com.example.androidprofessional.favourite.FavouriteInteractor
+import com.example.androidprofessional.favourite.FavouriteViewModel
 import com.example.androidprofessional.history.HistoryInteractor
 import com.example.androidprofessional.history.HistoryViewModel
 import com.example.androidprofessional.navigation.AndroidScreens

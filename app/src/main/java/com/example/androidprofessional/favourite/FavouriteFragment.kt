@@ -1,12 +1,10 @@
-package com.example.androidprofessional.fav
+package com.example.androidprofessional.favourite
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentFavourtesBinding
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.ui.DetailedInfoFragment
@@ -67,12 +65,15 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
+                binding.favouriteRecyclerView.visibility = View.VISIBLE
                 val dataModel = appState.data
+                if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
                 binding.favouriteRecyclerView.adapter = dataModel?.let { list ->
                     FavouriteAdapter(
                             list.sortedWith(compareBy { it.text }), onListItemClickListener
                     )
                 }
+
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let {
                     if (dataModel != null) {
@@ -82,6 +83,12 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
             }
         }
     }
+
+    private fun showEmptyDataPicture() {
+        binding.favouriteRecyclerView.visibility = View.INVISIBLE
+        binding.noFavDataImageView.visibility = View.VISIBLE
+    }
+
 
     override fun onStop() {
         scope.close()

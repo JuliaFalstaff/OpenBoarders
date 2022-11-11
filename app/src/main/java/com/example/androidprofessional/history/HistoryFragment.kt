@@ -67,6 +67,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Success -> {
                 showViewSuccess()
                 val dataModel = appState.data
+                if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
                 binding.historyRecyclerView.adapter =
                     dataModel?.let { HistoryAdapter(it, onListItemClickListener) }
                 binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -88,6 +89,11 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 showErrorScreen(appState.error.message)
             }
         }
+    }
+
+    private fun showEmptyDataPicture() {
+        binding.historyRecyclerView.visibility = View.INVISIBLE
+        binding.noHistoryDataImageView.visibility = View.VISIBLE
     }
 
     private fun showErrorScreen(error: String?) = with(binding) {

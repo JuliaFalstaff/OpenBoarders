@@ -102,7 +102,7 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         cardTranscriptionTextView.visibility = View.INVISIBLE
         showTranslationButton.visibility = View.INVISIBLE
         nextCardButton.visibility = View.INVISIBLE
-        cardWordPictureImageView.setImageResource(R.drawable.no_favs_data)
+        cardWordPictureImageView.setImageResource(R.drawable.no_data_image)
     }
 
     @SuppressLint("SetTextI18n")

@@ -1,4 +1,4 @@
-package com.example.androidprofessional.fav
+package com.example.androidprofessional.favourite
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

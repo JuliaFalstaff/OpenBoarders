@@ -1,4 +1,4 @@
-package com.example.androidprofessional.fav
+package com.example.androidprofessional.favourite
 
 import com.example.module.AppState
 import com.example.module.data.DataModel
