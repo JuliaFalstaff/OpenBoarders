@@ -1,0 +1,6 @@
+com/example/historyscreen/databinding/ItemHistoryRecyclerViewBinding.java
+ com.example.historyscreen.databinding.ItemHistoryRecyclerViewBinding
+com/example/historyscreen/BuildConfig.java
+ com.example.historyscreen.BuildConfig
+com/example/historyscreen/databinding/FragmentHistoryListBinding.java
+ com.example.historyscreen.databinding.FragmentHistoryListBinding

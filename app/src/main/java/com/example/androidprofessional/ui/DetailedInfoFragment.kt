@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,12 +15,11 @@ import com.example.androidprofessional.utils.ExoPlayerFactory
 import com.example.androidprofessional.utils.PicassoImageLoader
 import com.example.core.BackButtonClickListener
 import com.example.module.data.DataModel
-import com.example.utils.OnlineLiveData
+import com.example.utils.isOnline
 import com.github.terrakok.cicerone.Router
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.Util
-import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
 
 class DetailedInfoFragment : Fragment(), BackButtonClickListener {
@@ -33,9 +31,9 @@ class DetailedInfoFragment : Fragment(), BackButtonClickListener {
     private val router: Router by inject<Router>()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentDetailedInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -79,21 +77,19 @@ class DetailedInfoFragment : Fragment(), BackButtonClickListener {
     }
 
     private fun startLoadingOrShowError() {
-        OnlineLiveData(requireContext()).observe(viewLifecycleOwner, Observer {
-            if (it) {
-                setData()
-            } else {
-                Toast.makeText(context, getString(R.string.error_no_internet), Toast.LENGTH_SHORT)
-                        .show()
-            }
-        })
+        if (isOnline(requireContext())) {
+            setData()
+        } else {
+            Toast.makeText(context, getString(R.string.error_no_internet), Toast.LENGTH_LONG)
+                .show()
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setData() = with(binding) {
         wordTextView.text = wordBundle.text
         descriptionWordTextView.text =
-                wordBundle.meanings?.joinToString { it.translation?.translation.toString() }
+            wordBundle.meanings?.joinToString { it.translation?.translation.toString() }
         transcriptionTextView.text = "[${wordBundle.meanings?.firstOrNull()?.transcription}]"
 
         val imageLink = wordBundle.meanings?.firstOrNull()?.imageUrl

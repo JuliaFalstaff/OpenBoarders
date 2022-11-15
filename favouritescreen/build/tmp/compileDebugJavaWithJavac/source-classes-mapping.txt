@@ -1,0 +1,6 @@
+com/example/favouritescreen/BuildConfig.java
+ com.example.favouritescreen.BuildConfig
+com/example/favouritescreen/databinding/FragmentFavourtesBinding.java
+ com.example.favouritescreen.databinding.FragmentFavourtesBinding
+com/example/favouritescreen/databinding/ItemFavouriteRecyclerBinding.java
+ com.example.favouritescreen.databinding.ItemFavouriteRecyclerBinding

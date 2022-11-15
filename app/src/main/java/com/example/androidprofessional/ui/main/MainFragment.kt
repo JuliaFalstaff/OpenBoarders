@@ -110,13 +110,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 isNetworkAvailable = isOnline(requireContext())
                     model.getData(searchWord, isNetworkAvailable)
                             .observe(viewLifecycleOwner, Observer { renderData(it) })
-                if (!isNetworkAvailable) {
-                    Toast.makeText(
-                            context,
-                            getString(R.string.error_offline_network),
-                            Toast.LENGTH_LONG
-                    ).show()
-                }
+                showOfflineError()
             }
         })
         searchDialogFragment.show(parentFragmentManager.beginTransaction(), TAG_SEARCH)
@@ -160,6 +154,17 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         reloadButton.setOnClickListener {
             model.getData(getString(R.string.empty), isNetworkAvailable)
                     .observe(viewLifecycleOwner, Observer { renderData(it) })
+            showOfflineError()
+        }
+    }
+
+    private fun showOfflineError() {
+        if (!isNetworkAvailable) {
+            Toast.makeText(
+                context,
+                getString(R.string.error_offline_network),
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
