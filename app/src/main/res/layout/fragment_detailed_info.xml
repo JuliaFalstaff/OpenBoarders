@@ -18,7 +18,7 @@
         android:contentDescription="@string/image_view_translation"
         android:adjustViewBounds="true"
         android:layout_marginTop="@dimen/margin_x_large"
-        android:src="@drawable/ic_launcher_start"
+        tools:src="@drawable/no_data_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
