@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_dialog_layout"
     style="@style/AppBottomSheetDialogTheme"
+    android:padding="@dimen/padding_medium"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
