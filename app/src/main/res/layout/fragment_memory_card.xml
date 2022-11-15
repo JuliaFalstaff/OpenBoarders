@@ -86,13 +86,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium"
-            android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:backgroundTint="@color/white"
+            android:contentDescription="@string/play_pronounce_word"
+            android:minHeight="@dimen/min_height_of_sound_button"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_audio"
             app:layout_constraintBottom_toBottomOf="@+id/cardTranscriptionTextView"
             app:layout_constraintStart_toEndOf="@+id/cardWordTextView"
-            app:layout_constraintTop_toTopOf="@+id/cardTranscriptionTextView" />
+            app:layout_constraintTop_toTopOf="@+id/cardTranscriptionTextView"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/showTranslationButton"
