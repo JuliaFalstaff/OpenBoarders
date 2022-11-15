@@ -1,9 +1,11 @@
 package com.example.androidprofessional.navigation
 
 import android.os.Bundle
-import com.example.androidprofessional.favourite.FavouriteFragment
-import com.example.androidprofessional.history.HistoryFragment
+import com.example.androidprofessional.ui.favourite.FavouriteFragment
+import com.example.androidprofessional.ui.history.HistoryFragment
 import com.example.androidprofessional.ui.*
+import com.example.androidprofessional.ui.cards.MemoryCardsFragment
+import com.example.androidprofessional.ui.main.MainFragment
 import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
@@ -21,7 +23,7 @@ class AndroidScreens: IScreens {
     }
 
     override fun memoryCardsFragment(): Screen {
-        return FragmentScreen {MemoryCardsFragment.newInstance()}
+        return FragmentScreen { MemoryCardsFragment.newInstance()}
     }
 
     override fun mainFragment(): Screen {

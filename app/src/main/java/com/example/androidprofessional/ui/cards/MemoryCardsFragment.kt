@@ -1,4 +1,4 @@
-package com.example.androidprofessional.ui
+package com.example.androidprofessional.ui.cards
 
 import android.annotation.SuppressLint
 import android.net.Uri
@@ -12,7 +12,6 @@ import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMemoryCardBinding
 import com.example.androidprofessional.utils.ExoPlayerFactory
 import com.example.androidprofessional.utils.PicassoImageLoader
-import com.example.androidprofessional.viewmodel.MemoryCardsViewModel
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.module.AppState

@@ -1,6 +1,7 @@
-package com.example.androidprofessional.history
+package com.example.androidprofessional.ui.history
 
 
+import com.example.androidprofessional.usecase.history.HistoryInteractor
 import com.example.core.BaseViewModel
 import com.example.module.AppState
 import kotlinx.coroutines.Job

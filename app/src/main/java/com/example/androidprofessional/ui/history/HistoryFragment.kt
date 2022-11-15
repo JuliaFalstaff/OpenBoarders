@@ -1,4 +1,4 @@
-package com.example.androidprofessional.history
+package com.example.androidprofessional.ui.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentHistoryListBinding
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.ui.DetailedInfoFragment
+import com.example.androidprofessional.ui.adapters.HistoryAdapter
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.module.AppState

@@ -1,4 +1,4 @@
-package com.example.androidprofessional.favourite
+package com.example.androidprofessional.ui.favourite
 
 import com.example.module.data.DataModel
 

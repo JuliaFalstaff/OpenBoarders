@@ -1,5 +1,6 @@
-package com.example.androidprofessional.favourite
+package com.example.androidprofessional.ui.favourite
 
+import com.example.androidprofessional.usecase.favourite.FavouriteInteractor
 import com.example.module.data.DataModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

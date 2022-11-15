@@ -1,4 +1,4 @@
-package com.example.androidprofessional.ui
+package com.example.androidprofessional.ui.main
 
 import android.os.Bundle
 import android.view.Menu

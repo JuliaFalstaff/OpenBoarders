@@ -1,7 +1,7 @@
-package com.example.androidprofessional.viewmodel
+package com.example.androidprofessional.ui.cards
 
 import androidx.lifecycle.LiveData
-import com.example.androidprofessional.usecase.main.game.MemoryCardsInteractor
+import com.example.androidprofessional.usecase.game.MemoryCardsInteractor
 import com.example.core.BaseViewModel
 import com.example.module.AppState
 import kotlinx.coroutines.Job

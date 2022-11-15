@@ -1,4 +1,4 @@
-package com.example.androidprofessional.history
+package com.example.androidprofessional.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.databinding.ItemHistoryRecyclerViewBinding
+import com.example.androidprofessional.ui.history.IOnListItemClickListener
 import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 

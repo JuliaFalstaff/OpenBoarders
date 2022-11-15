@@ -1,8 +1,7 @@
-package com.example.core
+package com.example.androidprofessional.usecase.main
 
 import com.example.module.AppState
 import com.example.module.data.DataModel
-
 
 interface Interactor<T> {
     suspend fun getData(word: String, fromRemoteSource: Boolean): T

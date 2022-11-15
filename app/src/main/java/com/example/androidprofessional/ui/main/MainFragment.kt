@@ -1,4 +1,4 @@
-package com.example.androidprofessional.ui
+package com.example.androidprofessional.ui.main
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentMainBinding
 import com.example.androidprofessional.navigation.AndroidScreens
-import com.example.androidprofessional.ui.adapter.MainAdapter
-import com.example.androidprofessional.viewmodel.MainViewModel
+import com.example.androidprofessional.ui.DetailedInfoFragment
+import com.example.androidprofessional.ui.SearchDialogFragment
+import com.example.androidprofessional.ui.adapters.MainAdapter
 import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.module.AppState
@@ -52,7 +52,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 override fun onItemClick(data: DataModel) {
                     router.navigateTo(screens.detailedFragment(Bundle().apply {
                         putParcelable(
-                                DetailedInfoFragment.WORD_INFO, data)
+                            DetailedInfoFragment.WORD_INFO, data)
                     }))
                 }
 
@@ -107,7 +107,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private fun openDialogFragmentsAndSearch() {
         val searchDialogFragment = SearchDialogFragment.newInstance()
         searchDialogFragment.setOnSearchClickListener(object :
-                SearchDialogFragment.OnSearchClickListener {
+            SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
                 isNetworkAvailable = isOnline(requireContext())
                     model.getData(searchWord, isNetworkAvailable)

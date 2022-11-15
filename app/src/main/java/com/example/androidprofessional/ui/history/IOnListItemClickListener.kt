@@ -1,4 +1,4 @@
-package com.example.androidprofessional.history
+package com.example.androidprofessional.ui.history
 
 import com.example.module.data.DataModel
 
