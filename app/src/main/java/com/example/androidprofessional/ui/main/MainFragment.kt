@@ -20,7 +20,6 @@ import com.example.core.BaseFragment
 import com.example.core.BaseViewModel
 import com.example.module.AppState
 import com.example.module.data.DataModel
-import com.example.utils.fragmentViewById
 import com.example.utils.isOnline
 import com.github.terrakok.cicerone.Router
 import org.koin.androidx.scope.createScope
@@ -41,7 +40,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
-    private val horizontalProgressBar by fragmentViewById<ProgressBar>(R.id.progressBarHorizontal)
     private val router: Router by inject()
     private val pref: SharedPreferences by lazy {
         requireActivity().getSharedPreferences(ON_BOARDING_PREF, Context.MODE_PRIVATE)
@@ -145,10 +143,8 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Loading -> {
                 showViewLoading()
                 if (appState.progress != null) {
-                    horizontalProgressBar.visibility = View.VISIBLE
                     binding.progressBarRound.visibility = View.GONE
                 } else {
-                    horizontalProgressBar.visibility = View.GONE
                     binding.progressBarRound.visibility = View.VISIBLE
                 }
             }
