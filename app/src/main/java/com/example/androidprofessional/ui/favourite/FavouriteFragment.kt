@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentFavourtesBinding
 import com.example.androidprofessional.navigation.AndroidScreens
 import com.example.androidprofessional.ui.DetailedInfoFragment
@@ -35,7 +37,8 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         override fun onItemClick(data: DataModel) {
             router.navigateTo(screens.detailedFragment(Bundle().apply {
                 putParcelable(
-                    DetailedInfoFragment.WORD_INFO, data)
+                    DetailedInfoFragment.WORD_INFO, data
+                )
             }))
         }
 
@@ -45,9 +48,9 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentFavourtesBinding.inflate(inflater, container, false)
         return binding.root
@@ -68,20 +71,31 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         when (appState) {
             is AppState.Success -> {
                 binding.favouriteRecyclerView.visibility = View.VISIBLE
+                binding.favouriteProgressBar.visibility = View.INVISIBLE
                 val dataModel = appState.data
                 if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
                 binding.favouriteRecyclerView.adapter = dataModel?.let { list ->
                     FavouriteAdapter(
-                            list.sortedWith(compareBy { it.text }), onListItemClickListener
+                        list.sortedWith(compareBy { it.text }), onListItemClickListener
                     )
                 }
-
                 binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let {
                     if (dataModel != null) {
                         it?.setFavoriteData(dataModel)
                     }
                 }
+            }
+            is AppState.Loading -> {
+                binding.favouriteRecyclerView.visibility = View.INVISIBLE
+                binding.favouriteProgressBar.visibility = View.VISIBLE
+            }
+            is AppState.Error -> {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.undefined_error),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

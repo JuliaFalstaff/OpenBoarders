@@ -26,7 +26,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
     private val adapter: HistoryAdapter? = null
-    val viewModel: HistoryViewModel by inject()
+    private val viewModel: HistoryViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
     private val router: Router by inject()
