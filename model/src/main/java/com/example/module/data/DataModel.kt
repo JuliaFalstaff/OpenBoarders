@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class DataModel(
+data class DataModel(
         @SerializedName(ID_DATA_MODEL) val id: Int? = 0,
         @SerializedName(TEXT_DATA_MODEL) val text: String? = "",
         @SerializedName(MEANINGS_MODEL) val meanings: List<Meanings>? = null,

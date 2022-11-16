@@ -1,6 +1,5 @@
 package com.example.androidprofessional.usecase.favourite
 
-import com.example.androidprofessional.usecase.favourite.IFavouriteInteractor
 import com.example.module.AppState
 import com.example.module.data.DataModel
 import com.example.repository.repository.IRepositoryLocal
@@ -11,7 +10,7 @@ class FavouriteInteractor(
 
     override suspend fun getFavouritesData(): AppState {
         return AppState.Success(
-            repositoryLocal.getFavouritesData().toMutableList()
+            repositoryLocal.getFavouritesData()
         )
     }
 

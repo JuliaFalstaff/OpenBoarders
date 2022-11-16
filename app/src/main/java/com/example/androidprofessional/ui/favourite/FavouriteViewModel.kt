@@ -1,17 +1,18 @@
 package com.example.androidprofessional.ui.favourite
 
 import com.example.androidprofessional.usecase.favourite.FavouriteInteractor
+import com.example.module.AppState
 import com.example.module.data.DataModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class FavouriteViewModel(private val interactor: FavouriteInteractor) :
-        com.example.core.BaseViewModel<com.example.module.AppState>() {
+        com.example.core.BaseViewModel<AppState>() {
 
     private var job: Job? = null
 
     override fun handleError(error: Throwable) {
-        liveDataForViewToObserve.postValue(com.example.module.AppState.Error(error))
+        liveDataForViewToObserve.postValue(AppState.Error(error))
     }
 
     fun getData() {
@@ -28,7 +29,7 @@ class FavouriteViewModel(private val interactor: FavouriteInteractor) :
     }
 
     override fun onCleared() {
-        liveDataForViewToObserve.postValue(com.example.module.AppState.SuccessHistoryData(null))
+        liveDataForViewToObserve.postValue(AppState.Success(null))
         super.onCleared()
     }
 }

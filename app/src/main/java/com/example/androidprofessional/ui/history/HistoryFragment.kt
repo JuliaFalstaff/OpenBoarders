@@ -89,6 +89,9 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Error -> {
                 showErrorScreen(appState.error.message)
             }
+            else -> {
+                showErrorScreen(getString(R.string.undefined_error))
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class Meanings(
+data class Meanings(
         @SerializedName(ID_MEANINGS) val id: Int,
         @Embedded
         @SerializedName(TRANSLATION_MEANINGS) val translation: Translation? = null,

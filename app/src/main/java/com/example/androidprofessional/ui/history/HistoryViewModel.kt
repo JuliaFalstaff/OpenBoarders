@@ -13,7 +13,7 @@ class HistoryViewModel(private val interactor: HistoryInteractor) :
     private var job: Job? = null
 
     override fun onCleared() {
-        liveDataForViewToObserve.postValue(AppState.SuccessHistoryData(null))
+        liveDataForViewToObserve.postValue(AppState.Success(null))
         super.onCleared()
     }
 

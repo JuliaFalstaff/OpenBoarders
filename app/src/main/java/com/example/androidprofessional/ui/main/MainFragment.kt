@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,27 +45,28 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
-            object : MainAdapter.OnListItemClickListener {
-                override fun onItemClick(data: DataModel) {
-                    router.navigateTo(screens.detailedFragment(Bundle().apply {
-                        putParcelable(
-                            DetailedInfoFragment.WORD_INFO, data)
-                    }))
-                }
-
-                override fun addToFav(data: DataModel) {
-                    viewModel.saveToFav(data)
-                }
-
-                override fun deleteFromFav(data: DataModel) {
-                    viewModel.deleteFromFav(data)
-                }
+        object : MainAdapter.OnListItemClickListener {
+            override fun onItemClick(data: DataModel) {
+                router.navigateTo(screens.detailedFragment(Bundle().apply {
+                    putParcelable(
+                        DetailedInfoFragment.WORD_INFO, data
+                    )
+                }))
             }
 
+            override fun addToFav(data: DataModel) {
+                viewModel.saveToFav(data)
+            }
+
+            override fun deleteFromFav(data: DataModel) {
+                viewModel.deleteFromFav(data)
+            }
+        }
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -92,13 +92,13 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     private fun openShowCase() {
         GuideView.Builder(requireContext())
-                .setTitle(getString(R.string.search_word_onboarding))
-                .setContentText(getString(R.string.content_text_onboarding))
-                .setGravity(Gravity.center)
-                .setDismissType(DismissType.anywhere)
-                .setTargetView(binding.searchFab)
-                .build()
-                .show()
+            .setTitle(getString(R.string.search_word_onboarding))
+            .setContentText(getString(R.string.content_text_onboarding))
+            .setGravity(Gravity.center)
+            .setDismissType(DismissType.anywhere)
+            .setTargetView(binding.searchFab)
+            .build()
+            .show()
         pref.edit().putBoolean(ON_BOARDING_PREF_COMPLETE, false).apply()
     }
 
@@ -108,8 +108,8 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
                 isNetworkAvailable = isOnline(requireContext())
-                    model.getData(searchWord, isNetworkAvailable)
-                            .observe(viewLifecycleOwner, Observer { renderData(it) })
+                model.getData(searchWord, isNetworkAvailable)
+                    .observe(viewLifecycleOwner, Observer { renderData(it) })
                 showOfflineError()
             }
         })
@@ -126,9 +126,9 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
                     showViewSuccess()
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
-                                LinearLayoutManager(context)
+                            LinearLayoutManager(context)
                         binding.mainActivityRecyclerview.adapter =
-                                MainAdapter(onListItemClickListener, dataModel)
+                            MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter.let { it?.setData(dataModel) }
                     }
@@ -145,6 +145,10 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             is AppState.Error -> {
                 showErrorScreen(appState.error.message)
             }
+            else -> {
+                showErrorScreen(getString(R.string.undefined_error))
+            }
+            
         }
     }
 
@@ -153,7 +157,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
         errorTextView.text = error ?: getString(R.string.undefined_error)
         reloadButton.setOnClickListener {
             model.getData(getString(R.string.empty), isNetworkAvailable)
-                    .observe(viewLifecycleOwner, Observer { renderData(it) })
+                .observe(viewLifecycleOwner, Observer { renderData(it) })
             showOfflineError()
         }
     }
@@ -163,7 +167,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             Toast.makeText(
                 context,
                 getString(R.string.error_offline_network),
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
         }
     }
