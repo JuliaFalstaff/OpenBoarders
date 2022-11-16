@@ -3,19 +3,16 @@ package com.example.androidprofessional.ui.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.databinding.ItemHistoryRecyclerViewBinding
-import com.example.androidprofessional.ui.history.IOnListItemClickListener
 import com.example.module.data.DataModel
-import com.example.utils.DiffUtils
 import com.example.utils.ItemDiffCallback
 
 class HistoryAdapter(
-    private var listener: IOnListItemClickListener
-) :
-    ListAdapter<DataModel, HistoryAdapter.ViewHolder>(ItemDiffCallback()) {
+): ListAdapter<DataModel, HistoryAdapter.ViewHolder>(ItemDiffCallback()) {
+
+    var onItemClick: ((DataModel)-> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHistoryRecyclerViewBinding.inflate(
@@ -30,7 +27,6 @@ class HistoryAdapter(
         holder.bind(getItem(position))
     }
 
-
     inner class ViewHolder(val binding: ItemHistoryRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
@@ -42,7 +38,7 @@ class HistoryAdapter(
                 binding.transcriptionHistoryTextView.text =
                     "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener {
-                    listener.onItemClick(data)
+                    onItemClick?.invoke(data)
                 }
             }
         }

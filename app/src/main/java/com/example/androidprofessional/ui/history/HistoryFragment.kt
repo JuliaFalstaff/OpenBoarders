@@ -32,17 +32,6 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val router: Router by inject()
     private val screens: AndroidScreens by inject()
 
-    private val onListItemClickListener: IOnListItemClickListener =
-        object : IOnListItemClickListener {
-            override fun onItemClick(data: DataModel) {
-                router.navigateTo(screens.detailedFragment(Bundle().apply {
-                    putParcelable(
-                        DetailedInfoFragment.WORD_INFO, data
-                    )
-                }))
-            }
-        }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,8 +49,15 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     private fun initView() {
-        adapter = HistoryAdapter(onListItemClickListener)
+        adapter = HistoryAdapter()
         binding.historyRecyclerView.adapter = adapter
+        adapter.onItemClick = { data ->
+            router.navigateTo(screens.detailedFragment(Bundle().apply {
+                putParcelable(
+                    DetailedInfoFragment.WORD_INFO, data
+                )
+            }))
+        }
     }
 
     override fun renderData(appState: AppState) {
