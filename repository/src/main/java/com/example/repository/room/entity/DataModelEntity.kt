@@ -2,7 +2,7 @@ package com.example.repository.room.entity
 
 import androidx.room.*
 import com.example.module.data.Meanings
-import com.example.repository.room.entity.HistoryEntity.Companion.ENTITY_INDEX_VALUE
+import com.example.repository.room.entity.DataModelEntity.Companion.ENTITY_INDEX_VALUE
 import com.example.utils.Converter
 
 @Entity(indices = arrayOf(Index(value = arrayOf(ENTITY_INDEX_VALUE), unique = true)))
