@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentHistoryListBinding
@@ -47,7 +48,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentHistoryListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -66,7 +67,8 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
-                showViewSuccess()
+                binding.historyRecyclerView.visibility = View.VISIBLE
+                binding.progressBarHistory.visibility = View.INVISIBLE
                 val dataModel = appState.data
                 if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
                 binding.historyRecyclerView.adapter =
@@ -79,18 +81,15 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 }
             }
             is AppState.Loading -> {
-                showViewLoading()
-                if (appState.progress != null) {
-                    binding.progressBarRound.visibility = View.GONE
-                } else {
-                    binding.progressBarRound.visibility = View.VISIBLE
-                }
+                binding.historyRecyclerView.visibility = View.INVISIBLE
+                binding.progressBarHistory.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                showErrorScreen(appState.error.message)
-            }
-            else -> {
-                showErrorScreen(getString(R.string.undefined_error))
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.undefined_error),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -98,33 +97,6 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private fun showEmptyDataPicture() {
         binding.historyRecyclerView.visibility = View.INVISIBLE
         binding.noHistoryDataImageView.visibility = View.VISIBLE
-    }
-
-    private fun showErrorScreen(error: String?) = with(binding) {
-        showViewError()
-        errorTextView.text = error ?: getString(R.string.undefined_error)
-        reloadButton.setOnClickListener {
-            viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it) })
-            viewModel.getData()
-        }
-    }
-
-    private fun showViewSuccess() = with(binding) {
-        successFrameLayout.visibility = View.VISIBLE
-        loadingFrameLayout.visibility = View.GONE
-        errorLinearLayout.visibility = View.GONE
-    }
-
-    private fun showViewLoading() = with(binding) {
-        successFrameLayout.visibility = View.GONE
-        loadingFrameLayout.visibility = View.VISIBLE
-        errorLinearLayout.visibility = View.GONE
-    }
-
-    private fun showViewError() = with(binding) {
-        successFrameLayout.visibility = View.GONE
-        loadingFrameLayout.visibility = View.GONE
-        errorLinearLayout.visibility = View.VISIBLE
     }
 
     override fun onStop() {
