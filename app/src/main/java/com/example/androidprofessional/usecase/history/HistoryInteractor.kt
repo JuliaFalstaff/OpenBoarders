@@ -16,15 +16,15 @@ class HistoryInteractor(
                 repositoryRemote
             } else {
                 repositoryLocal
-            }.getData(word).toMutableList()
+            }.getData(word)
         )
     }
 
     override suspend fun getData(word: String): AppState {
-        return AppState.Success(repositoryRemote.getData(word).toMutableList())
+        return AppState.Success(repositoryRemote.getData(word))
     }
 
     override suspend fun getHistoryData(): AppState {
-        return AppState.Success(repositoryLocal.getHistoryData().toMutableList())
+        return AppState.Success(repositoryLocal.getHistoryData())
     }
 }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentHistoryListBinding
 import com.example.androidprofessional.navigation.AndroidScreens
@@ -26,7 +25,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override val scope: Scope by lazy { createScope(this) }
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
-    private val adapter: HistoryAdapter? = null
+    private lateinit var adapter: HistoryAdapter
     private val viewModel: HistoryViewModel by inject()
     override val model: BaseViewModel<AppState>
         get() = viewModel
@@ -61,6 +60,7 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     }
 
     private fun initView() {
+        adapter = HistoryAdapter(onListItemClickListener)
         binding.historyRecyclerView.adapter = adapter
     }
 
@@ -71,13 +71,8 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 binding.progressBarHistory.visibility = View.INVISIBLE
                 val dataModel = appState.data
                 if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
-                binding.historyRecyclerView.adapter =
-                    dataModel?.let { HistoryAdapter(it, onListItemClickListener) }
-                binding.historyRecyclerView.layoutManager = LinearLayoutManager(context)
-                adapter.let { adapter ->
-                    if (dataModel != null) {
-                        adapter?.setData(dataModel.sortedWith(compareBy { it.text }))
-                    }
+                if (dataModel != null) {
+                    adapter.submitList(dataModel.sortedWith(compareBy { it.text }))
                 }
             }
             is AppState.Loading -> {
