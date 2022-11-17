@@ -79,13 +79,20 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 binding.progressBarHistory.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.undefined_error),
-                    Toast.LENGTH_SHORT
-                ).show()
+                showErrorToast()
+            }
+            else -> {
+                showErrorToast()
             }
         }
+    }
+
+    private fun showErrorToast() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.undefined_error),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun showEmptyDataPicture() {

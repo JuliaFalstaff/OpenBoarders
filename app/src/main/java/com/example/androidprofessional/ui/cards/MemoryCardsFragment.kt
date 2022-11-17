@@ -92,6 +92,9 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 ).show()
                 showErrorPicture()
             }
+            else -> {
+                showErrorToast()
+            }
         }
     }
 
@@ -102,6 +105,14 @@ class MemoryCardsFragment : BaseFragment<AppState>(), KoinScopeComponent {
         showTranslationButton.visibility = View.INVISIBLE
         nextCardButton.visibility = View.INVISIBLE
         cardWordPictureImageView.setImageResource(R.drawable.no_data_image)
+    }
+
+    private fun showErrorToast() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.undefined_error),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     @SuppressLint("SetTextI18n")

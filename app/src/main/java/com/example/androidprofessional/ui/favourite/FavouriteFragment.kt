@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidprofessional.R
 import com.example.androidprofessional.databinding.FragmentFavourtesBinding
 import com.example.androidprofessional.navigation.AndroidScreens
@@ -13,7 +12,6 @@ import com.example.androidprofessional.ui.DetailedInfoFragment
 import com.example.androidprofessional.ui.adapters.FavouriteAdapter
 import com.example.core.BaseFragment
 import com.example.module.AppState
-import com.example.module.data.DataModel
 import com.github.terrakok.cicerone.Router
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
@@ -87,13 +85,20 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 binding.favouriteProgressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.undefined_error),
-                    Toast.LENGTH_SHORT
-                ).show()
+               showErrorToast()
+            }
+            else -> {
+               showErrorToast()
             }
         }
+    }
+
+    private fun showErrorToast() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.undefined_error),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun showEmptyDataPicture() {

@@ -136,9 +136,7 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             }
             is AppState.Loading -> {
                 showViewLoading()
-
-                    binding.progressBarRound.visibility = View.VISIBLE
-
+                binding.progressBarRound.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 showErrorScreen(appState.error.message)
@@ -146,7 +144,6 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             else -> {
                 showErrorScreen(getString(R.string.undefined_error))
             }
-            
         }
     }
 
