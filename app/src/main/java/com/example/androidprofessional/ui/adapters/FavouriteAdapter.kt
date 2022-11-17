@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidprofessional.databinding.ItemFavouriteRecyclerBinding
-import com.example.androidprofessional.ui.favourite.IOnListItemClickListener
 import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 
-class FavouriteAdapter(private var data: List<DataModel>, private var onListItemClickListener: IOnListItemClickListener) :
+class FavouriteAdapter(private var data: List<DataModel>) :
         RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
     
-    var changeData = data.toMutableList()
+    var changeData = this.data.toMutableList()
+    var onItemClick: ((DataModel)-> Unit)? = null
+    var onItemDeleteClick: ((DataModel)-> Unit)? = null
 
     fun setFavoriteData(newListData: List<DataModel>) {
         val callback = DiffUtils(changeData.sortedWith(compareBy { it.text }), newListData)
@@ -47,11 +48,11 @@ class FavouriteAdapter(private var data: List<DataModel>, private var onListItem
                         data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener {
-                    onListItemClickListener.onItemClick(data)
+                    onItemClick?.invoke(data)
                 }
                 binding.deleteImageView.setOnClickListener {
                     removeItem()
-                    onListItemClickListener.onItemDelete(data)
+                    onItemDeleteClick?.invoke(data)
                 }
             }
         }

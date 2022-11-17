@@ -9,8 +9,7 @@ import com.example.androidprofessional.databinding.ItemHistoryRecyclerViewBindin
 import com.example.module.data.DataModel
 import com.example.utils.ItemDiffCallback
 
-class HistoryAdapter(
-): ListAdapter<DataModel, HistoryAdapter.ViewHolder>(ItemDiffCallback()) {
+class HistoryAdapter: ListAdapter<DataModel, HistoryAdapter.ViewHolder>(ItemDiffCallback()) {
 
     var onItemClick: ((DataModel)-> Unit)? = null
 

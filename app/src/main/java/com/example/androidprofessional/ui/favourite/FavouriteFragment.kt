@@ -32,20 +32,6 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val router: Router by inject()
     private val screens: AndroidScreens by inject()
 
-    private val onListItemClickListener: IOnListItemClickListener = object :
-        IOnListItemClickListener {
-        override fun onItemClick(data: DataModel) {
-            router.navigateTo(screens.detailedFragment(Bundle().apply {
-                putParcelable(
-                    DetailedInfoFragment.WORD_INFO, data
-                )
-            }))
-        }
-
-        override fun onItemDelete(data: DataModel) {
-            viewModel.deleteFavouriteWord(data)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,6 +50,20 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
 
     private fun initView() {
         binding.favouriteRecyclerView.adapter = adapter
+        setAdapterListener()
+    }
+
+    private fun setAdapterListener() {
+        adapter?.onItemClick = { data ->
+            router.navigateTo(screens.detailedFragment(Bundle().apply {
+                putParcelable(
+                    DetailedInfoFragment.WORD_INFO, data
+                )
+            }))
+        }
+        adapter?.onItemDeleteClick = { data ->
+            viewModel.deleteFavouriteWord(data)
+        }
     }
 
     override fun renderData(appState: AppState) {
@@ -74,11 +74,8 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 val dataModel = appState.data
                 if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
                 binding.favouriteRecyclerView.adapter = dataModel?.let { list ->
-                    FavouriteAdapter(
-                        list.sortedWith(compareBy { it.text }), onListItemClickListener
-                    )
+                    FavouriteAdapter(list.sortedWith(compareBy { it.text }))
                 }
-                binding.favouriteRecyclerView.layoutManager = LinearLayoutManager(context)
                 adapter.let {
                     if (dataModel != null) {
                         it?.setFavoriteData(dataModel)

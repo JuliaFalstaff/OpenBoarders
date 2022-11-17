@@ -50,6 +50,10 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private fun initView() {
         adapter = HistoryAdapter()
         binding.historyRecyclerView.adapter = adapter
+        setAdapterClickListener()
+    }
+
+    private fun setAdapterClickListener() {
         adapter.onItemClick = { data ->
             router.navigateTo(screens.detailedFragment(Bundle().apply {
                 putParcelable(
