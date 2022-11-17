@@ -14,7 +14,7 @@ class MainViewModel(private val interactor: MainInteractor) :
     private var job: Job? = null
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
-        liveDataForViewToObserve.postValue(AppState.Loading(null))
+        liveDataForViewToObserve.postValue(AppState.Loading)
         job?.cancel()
         job = viewModelCoroutineScope.launch { startInteractor(word, isOnline) }
         return super.getData(word, isOnline)

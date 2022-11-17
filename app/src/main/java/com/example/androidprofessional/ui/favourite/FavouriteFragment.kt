@@ -60,7 +60,6 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
         super.onViewCreated(view, savedInstanceState)
         initView()
         viewModel.getFavouriteData().observe(viewLifecycleOwner, { renderData(it) })
-        viewModel.getData()
     }
 
     private fun initView() {

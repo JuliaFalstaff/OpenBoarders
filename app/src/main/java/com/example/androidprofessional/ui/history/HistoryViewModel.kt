@@ -1,6 +1,7 @@
 package com.example.androidprofessional.ui.history
 
 
+import androidx.lifecycle.LiveData
 import com.example.androidprofessional.usecase.history.HistoryInteractor
 import com.example.core.BaseViewModel
 import com.example.module.AppState
@@ -17,11 +18,13 @@ class HistoryViewModel(private val interactor: HistoryInteractor) :
         super.onCleared()
     }
 
-    fun getData() {
+    override fun getHistoryData(): LiveData<AppState> {
+        liveDataForViewToObserve.postValue(AppState.Loading)
         job?.cancel()
         job = viewModelCoroutineScope.launch {
             liveDataForViewToObserve.postValue(interactor.getHistoryData())
         }
+        return super.getHistoryData()
     }
 
     override fun handleError(error: Throwable) {

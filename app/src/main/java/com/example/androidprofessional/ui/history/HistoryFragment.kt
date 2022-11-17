@@ -45,7 +45,6 @@ class HistoryFragment : BaseFragment<AppState>(), KoinScopeComponent {
         super.onViewCreated(view, savedInstanceState)
         initView()
         viewModel.getHistoryData().observe(viewLifecycleOwner, { renderData(it) })
-        viewModel.getData()
     }
 
     private fun initView() {

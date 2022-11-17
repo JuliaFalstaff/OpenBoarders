@@ -136,11 +136,9 @@ class MainFragment : BaseFragment<AppState>(), KoinScopeComponent {
             }
             is AppState.Loading -> {
                 showViewLoading()
-                if (appState.progress != null) {
-                    binding.progressBarRound.visibility = View.GONE
-                } else {
+
                     binding.progressBarRound.visibility = View.VISIBLE
-                }
+
             }
             is AppState.Error -> {
                 showErrorScreen(appState.error.message)
