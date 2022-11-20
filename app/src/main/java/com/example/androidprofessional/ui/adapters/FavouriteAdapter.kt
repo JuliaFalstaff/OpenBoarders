@@ -16,8 +16,6 @@ class FavouriteAdapter(
     RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
     var changeData = this.data.toMutableList()
-    var onItemClick: ((DataModel) -> Unit)? = null
-    var onItemDeleteClick: ((DataModel) -> Unit)? = null
 
     fun setFavoriteData(newListData: List<DataModel>) {
         val callback = DiffUtils(changeData.sortedWith(compareBy { it.text }), newListData)

@@ -58,25 +58,11 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        viewModel.getFavouriteData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getFavouriteData().observe(viewLifecycleOwner) { renderData(it) }
     }
 
     private fun initView() {
         binding.favouriteRecyclerView.adapter = adapter
-//        setAdapterListener()
-    }
-
-    private fun setAdapterListener() {
-        adapter?.onItemClick = { data ->
-            router.navigateTo(screens.detailedFragment(Bundle().apply {
-                putParcelable(
-                    DetailedInfoFragment.WORD_INFO, data
-                )
-            }))
-        }
-        adapter?.onItemDeleteClick = { data ->
-            viewModel.deleteFavouriteWord(data)
-        }
     }
 
     override fun renderData(appState: AppState) {
