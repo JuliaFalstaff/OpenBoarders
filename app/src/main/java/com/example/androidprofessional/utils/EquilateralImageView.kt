@@ -6,7 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 
 class EquilateralImageView : AppCompatImageView {
     constructor(context: Context) : super(context)
-    constructor(contex: Context, attrs: AttributeSet) : super(contex, attrs)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
         context,
         attrs,

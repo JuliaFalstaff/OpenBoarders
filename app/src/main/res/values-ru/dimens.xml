@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_fab">16dp</dimen>
+    <dimen name="min_height_of_sound_button">48dp</dimen>
+    <dimen name="stroke_width_card">1dp</dimen>
+    <dimen name="peek_height_dialog">250dp</dimen>
+</resources>

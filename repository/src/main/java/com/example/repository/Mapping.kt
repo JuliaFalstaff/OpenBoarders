@@ -1,4 +1,4 @@
-package com.example.androidprofessional.utils
+package com.example.repository
 
 import com.example.module.data.DataModel
 import com.example.repository.room.entity.FavouriteEntity

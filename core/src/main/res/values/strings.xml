@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_offline_network">Device is offline</string>
+    <string name="error_offline_network">Can\'t load and show data. Device is offline</string>
 </resources>

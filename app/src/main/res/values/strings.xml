@@ -25,4 +25,6 @@
     <string name="error_null_data">Error - data is null</string>
     <string name="search_word_onboarding">Search here</string>
     <string name="content_text_onboarding">Use this button for typing a word and find its translation</string>
+    <string name="search_the_world_fab">Search the world</string>
+    <string name="play_pronounce_word">Play pronounce</string>
 </resources>

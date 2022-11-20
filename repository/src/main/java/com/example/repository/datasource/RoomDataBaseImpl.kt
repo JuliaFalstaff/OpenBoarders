@@ -1,7 +1,7 @@
 package com.example.repository.datasource
 
-import com.example.androidprofessional.utils.*
 import com.example.module.data.DataModel
+import com.example.repository.*
 import com.example.repository.room.dao.FavouriteDao
 import com.example.repository.room.dao.HistoryDao
 

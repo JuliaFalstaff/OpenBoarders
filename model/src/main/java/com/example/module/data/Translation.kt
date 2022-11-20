@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class Translation(
+data class Translation(
         @SerializedName(TEXT_TRANSLATION) val translation: String? = "",
         @SerializedName(NOTE_TRANSLATION) val note: String? = "",
 ) : Parcelable {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res"/><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\build\generated\res\rs\debug"/><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res"><file name="recycler_separator" path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\drawable\recycler_separator.xml" qualifiers="" type="drawable"/><file name="fragment_history_list" path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\layout\fragment_history_list.xml" qualifiers="" type="layout"/><file name="item_history_recycler_view" path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\layout\item_history_recycler_view.xml" qualifiers="" type="layout"/><file path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\values\colors.xml" qualifiers=""><color name="purple_200">#FFBB86FC</color><color name="purple_500">#FF6200EE</color><color name="purple_700">#FF3700B3</color><color name="teal_200">#FF03DAC5</color><color name="teal_700">#FF018786</color><color name="black">#FF000000</color><color name="white">#FFFFFFFF</color><color name="colorPrimary">#008577</color><color name="colorPrimaryDark">#00574B</color><color name="colorAccent">#D81B60</color><color name="color_error">#bf1e19</color><color name="color_text_main">#66000014</color><color name="color_delete_text_icon">#66000014</color><color name="color_text_header">#313131</color><color name="color_pale_grey">#9E9E9E</color><color name="color_black">#313131</color><color name="color_white">#FFFFFF</color><color name="color_gray">#66000000</color></file><file path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\values\dimens.xml" qualifiers=""><dimen name="hairline">1px</dimen><dimen name="margin_xxxx_small">2dp</dimen><dimen name="margin_xxx_small">3dp</dimen><dimen name="margin_xx_small">5dp</dimen><dimen name="margin_x_small">7dp</dimen><dimen name="margin_small">10dp</dimen><dimen name="margin_medium">15dp</dimen><dimen name="margin_x_medium">17dp</dimen><dimen name="margin_xx_medium">20dp</dimen><dimen name="margin_xxx_medium">25dp</dimen><dimen name="margin_large">30dp</dimen><dimen name="margin_x_large">35dp</dimen><dimen name="margin_xx_large">40dp</dimen><dimen name="margin_xxx_large">45dp</dimen><dimen name="padding_bottom_sheet">0dp</dimen><dimen name="text_size_tip">10sp</dimen><dimen name="text_size_standard">17sp</dimen><dimen name="text_size_standard_header">20sp</dimen><dimen name="text_size_large">25sp</dimen><dimen name="bottom_sheet_dialog_corner_radius">10dp</dimen><dimen name="bottom_sheet_dialog_left_right_bottom_radius">0dp</dimen><dimen name="box_corner_radius">15dp</dimen><dimen name="cardview_elevation">15dp</dimen><dimen name="cardview_corner_radius">8dp</dimen><dimen name="layout_height_cardview">150dp</dimen><dimen name="dialog_fragment_height">350dp</dimen><dimen name="margin_xxxxx_large">75dp</dimen><dimen name="card_elevation">3dp</dimen></file><file path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">Dictionary</string><string name="error_textview_stub">Error</string><string name="reload_button">Reload</string><string name="undefined_error">Undefined error</string><string name="empty_server_response_on_success">Response from server is empty</string><string name="button_search">Search</string><string name="search_hint">New word</string><string name="delete_description">X</string><string name="startText">It\'s time to learn something new! Click the button for searching</string><string name="search_helper_text">*Look up in a dictionary</string><string name="empty"/><string name="error_no_internet">No Internet error</string><string name="image_view_translation">Picture</string><string name="menu_history">History</string><string name="home">Home</string><string name="favourite">Favourite</string></file><file path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\main\res\values\themes.xml" qualifiers=""><style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnSurface">@color/color_pale_grey</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style><style name="TranscriptionTextStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
+        <item name="android:textStyle">normal</item>
+    </style><style name="HeaderTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/color_text_header</item>
+        <item name="android:textSize">@dimen/text_size_standard_header</item>
+        <item name="android:textStyle">bold</item>
+    </style><style name="BaseTextStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:textSize">@dimen/text_size_standard</item>
+        <item name="android:textStyle">bold</item>
+    </style><style name="TextViewButtonStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style><style name="OutlineSearchButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style><style name="BaseEditTextStyle">
+        <item name="android:background">@null</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:inputType">text</item>
+    </style><style name="BaseFlatButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="colorAccent">@color/white</item>
+    </style><style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style><style name="AppModalStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_dialog_background</item>
+    </style><style name="CustomOutlineBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
+        <item name="boxStrokeColor">@color/color_pale_grey</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+        <item name="android:textCursorDrawable">@drawable/my_cursor_drawable</item>
+    </style><style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="iconTint">@color/white</item>
+    </style><style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:layout_marginTop">@dimen/margin_x_small</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="itemIconTint">@color/color_white</item>
+        <item name="itemRippleColor">@color/color_pale_grey</item>
+        <item name="itemTextColor">@color/white</item>
+    </style></file></source><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\build\generated\res\rs\debug"/><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="D:\Android project apps\MyGitProjects\SkyengTranslater\historyscreen\src\debug\res"/></dataSet><mergedItems/></merger>

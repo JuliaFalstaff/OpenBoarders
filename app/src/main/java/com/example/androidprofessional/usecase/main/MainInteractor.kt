@@ -8,7 +8,7 @@ import com.example.repository.repository.IRepositoryLocal
 class MainInteractor(
     val remoteRepository: IRepository<List<DataModel>>,
     val localRepository: IRepositoryLocal<List<DataModel>>,
-) : com.example.core.Interactor<AppState> {
+) : Interactor<AppState> {
 
     override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
         val appState: AppState
