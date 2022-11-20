@@ -26,5 +26,5 @@
     <string name="search_word_onboarding">Поиск слова</string>
     <string name="content_text_onboarding">Используйте эту кнопку для ввода слова и поиска его перевода</string>
     <string name="search_the_world_fab">Искать слово</string>
-    <string name="play_pronounce_word">Play pronounce</string>
+    <string name="play_pronounce_word">Озвучить произношение</string>
 </resources>

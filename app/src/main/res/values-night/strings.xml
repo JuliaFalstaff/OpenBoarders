@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Dictionary</string>
     <string name="error_textview_stub">Error</string>
     <string name="reload_button">Reload</string>
     <string name="undefined_error">Undefined error</string>
@@ -9,6 +8,6 @@
     <string name="delete_description">X</string>
     <string name="startText">It\'s time to learn something new! Click the button for searching</string>
     <string name="search_helper_text">*Look up in a dictionary</string>
-    <string name="search_the_world_fab">Search the world</string>
+    <string name="search_the_world_fab">Search the word</string>
     <string name="play_pronounce_word">Play pronounce</string>
 </resources>
