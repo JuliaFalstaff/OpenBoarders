@@ -12,6 +12,7 @@ import com.example.androidprofessional.ui.DetailedInfoFragment
 import com.example.androidprofessional.ui.adapters.FavouriteAdapter
 import com.example.core.BaseFragment
 import com.example.module.AppState
+import com.example.module.data.DataModel
 import com.github.terrakok.cicerone.Router
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.createScope
@@ -30,6 +31,20 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     private val router: Router by inject()
     private val screens: AndroidScreens by inject()
 
+    private val onListItemClickListener: FavouriteAdapter.IOnListItemClickListener = object :
+        FavouriteAdapter.IOnListItemClickListener {
+        override fun onItemClick(data: DataModel) {
+            router.navigateTo(screens.detailedFragment(Bundle().apply {
+                putParcelable(
+                    DetailedInfoFragment.WORD_INFO, data
+                )
+            }))
+        }
+
+        override fun onItemDelete(data: DataModel) {
+            viewModel.deleteFavouriteWord(data)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,25 +58,11 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        viewModel.getFavouriteData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getFavouriteData().observe(viewLifecycleOwner) { renderData(it) }
     }
 
     private fun initView() {
         binding.favouriteRecyclerView.adapter = adapter
-        setAdapterListener()
-    }
-
-    private fun setAdapterListener() {
-        adapter?.onItemClick = { data ->
-            router.navigateTo(screens.detailedFragment(Bundle().apply {
-                putParcelable(
-                    DetailedInfoFragment.WORD_INFO, data
-                )
-            }))
-        }
-        adapter?.onItemDeleteClick = { data ->
-            viewModel.deleteFavouriteWord(data)
-        }
     }
 
     override fun renderData(appState: AppState) {
@@ -72,7 +73,7 @@ class FavouriteFragment : BaseFragment<AppState>(), KoinScopeComponent {
                 val dataModel = appState.data
                 if (dataModel.isNullOrEmpty()) showEmptyDataPicture()
                 binding.favouriteRecyclerView.adapter = dataModel?.let { list ->
-                    FavouriteAdapter(list.sortedWith(compareBy { it.text }))
+                    FavouriteAdapter(list.sortedWith(compareBy { it.text }), onListItemClickListener)
                 }
                 adapter.let {
                     if (dataModel != null) {

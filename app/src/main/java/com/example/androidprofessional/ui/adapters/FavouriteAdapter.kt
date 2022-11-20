@@ -9,12 +9,13 @@ import com.example.androidprofessional.databinding.ItemFavouriteRecyclerBinding
 import com.example.module.data.DataModel
 import com.example.utils.DiffUtils
 
-class FavouriteAdapter(private var data: List<DataModel>) :
-        RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
-    
+class FavouriteAdapter(
+    private var data: List<DataModel>,
+    private var onListItemClickListener: IOnListItemClickListener
+) :
+    RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+
     var changeData = this.data.toMutableList()
-    var onItemClick: ((DataModel)-> Unit)? = null
-    var onItemDeleteClick: ((DataModel)-> Unit)? = null
 
     fun setFavoriteData(newListData: List<DataModel>) {
         val callback = DiffUtils(changeData.sortedWith(compareBy { it.text }), newListData)
@@ -25,9 +26,9 @@ class FavouriteAdapter(private var data: List<DataModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemFavouriteRecyclerBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return ViewHolder(binding)
     }
@@ -39,27 +40,32 @@ class FavouriteAdapter(private var data: List<DataModel>) :
     override fun getItemCount(): Int = changeData.size
 
     inner class ViewHolder(val binding: ItemFavouriteRecyclerBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.wordTextView.text = data.text
                 binding.descriptionWordTextView.text =
-                        data.meanings?.joinToString { it.translation?.translation.toString() }
+                    data.meanings?.joinToString { it.translation?.translation.toString() }
                 binding.transcriptionTextView.text = "[${data.meanings?.first()?.transcription}]"
                 itemView.setOnClickListener {
-                    onItemClick?.invoke(data)
+                    onListItemClickListener.onItemClick(data)
                 }
                 binding.deleteImageView.setOnClickListener {
                     removeItem()
-                    onItemDeleteClick?.invoke(data)
+                    onListItemClickListener.onItemDelete(data)
                 }
             }
         }
 
-        private fun removeItem(){
+        private fun removeItem() {
             changeData.removeAt(layoutPosition)
             notifyItemRemoved(layoutPosition)
         }
+    }
+
+    interface IOnListItemClickListener {
+        fun onItemClick(data: DataModel)
+        fun onItemDelete(data: DataModel)
     }
 }
